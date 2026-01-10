@@ -45,18 +45,21 @@
     "wasm"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build:wasm": "npm run build:wasm:agent; npm run build:wasm:hnsw; echo 'WASM build completed (some wasm-opt errors are expected)'",
+    "build": "bun run tsc -p tsconfig.json",
+    "build:wasm": "bun run build:wasm:agent && bun run build:wasm:hnsw && echo 'WASM build completed'",
     "build:wasm:agent": "wasm-pack build --target web ./wasm/agent || echo 'Note: wasm-opt failed but WASM was generated'",
     "build:wasm:hnsw": "wasm-pack build --target web ./wasm/hnsw || echo 'Note: wasm-opt failed but WASM was generated'",
-    "dev": "tsc -w",
-    "test": "vitest",
+    "dev": "bun --watch run tsc -w",
+    "test": "bun test",
+    "test:vitest": "vitest",
     "test:coverage": "vitest --coverage",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
+    "demo:node": "bun run src/wasm/demo-node.ts",
+    "demo:benchmark": "bun run src/wasm/demo-node.ts --benchmark --json",
+    "prepublishOnly": "bun run build"
   },
   "keywords": [
     "edge-ai",
@@ -77,7 +80,8 @@
     "url": "https://github.com/ruvector/edge.git"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.0.0",
+    "bun": ">=1.1.0"
   },
   "dependencies": {
     "@claude-flow/embeddings": "^3.0.0-alpha.1",

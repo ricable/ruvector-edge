@@ -1,0 +1,17 @@
+{
+  "name": "elex-wasm",
+  "type": "module",
+  "description": "ELEX WASM module with wasm-bindgen exports",
+  "version": "3.1.0",
+  "license": "MIT",
+  "files": [
+    "elex_wasm_bg.wasm",
+    "elex_wasm.js",
+    "elex_wasm.d.ts"
+  ],
+  "main": "elex_wasm.js",
+  "types": "elex_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

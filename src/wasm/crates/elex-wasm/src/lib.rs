@@ -121,19 +121,16 @@ enum TopologyConfig {
 #[wasm_bindgen]
 impl Topology {
     /// Mesh topology - all agents connected to all others
-    #[wasm_bindgen(constructor)]
     pub fn mesh() -> Topology {
         Topology { inner: TopologyConfig::Mesh }
     }
 
     /// Hierarchical topology - coordinators manage agent groups
-    #[wasm_bindgen(constructor)]
     pub fn hierarchical() -> Topology {
         Topology { inner: TopologyConfig::Hierarchical }
     }
 
     /// Hierarchical-mesh topology - hybrid approach (recommended)
-    #[wasm_bindgen(constructor)]
     pub fn hierarchical_mesh() -> Topology {
         Topology { inner: TopologyConfig::HierarchicalMesh }
     }
@@ -658,6 +655,7 @@ impl ElexSwarm {
 
             let js_stats = Object::new();
             Reflect::set(&js_stats, &JsValue::from_str("totalAgents"), &JsValue::from_f64(agents.len() as f64))?;
+            Reflect::set(&js_stats, &JsValue::from_str("activeAgents"), &JsValue::from_f64(agents.len() as f64))?;
             Reflect::set(&js_stats, &JsValue::from_str("totalQueries"), &JsValue::from_f64(total_queries as f64))?;
             Reflect::set(&js_stats, &JsValue::from_str("totalSuccesses"), &JsValue::from_f64(total_successes as f64))?;
             Reflect::set(&js_stats, &JsValue::from_str("avgLatencyMs"), &JsValue::from_f64(avg_latency as f64))?;

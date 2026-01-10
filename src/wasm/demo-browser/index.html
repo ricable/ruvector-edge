@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEX Swarm V3 - Multi-Agent Self-Learning RAN AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                ELEX SWARM V3
+                <span class="logo-subtitle">Multi-Agent Self-Learning RAN AI</span>
+            </div>
+            <div class="header-controls">
+                <button id="syncBtn" class="control-btn" disabled>🔄 SYNC</button>
+                <button id="trainBtn" class="control-btn" disabled>🎓 TRAIN</button>
+                <button id="batchBtn" class="control-btn" disabled>⚡ BATCH</button>
+            </div>
+            <div class="status-badge">
+                <div id="statusDot" class="status-dot"></div>
+                <span id="statusText">Initializing WASM...</span>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <div class="main-panel">
+                <div class="card query-card">
+                    <h2>🤖 Agent Swarm Intelligence</h2>
+                    <p class="subtitle">Enter a RAN optimization query to interact with the multi-agent self-learning
+                        swarm.</p>
+
+                    <div class="query-row">
+                        <textarea id="queryInput" class="query-input" rows="2"
+                            placeholder="e.g., Optimize MIMO sleep mode for energy saving..."></textarea>
+                        <select id="queryType" class="query-type-select">
+                            <option value="general">General</option>
+                            <option value="parameter">Parameter</option>
+                            <option value="counter">Counter</option>
+                            <option value="kpi">KPI</option>
+                            <option value="procedure">Procedure</option>
+                            <option value="troubleshoot">Troubleshoot</option>
+                        </select>
+                    </div>
+
+                    <button id="runBtn" class="btn" disabled>
+                        <span id="btnText">EXECUTE QUERY</span>
+                        <div id="spinner" class="loading-spinner"></div>
+                    </button>
+
+                    <div id="responseArea" class="response-area">
+                        <div class="init-message">
+                            <div class="loader-ring"></div>
+                            <p>Initializing multi-agent swarm...</p>
+                        </div>
+                    </div>
+
+                    <div id="feedbackBtns" class="feedback-buttons" style="display: none;">
+                        <span class="feedback-label">Rate this response:</span>
+                        <button id="feedbackGood" class="feedback-btn good">👍 Good</button>
+                        <button id="feedbackNeutral" class="feedback-btn neutral">😐 Okay</button>
+                        <button id="feedbackBad" class="feedback-btn bad">👎 Poor</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="card metrics-card">
+                    <h2>📊 Swarm Metrics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">System Version</div>
+                            <div id="versionVal" class="stat-value">---</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Avg. Latency</div>
+                            <div id="latencyVal" class="stat-value">0ms</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Active Agents</div>
+                            <div id="agentsVal" class="stat-value">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">SIMD Status</div>
+                            <div id="simdVal" class="stat-value">---</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Success Rate</div>
+                            <div id="successRateVal" class="stat-value">0%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Total Queries</div>
+                            <div id="queriesVal" class="stat-value">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card logs-card">
+                    <h2>📝 System Logs</h2>
+                    <div id="logArea" class="log-area">
+                        [SYSTEM] Awaiting WASM load...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agents-section">
+            <h2 class="section-title">🧠 Self-Learning Agent Pool</h2>
+            <p class="section-subtitle">Each agent uses Q-learning to improve its responses based on feedback</p>
+            <div id="agentPool" class="agent-grid">
+                <!-- Agents will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

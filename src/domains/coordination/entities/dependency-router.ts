@@ -53,7 +53,7 @@ export class DependencyRouter {
   private routeCache: Map<string, RoutingPath> = new Map();
   private maxCacheSize = 1000;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Get singleton instance
@@ -202,7 +202,9 @@ export class DependencyRouter {
     // Cache result
     if (this.routeCache.size >= this.maxCacheSize) {
       const firstKey = this.routeCache.keys().next().value;
-      this.routeCache.delete(firstKey);
+      if (firstKey !== undefined) {
+        this.routeCache.delete(firstKey);
+      }
     }
     this.routeCache.set(cacheKey, routingPath);
 
