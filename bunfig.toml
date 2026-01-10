@@ -1,0 +1,16 @@
+# Bun configuration for ELEX Edge AI Agent Swarm
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Auto-install dependencies on bun run
+auto = true
+
+[test]
+# Enable coverage reporting
+coverage = true
+# Test file patterns
+root = "./tests"
+
+[run]
+# Silent mode for cleaner output
+silent = false

@@ -190,17 +190,23 @@ src/wasm/                           # Phase 8 WASM SDK Implementation ✅
 ## Quick Start
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies (using Bun for faster installs)
+bun install
 
 # Run tests
-npm test
+bun test
+
+# Run WASM demo
+bun run demo:node
+
+# Run benchmark with JSON output (for CI)
+bun run demo:benchmark
 
 # Build WASM modules
-cd wasm/agent && ./build.sh
+cd src/wasm && ./build-optimized.sh
 
 # Run development server
-npm run dev
+bun run dev
 ```
 
 ---
