@@ -1,0 +1,21 @@
+[package]
+name = "elex-qlearning"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ELEX Q-learning reinforcement learning engine"
+
+[dependencies]
+elex-core = { path = "../elex-core" }
+hashbrown = { version = "0.14", features = ["serde"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rand = "0.8"
+js-sys = { workspace = true, optional = true }
+getrandom = { workspace = true, optional = true }
+
+[features]
+wasm = ["js-sys", "getrandom/js"]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

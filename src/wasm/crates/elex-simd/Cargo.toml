@@ -1,0 +1,22 @@
+[package]
+name = "elex-simd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ELEX SIMD-accelerated operations with scalar fallbacks"
+
+[features]
+default = ["simd"]
+simd = []
+scalar-only = []
+
+[dependencies]
+elex-core = { path = "../elex-core" }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+criterion = "0.5"
+
+# [[bench]]
+# name = "simd_benchmark"
+# harness = false

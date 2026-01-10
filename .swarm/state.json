@@ -1,0 +1,7 @@
+{
+  "id": "swarm-mock-123",
+  "maxAgents": 20,
+  "strategy": "development",
+  "initializedAt": "2026-01-10T21:16:30.327Z",
+  "status": "ready"
+}

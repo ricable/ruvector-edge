@@ -1,0 +1,25 @@
+[package]
+name = "elex-routing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ELEX semantic routing with HNSW-based query matching"
+
+[dependencies]
+elex-core = { path = "../elex-core" }
+elex-memory = { path = "../elex-memory", default-features = false, features = ["indexeddb"] }
+elex-qlearning = { path = "../elex-qlearning", features = ["wasm"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+getrandom = { workspace = true }
+rand = "0.8"
+rand_chacha = "0.3"
+hashbrown = "0.14"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+criterion = "0.5"
+
+# [[bench]]
+# name = "routing_benchmark"
+# harness = false

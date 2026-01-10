@@ -1,0 +1,25 @@
+[package]
+name = "elex-agent"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ELEX agent runtime and coordination"
+
+[dependencies]
+elex-core = { path = "../elex-core" }
+elex-simd = { path = "../elex-simd" }
+elex-qlearning = { path = "../elex-qlearning", features = ["wasm"] }
+elex-memory = { path = "../elex-memory", default-features = false, features = ["indexeddb"] }
+elex-crypto = { path = "../elex-crypto" }
+elex-routing = { path = "../elex-routing" }
+elex-safety = { path = "../elex-safety" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+getrandom = { workspace = true }
+js-sys = { workspace = true }
+hex = "0.4"
+rand_core = "0.6"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

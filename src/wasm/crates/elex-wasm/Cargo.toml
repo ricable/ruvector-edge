@@ -1,0 +1,33 @@
+[package]
+name = "elex-wasm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ELEX WASM module with wasm-bindgen exports"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+elex-core = { path = "../elex-core" }
+elex-simd = { path = "../elex-simd" }
+elex-qlearning = { path = "../elex-qlearning", features = ["wasm"] }
+elex-memory = { path = "../elex-memory", default-features = false, features = ["indexeddb"] }
+elex-agent = { path = "../elex-agent" }
+elex-routing = { path = "../elex-routing" }
+elex-safety = { path = "../elex-safety" }
+elex-crypto = { path = "../elex-crypto" }
+wasm-bindgen = { workspace = true }
+wasm-bindgen-futures = { workspace = true }
+js-sys = { workspace = true }
+web-sys = { workspace = true, features = ["Window", "StorageEvent"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+console_error_panic_hook = { workspace = true, optional = true }
+getrandom = { workspace = true, features = ["js"] }
+hex = { workspace = true }
+
+[features]
+default = ["console_error_panic_hook"]
+console_error_panic_hook = ["dep:console_error_panic_hook"]

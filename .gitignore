@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+*.wasm
+pkg/
+target/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Claude Flow runtime files
+.claude-flow/daemon.pid
+.claude-flow/daemon-state.json
+.claude-flow/memory/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Rust/WASM build artifacts
+src/wasm/target/
+src/wasm/agent/target/
+src/wasm/hnsw/target/
+src/wasm/crates/*/target/
+Cargo.lock
+*.rlib
+
+# Lock files (optional - uncomment if you want to track them)
+# package-lock.json

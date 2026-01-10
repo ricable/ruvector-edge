@@ -1,0 +1,67 @@
+{
+  "name": "elex-wasm",
+  "version": "0.1.0",
+  "description": "ELEX Edge AI Agent Swarm - WebAssembly bindings for RAN optimization",
+  "keywords": [
+    "elex",
+    "wasm",
+    "webassembly",
+    "ran",
+    "telecommunications",
+    "ai",
+    "agent",
+    "swarm",
+    "optimization",
+    "ericsson",
+    "lte",
+    "5g",
+    "nr"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvector/elex-wasm.git"
+  },
+  "author": "ELEX Team <elex@ruvector.net>",
+  "homepage": "https://github.com/ruvector/elex-wasm#readme",
+  "type": "module",
+  "main": "./elex_wasm.js",
+  "module": "./elex_wasm.js",
+  "types": "./elex_wasm.d.ts",
+  "sideEffects": false,
+  "files": [
+    "elex_wasm_bg.wasm",
+    "elex_wasm.js",
+    "elex_wasm_bg.js",
+    "elex_wasm.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "cd ../.. && bash crates/elex-wasm/build.sh",
+    "test:browser": "wasm-pack test --firefox --headless",
+    "test:node": "node pkg/examples/node.js",
+    "example:browser": "npx serve pkg/examples/",
+    "docs": "typedoc --out docs elex_wasm.d.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0",
+    "typedoc": "^0.25.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "crypto": false
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
+}

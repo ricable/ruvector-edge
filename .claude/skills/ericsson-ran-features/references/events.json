@@ -1,0 +1,3366 @@
+{
+  "INTERNAL_EVENT_MIMO_SLEEP_DETECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_TX_CONFIG": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_DL_PRB_USAGE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_DL_PRB_THRESHOLD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_UES_THRESHOLD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_DURATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DET_DIRECTION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_MODE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_START_HOUR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_2025",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_START_MINUTE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_2025",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_START_SECOND": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_2025",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_START_MILLISEC": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_2025",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_STOP_HOUR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_STOP_MINUTE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_STOP_SECOND": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_STOP_MILLISEC": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_3096",
+      "FAJ_121_5296",
+      "FAJ_121_1817",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_CURRENT_TX_CONFIG": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_DESIRED_TX_CONFIG": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_MIMO_SLEEP_SWITCH_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3094",
+      "FAJ_121_5296"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_HOUR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_MINUTE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_SECOND": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_TIMESTAMP_MILLISEC": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_SCANNER_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_RBS_MODULE_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070",
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_GLOBAL_CELL_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_ENBS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030"
+    ]
+  },
+  "EVENT_PARAM_MMES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030"
+    ]
+  },
+  "EVENT_PARAM_GUMMEI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030"
+    ]
+  },
+  "EVENT_PARAM_RAC_UE_REF": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030"
+    ]
+  },
+  "EVENT_PARAM_TRACE_RECORDING_SESSION_REFERENCE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_MESSAGE_DIRECTION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_L": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3030",
+      "FAJ_121_3070"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_CQI_SUBBAND": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2053"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_CQI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2053"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_CQI_SUBBAND_SAMP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2053"
+    ]
+  },
+  "EVENT_PARAM_ESCELL_RADIOTHP_VOL_DL_SCELL_EXT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_ESCELL_RADIOTHP_VOL_TX_DL_SCELL_EXT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_ESCELL_RADIOTHP_VOL_TX_DL_SCELL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_NO_ESCELL_CONFIGURED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_ONE_ESCELL_CONFIGURED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_TWO_ESCELL_CONFIGURED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_THREE_ESCELL_CONFIGURED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_FOUR_ESCELL_CONFIGURED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_CA_ACT_DL_IENB_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_CA_SCHEDULED_DL_IENB_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "EVENT_PARAM_PER_IENB_X": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4469"
+    ]
+  },
+  "INTERNAL_EVENT_DYNAMIC_UE_ADMISSION_BLOCKING_STARTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "INTERNAL_EVENT_DYNAMIC_UE_ADMISSION_BLOCKING_STOPPED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "INTERNAL_EVENT_DYNAMIC_UE_ADMISSION_BLOCKING_UPDATED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_DYNAMIC_UE_ADMISSION_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_RRC_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301",
+      "FAJ_121_3091"
+    ]
+  },
+  "EVENT_PARAM_MSR_UL_PRB_UTIL_CELL_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_UL_PRB_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_DL_PRB_UTIL_CELL_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_DL_PRB_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_UL_SE_UTIL_CELL_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_UL_SE_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_DL_SE_UTIL_CELL_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_DL_SE_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_CCE_UTIL_CELL_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_UL_BB_CAP_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_MSR_DL_BB_CAP_UTIL_BBM_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301"
+    ]
+  },
+  "EVENT_PARAM_REESTAB_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_PREP_IN_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4301",
+      "FAJ_121_3091",
+      "FAJ_121_5118"
+    ]
+  },
+  "EVENT_PARAM_NOISEINTERF_SUM_BRANCH_PRBX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4157"
+    ]
+  },
+  "INTERNAL_EVENT_X": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0484"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBREL_ADD": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0484",
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBCELL_CHANGE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0484",
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBENB_CHANGE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0484",
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_UE_MOBILITY_EVAL": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3054",
+      "FAJ_121_3048",
+      "FAJ_121_4368",
+      "FAJ_121_3100",
+      "FAJ_121_1788",
+      "FAJ_121_3073",
+      "FAJ_121_1797",
+      "FAJ_121_4669",
+      "FAJ_121_3072",
+      "FAJ_121_3087",
+      "FAJ_121_0876",
+      "FAJ_121_3009",
+      "FAJ_121_1817",
+      "FAJ_121_0493",
+      "FAJ_121_0495",
+      "FAJ_121_3013",
+      "FAJ_121_0921",
+      "FAJ_121_4983",
+      "FAJ_121_3004",
+      "FAJ_121_0491"
+    ]
+  },
+  "EVENT_PARAM_FREQ_BAND_PRIO_CAPABLE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3054"
+    ]
+  },
+  "EVENT_PARAM_MFBI_INFO": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3054"
+    ]
+  },
+  "INTERNAL_EVENT_UE_LB_MEAS": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4219",
+      "FAJ_121_3048",
+      "FAJ_121_4368",
+      "FAJ_121_4406",
+      "FAJ_121_3100",
+      "FAJ_121_3075",
+      "FAJ_121_3009",
+      "FAJ_121_3028"
+    ]
+  },
+  "INTERNAL_EVENT_UE_LB_QUAL": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4219",
+      "FAJ_121_3048",
+      "FAJ_121_4368",
+      "FAJ_121_4406",
+      "FAJ_121_3100",
+      "FAJ_121_3075",
+      "FAJ_121_3009",
+      "FAJ_121_3028"
+    ]
+  },
+  "EVENT_PARAM_TRAVERSED_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219",
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3075",
+      "FAJ_121_3009",
+      "FAJ_121_3028"
+    ]
+  },
+  "EVENT_PARAM_LB_CANCELLED_REASON": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219",
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3100",
+      "FAJ_121_3075",
+      "FAJ_121_3009",
+      "FAJ_121_3028"
+    ]
+  },
+  "EVENT_PARAM_TP_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_SOURCE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_TARGET": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_RANK_UE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_RANK_UE_INT_SIGN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_RANK_THRESHOLD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "EVENT_PARAM_TP_RANK_THRESHOLD_INT_SIGN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4219"
+    ]
+  },
+  "INTERNAL_EVENT_UE_CAPABILITY": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3076",
+      "FAJ_121_3084",
+      "FAJ_121_4466"
+    ]
+  },
+  "EVENT_PARAM_RANK_TX_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3076",
+      "FAJ_121_3000",
+      "FAJ_121_3002",
+      "FAJ_121_4180",
+      "FAJ_121_4793"
+    ]
+  },
+  "EVENT_PARAM_RANK_REPORTED_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3076"
+    ]
+  },
+  "EVENT_PARAM_CQI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3076"
+    ]
+  },
+  "EVENT_PARAM_HOM_CQI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3076"
+    ]
+  },
+  "EVENT_PARAM_UE_HARQ_UL_SUCC_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4363",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_UE_HARQ_UL_FAIL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4363",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_MAC_DTX_UL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4363",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_SINR_MEAS_PUSCH_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4363"
+    ]
+  },
+  "EVENT_PARAM_UE_CAP_CATEGORY_DL_UL_COMB": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4363"
+    ]
+  },
+  "INTERNAL_EVENT_LB_INTER_FREQ": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "INTERNAL_EVENT_ONGOING_UE_MEAS": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3048"
+    ]
+  },
+  "INTERNAL_EVENT_UE_MEAS_FAILURE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3100"
+    ]
+  },
+  "INTERNAL_EVENT_MEAS_CONFIG_B": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3100",
+      "FAJ_121_0493",
+      "FAJ_121_0495",
+      "FAJ_121_3013",
+      "FAJ_121_4983",
+      "FAJ_121_3004",
+      "FAJ_121_0491"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_CGI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_1885",
+      "FAJ_121_4406",
+      "FAJ_121_3075",
+      "FAJ_121_4467",
+      "FAJ_121_3096",
+      "FAJ_121_3009",
+      "FAJ_121_3063",
+      "FAJ_121_3028",
+      "FAJ_121_0497",
+      "FAJ_121_1898",
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_LB_DIFF": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_DIFF_INT_SIGN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_AMOUNT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_SOURCE_RATIO": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_TARGET_RATIO": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_RATE_OFFSET": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_LB_OFFSET_INT_SIGN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_FREQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3075",
+      "FAJ_121_3096",
+      "FAJ_121_3009",
+      "FAJ_121_3028",
+      "FAJ_121_0497",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_TRIGGERING_FUNCTION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3100",
+      "FAJ_121_3075",
+      "FAJ_121_3009",
+      "FAJ_121_3028"
+    ]
+  },
+  "EVENT_PARAM_UE_CA_CAPABLE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3075",
+      "FAJ_121_3028"
+    ]
+  },
+  "EVENT_PARAM_HO_SOURCE_OR_TARGET_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_1885",
+      "FAJ_121_4406",
+      "FAJ_121_3075",
+      "FAJ_121_0897",
+      "FAJ_121_3042",
+      "FAJ_121_3096",
+      "FAJ_121_0877",
+      "FAJ_121_3009",
+      "FAJ_121_3028",
+      "FAJ_121_5118",
+      "FAJ_121_3023",
+      "FAJ_121_3039"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_PREP_OUT_ATTEMPT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3100",
+      "FAJ_121_3096",
+      "FAJ_121_3072",
+      "FAJ_121_3087",
+      "FAJ_121_1817",
+      "FAJ_121_0921"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_RSRP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_RSRQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_REJECT_MEAS_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3096",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_MEAS_ABORT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_EXEC_OUT_ATTEMPT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_4406",
+      "FAJ_121_3100",
+      "FAJ_121_3096",
+      "FAJ_121_3072",
+      "FAJ_121_3087",
+      "FAJ_121_3009",
+      "FAJ_121_1817",
+      "FAJ_121_0921"
+    ]
+  },
+  "EVENT_PARAM_MOBILITY_TRIGGER": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3100",
+      "FAJ_121_3073",
+      "FAJ_121_3072",
+      "FAJ_121_3087",
+      "FAJ_121_3009",
+      "FAJ_121_1817",
+      "FAJ_121_4940",
+      "FAJ_121_0921",
+      "FAJ_121_4983"
+    ]
+  },
+  "EVENT_PARAM_UTRA_THRESHOLD_RSCP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048"
+    ]
+  },
+  "EVENT_PARAM_MEAS_REQUESTER": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048",
+      "FAJ_121_3100",
+      "FAJ_121_4467",
+      "FAJ_121_3063",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_UTRA_ARFCN_VALUE_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3048"
+    ]
+  },
+  "EVENT_PARAM_UE_HARQ_DL_ACK_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422"
+    ]
+  },
+  "EVENT_PARAM_UE_HARQ_DL_NACK_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_MAC_DTX_DL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_DL_ACK_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422",
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_DL_NACK_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422",
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_MAC_DTX_DL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4422",
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_DELTA_SINR_MEAS_PUSCH_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3043"
+    ]
+  },
+  "EVENT_PARAM_TAC": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4368"
+    ]
+  },
+  "EVENT_PARAM_MASKEDSRN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4368"
+    ]
+  },
+  "EVENT_PARAM_SVN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4368"
+    ]
+  },
+  "INTERNAL_EVENT_SON_UE_OSCILLATION_PREVENTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1885"
+    ]
+  },
+  "INTERNAL_EVENT_SON_OSCILLATION_DETECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1885"
+    ]
+  },
+  "EVENT_PARAM_HO_PREV_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1885"
+    ]
+  },
+  "EVENT_PARAM_ERAB_QCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1885",
+      "FAJ_121_1857",
+      "FAJ_121_1749"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_RATE_SHAPE_TIME_UL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1745"
+    ]
+  },
+  "INTERNAL_EVENT_UETR_RRC_SCELL_CONFIGURED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "INTERNAL_EVENT_UETR_RRC_SCELL_DECONFIGURED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "INTERNAL_EVENT_RRC_SCELL_CONFIG": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_3063"
+    ]
+  },
+  "INTERNAL_EVENT_RRC_SCELL_DECONFIGURED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_3063",
+      "FAJ_121_4884"
+    ]
+  },
+  "EVENT_PARAM_SCELL_RADIOTHP_VOL_UL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_SCELL_RADIOTHP_RES_UL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_SCHED_ACTIVITY_UE_UL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_UL_SUCC_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_UL_FAIL_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_UL_SUCC_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_UL_FAIL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_MAC_DTX_UL_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_MAC_DTX_UL_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_5031"
+    ]
+  },
+  "EVENT_PARAM_GLOBAL_SCELL_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_SCELL_SELECTION_METHOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_SERVING_RSRP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_SERVING_RSRQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_SCELL_CONFIG_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_UE_SCELL_CONFIG_SCELL_DIR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_DESELECTION_REASON": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4425",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "INTERNAL_EVENT_LB_SUB_RATIO": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_SUB_RATIO": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "EVENT_PARAM_UE_CA_CABABLE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4406",
+      "FAJ_121_3009"
+    ]
+  },
+  "INTERNAL_EVENT_CELL_DL_CAPACITY": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3031"
+    ]
+  },
+  "EVENT_PARAM_ESTIM_CELL_CAPACITY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3031"
+    ]
+  },
+  "EVENT_PARAM_CELL_CAPACITY_UPDATE_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3031"
+    ]
+  },
+  "EVENT_PARAM_BRANCH_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4576"
+    ]
+  },
+  "EVENT_PARAM_NOISEINTERF_SUM_BRANCH_UPPTS_SYM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4576"
+    ]
+  },
+  "EVENT_PARAM_SERVINGPLMNID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0860"
+    ]
+  },
+  "EVENT_PARAM_MMENAME": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0860"
+    ]
+  },
+  "EVENT_PARAM_S": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0860",
+      "FAJ_121_3091"
+    ]
+  },
+  "EVENT_PARAM_X": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0860",
+      "FAJ_121_3096"
+    ]
+  },
+  "INTERNAL_EVENT_UETR_MEASUREMENT_REPORT_RECEIVED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3100",
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "INTERNAL_EVENT_MEAS_CONFIG_A": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3100",
+      "FAJ_121_3063",
+      "FAJ_121_0493",
+      "FAJ_121_0495",
+      "FAJ_121_3013",
+      "FAJ_121_3004",
+      "FAJ_121_0491"
+    ]
+  },
+  "EVENT_PARAM_MOBILITY_DECISION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3100",
+      "FAJ_121_3087",
+      "FAJ_121_0876",
+      "FAJ_121_0921"
+    ]
+  },
+  "INTERNAL_EVENT_WIFI_MOBILITY_EVAL_CONNECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "INTERNAL_EVENT_WIFI_MOBILITY_EVAL_IDLE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "EVENT_PARAM_WIFI_ACCESS_DECISION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "EVENT_PARAM_WIFI_THROUGHPUT_ESTIMATE_EUTRA_CONNECTED": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "EVENT_PARAM_WIFI_THROUGHPUT_ESTIMATE_WIFI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "EVENT_PARAM_ESTIMATE_FAIL_STATUS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3064"
+    ]
+  },
+  "EVENT_PARAM_RRC_RECONFIG_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2051",
+      "FAJ_121_3090",
+      "FAJ_121_3096"
+    ]
+  },
+  "INTERNAL_EVENT_ERAB_DATA_INFO": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1892",
+      "FAJ_121_4124",
+      "FAJ_121_1749",
+      "FAJ_121_1747"
+    ]
+  },
+  "INTERNAL_EVENT_SPID_PRIORITY_IGNORED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1788"
+    ]
+  },
+  "EVENT_PARAM_SPID_VALUE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1788",
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_ERAB_PROCEDURE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4124",
+      "FAJ_121_1747"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_CCE_REQUESTED_DISTR_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3057"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_CCE_AGGREGATION_LEVEL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3057"
+    ]
+  },
+  "EVENT_PARAM_PER_PDCCH_SYM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3057"
+    ]
+  },
+  "EVENT_PARAM_SCELL_IS_EXTERNAL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4467"
+    ]
+  },
+  "EVENT_PARAM_MEASUREMENT_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4467",
+      "FAJ_121_3096",
+      "FAJ_121_3063",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_AFFECTED_MEAS_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4467",
+      "FAJ_121_3096",
+      "FAJ_121_4518",
+      "FAJ_121_3063",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_RAT_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4467",
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_MEAS_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4467"
+    ]
+  },
+  "EVENT_PARAM_HO_TARGET_SELECTION_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0897",
+      "FAJ_121_3096",
+      "FAJ_121_0877",
+      "FAJ_121_3039"
+    ]
+  },
+  "EVENT_PARAM_SRVCC_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3014",
+      "FAJ_121_3096",
+      "FAJ_121_2027",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_SINR_MAX_DMRS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_THRESHOLD_RSRP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_THRESHOLD_RSRQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_THRESHOLD_UL_SINR_MAX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_EST_POWER_HEADROOM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_DL_COV_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_UL_COV_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_FILTERED_EQ_GAIN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_ULCOMP_COMBINING_SECTOR_CELL_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_TTI_BUNDLING_MODE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_UL_EVALUATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_SINR_MAX_RSRP_SOURCE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_NOISE_INTERFERENCE_SOURCE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_SINR_MAX_RSRP_TARGET": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_NOISE_INTERFERENCE_TARGET": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_ULTRIG_REJECT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1797"
+    ]
+  },
+  "EVENT_PARAM_INTERNAL_RELEASE_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091",
+      "FAJ_121_1787",
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_PREP_OUT_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091",
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_EXEC_OUT_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091",
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_PROC_HO_EXEC_IN_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091"
+    ]
+  },
+  "EVENT_PARAM_INITIAL_CTXT_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091"
+    ]
+  },
+  "EVENT_PARAM_ERAB_SETUP_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3091",
+      "FAJ_121_1857",
+      "FAJ_121_5018"
+    ]
+  },
+  "EVENT_PARAM_PLMN_INDEX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_UE_CATEGORY_FLEX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_BR_CE_LEVEL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_UE_POWER_CLASS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_SUBSCRIBER_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_UE_ENDC_STAGE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_PER_RB_QCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_ERAB_ARP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669",
+      "FAJ_121_1857",
+      "FAJ_121_1749"
+    ]
+  },
+  "EVENT_PARAM_ERAB_PCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_ERAB_PVI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_LCG": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4669"
+    ]
+  },
+  "EVENT_PARAM_NO_OF_PDSCH_BLANKED_SUBFRAME": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4708"
+    ]
+  },
+  "EVENT_PARAM_SEND_GENBID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3078",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_RECV_GENBID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3078",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_MAC_DTX_DL_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_DL_NACK_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_SCELL_HARQ_DL_ACK_QPSK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_DL_MAC_DELAY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_SCELL_RADIOTHP_VOL_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_SCELL_RADIOTHP_RES_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_PER_SCELL_SCHED_ACTIVITY_UE_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3046"
+    ]
+  },
+  "EVENT_PARAM_HO_REJECT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3068"
+    ]
+  },
+  "EVENT_PARAM_ELC_PDSCH_BLANKED_TTI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4471"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_PCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096",
+      "FAJ_121_0497",
+      "FAJ_121_1898"
+    ]
+  },
+  "EVENT_PARAM_NON_PLANNED_PCI_MEASURE_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_RAT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096",
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_HO_OUT_PREP_ERAB_REQ_BITMAP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_HO_OUT_PREP_ERAB_FAIL_BITMAP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_DRX_CONFIG_INDEX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_HO_OUT_EXEC_ERAB_REQ_BITMAP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_HO_OUT_EXEC_ERAB_FAIL_BITMAP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_TA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096",
+      "FAJ_121_2025",
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_RRC_RECONFIG_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_START_CGI_MEAS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_ENB_IP_ADDRESS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096"
+    ]
+  },
+  "EVENT_PARAM_GENBID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3096",
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_PARTITION_CONFIG_MISSING": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_MEASUREMENT_PERIOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_DL_MAX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_DL_MIN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_DL_SUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_UL_MAX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_UL_MIN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_PRB_UL_SUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_AVAIL_PRB_UL_RESOURCES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_AVAIL_PRB_DL_RESOURCES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PRB_UL_UTILIZATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PRB_DL_UTILIZATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_GBR_UL_UTILIZATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_GBR_DL_UTILIZATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_PARTITION_CONFIG_FAULT_BITMAP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4571"
+    ]
+  },
+  "EVENT_PARAM_MBMS_QOS_QCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4556"
+    ]
+  },
+  "EVENT_PARAM_MBMS_QOS_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4556"
+    ]
+  },
+  "EVENT_PARAM_MBMS_REQUESTED_SA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4556"
+    ]
+  },
+  "EVENT_PARAM_UE_CAP_CATEGORY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3084",
+      "FAJ_121_4466"
+    ]
+  },
+  "EVENT_PARAM_CA_PF": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3084",
+      "FAJ_121_4466"
+    ]
+  },
+  "EVENT_PARAM_RSRPSERVING": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_RSRQSERVING": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_PHYSICAL_CELLID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_RSRPRESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_RSRQRESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_MDT_M": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518"
+    ]
+  },
+  "EVENT_PARAM_CRNTI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4518",
+      "FAJ_121_4894"
+    ]
+  },
+  "INTERNAL_EVENT_DL_COMP_MEAS_CONFIG_REJECT": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4223"
+    ]
+  },
+  "INTERNAL_EVENT_DL_COMP_MEAS_REP_DISCARD": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4223"
+    ]
+  },
+  "EVENT_PARAM_RRC_CONFIG_REJECT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4223"
+    ]
+  },
+  "EVENT_PARAM_MEAS_REP_DISCARD_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4223"
+    ]
+  },
+  "EVENT_PARAM_NOISEINTERF_SUM_PRB": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1799"
+    ]
+  },
+  "EVENT_PARAM_PER_DRB_DL_RLC_DELAY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0859"
+    ]
+  },
+  "EVENT_PARAM_PER_DRB_DL_RLC_DELAY_SAMPL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0859"
+    ]
+  },
+  "EVENT_PARAM_PER_DRB_LAT_TIME_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0859"
+    ]
+  },
+  "EVENT_PARAM_PER_DRB_LAT_SAMPL_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0859"
+    ]
+  },
+  "INTERNAL_EVENT_ADV_CELL_SUP_DETECTION": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "INTERNAL_EVENT_ADV_CELL_SUP_RECOVERY_ATTEMPT": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "INTERNAL_EVENT_ADV_CELL_SUP_RECOVERY_RESULT": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "INTERNAL_EVENT_AI_ACS_CONCEPT_DRIFT_DETECTION": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0781",
+      "FAJ_121_5282"
+    ]
+  },
+  "EVENT_PARAM_ADV_CELL_SUP_RULE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_ADV_CELL_SUP_RECOVERY_METHOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_ADV_CELL_SUP_RECOVERY_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_RA_ATT_CBRA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_RA_ATT_CFRA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_RA_SUCC_CBRA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "EVENT_PARAM_RA_SUCC_CFRA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0781"
+    ]
+  },
+  "INTERNAL_EVENT_ETWS_REQ": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_ETWS_RESP": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_CMAS_REQ": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_CMAS_RESP": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_ETWS_REPET_STOPPED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_CMAS_REPET_STOPPED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "INTERNAL_EVENT_PWS_RESTART": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_ETWS_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_NO_OF_REPET_REQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_REPET_PERIOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_ETWS_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_MESSAGE_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_SERIAL_NUMBER": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_CMAS_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_NO_OF_REPET_COMPL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_ETWS_REPET_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_CMAS_REPET_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2050"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_VOIP_QUALITY_UL_OK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1789"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_VOIP_QUALITY_UL_NOK": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1789"
+    ]
+  },
+  "EVENT_PARAM_NOT_ENOUGH_VOIP_DELAY_SAMPLES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1789"
+    ]
+  },
+  "EVENT_PARAM_RELEASE_WITH_REDIRECT_REASON": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0876",
+      "FAJ_121_0921"
+    ]
+  },
+  "EVENT_PARAM_UE_PREEMPTION_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5490"
+    ]
+  },
+  "INTERNAL_EVENT_CA_WAITING_FOR_COVERAGE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_EVENT_A": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_WAITING_WITH_CONFIGURED_SCELLS_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3063"
+    ]
+  },
+  "EVENT_PARAM_UE_ADM_CTRL_BLOCKING_ARP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1787"
+    ]
+  },
+  "EVENT_PARAM_UE_HIGHEST_REQ_ARP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1787"
+    ]
+  },
+  "EVENT_PARAM_ERAB_SETUP_ATT_PA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ERAB_SETUP_SUCC_PA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ACCUMULATED_UL_REQUESTED_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ACCUMULATED_DL_REQUESTED_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ACCUMULATED_UL_ADMITTED_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ACCUMULATED_DL_ADMITTED_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857"
+    ]
+  },
+  "EVENT_PARAM_ADMISSION_ARP_LEVEL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1857",
+      "FAJ_121_3092"
+    ]
+  },
+  "INTERNAL_EVENT_LOAD_CONTROL_STATE_TRANSITION": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "INTERNAL_EVENT_ADMISSION_BLOCKING_STARTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "INTERNAL_EVENT_ADMISSION_BLOCKING_UPDATED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "INTERNAL_EVENT_ADMISSION_BLOCKING_STOPPED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_PROCESSOR_LOAD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_ST_TIMESTAMP_HOUR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_ST_TIMESTAMP_MINUTE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_ST_TIMESTAMP_SECOND": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_ST_TIMESTAMP_MILLISEC": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_TRANSITION_TRIGGER": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_OLD_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_NEW_STATE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3092"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_START_NR_OF_RRC_CONN_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_START_NR_OF_VOLTE_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_START_NR_OF_EMERGENCY_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_END_NR_OF_RRC_CONN_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_END_NR_OF_VOLTE_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_SOFT_LOCK_END_NR_OF_EMERGENCY_UES": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1817"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_DL_DTX_WORSE_DISTR_XXX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_UL_DTX_WORSE_DISTR_XXX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_CCE_AGGREGATION_LEVEL_DL_DISTR_XXX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_PDCCH_CCE_AGGREGATION_LEVEL_UL_DISTR_XXX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_SINR_MEAS_PDCCH_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_SINR_MEAS_PDCCH_UL_XXX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "EVENT_PARAM_SINR_MEAS_PDCCH_UL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5716"
+    ]
+  },
+  "INTERNAL_EVENT_ANR_NR_EVAL": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_ANR_NR_FREQ_REL_ADD": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBREL_REMOVE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBREL_SELECT_PCI_CONFLICT": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_UE_ANR_CONFIG_PCI": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_UE_ANR_PCI_REPORT": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_UE_ANR_CONFIG_PCI_REMOVE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_ANR_PCI_REPORT_WANTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_ANR": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_MEAS_CONFIG_PERIODICAL_NR": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NEIGHBGNB_CHANGE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "INTERNAL_EVENT_NR_PCI_CONFLICT_SUSPECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_EVAL_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_TRIGGER": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_TRIGGER_QUANTITY_NR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_NCGI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497",
+      "FAJ_121_1898"
+    ]
+  },
+  "EVENT_PARAM_ANR_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_PREVIOUS_NR_NEIGHBOR_FREQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_UPDATED_NR_NEIGHBOR_FREQ": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_PREVIOUS_NR_NEIGHBOR_SMTC_SCS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_UPDATED_NR_NEIGHBOR_SMTC_SCS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_NEIGH_ADD_METHOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_OPERATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_SELECT_METHOD": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_OPERATION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ENB_NAME": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_MEASURE_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_NO_SIB": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_GERAN_FREQ_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_REMOVE_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_PCI_MEASURE_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_UE_CAP_ANR_FEATURE_INDICATORS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_HO_SUCC_LEVEL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ANR_PCI_CONFLICT_MEASURE_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_START_CGI_MEAS_QCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_CGI_MEAS_METHOD_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_MEAS_OBJECT_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_PERIODICAL_PURPOSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_ARFCN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_MAX_REPORT_CELLS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_REPORT_INTERVAL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_REPORT_AMOUNT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_EXT_MAX_MEASID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_INC_MON_EUTRA": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_UE_TRACE_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_GLOBAL_RN_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_GNB_NAME": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0497"
+    ]
+  },
+  "EVENT_PARAM_MEASCELLGROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4883"
+    ]
+  },
+  "EVENT_PARAM_PER_MEASCELLGROUP_PRB_UNIT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4883"
+    ]
+  },
+  "EVENT_PARAM_PER_MEASCELLGROUP_DL_PRB_UTIL_DISTR_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4883"
+    ]
+  },
+  "EVENT_PARAM_PER_MEASCELLGROUP_DL_PRB_UTIL_DISTR_XX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4883"
+    ]
+  },
+  "EVENT_PARAM_RRC_ESTABL_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5062"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_SCELL_ACTIVITY_STATE_BEFORE_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_SCELL_ACTIVITY_STATE_AFTER_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_SCELL_THP_BEFORE_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_SCELL_THP_AFTER_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_REQUIRED_TBS_BEFORE_HO_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_REQUIRED_TBS_AFTER_HO_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_PCELL_THP_BEFORE_HO_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_PER_UL_HEAVY_UE_PCELL_THP_AFTER_HO_SELE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5116"
+    ]
+  },
+  "EVENT_PARAM_DELTA_SINR_ERAN_UL_COMP_MEAS_PUSCH_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4856"
+    ]
+  },
+  "EVENT_PARAM_UE_ACTIVITY_STATUS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_RSC_DECISION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_SERVING_PHYSICAL_CELLID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_SERVING_PHYSICAL_CELLID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PHYSICAL_CELLID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_RSRPRESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_RSRQRESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PROC_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_SELECTION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_RSRP_MIN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_RSRP_MAX": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_SERVING_EFCN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_EARFCN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_WITHIN_COVERAGE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ML_PREDICT_OUTSIDE_COVERAGE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4940"
+    ]
+  },
+  "EVENT_PARAM_ERAB_MODIFY_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1749"
+    ]
+  },
+  "EVENT_PARAM_ERAB_GBR": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1749"
+    ]
+  },
+  "EVENT_PARAM_PER_PRB_AVG_USED_DL_SUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4946"
+    ]
+  },
+  "EVENT_PARAM_PER_PRB_AVG_USED_DL_SAMP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4946"
+    ]
+  },
+  "EVENT_PARAM_PER_PRB_AVG_USED_UL_SUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4946"
+    ]
+  },
+  "EVENT_PARAM_PER_PRB_AVG_USED_UL_SAMP": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4946"
+    ]
+  },
+  "EVENT_PARAM_TA_INTERVAL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_2025"
+    ]
+  },
+  "EVENT_PARAM_ERAB_ROHC_UL_DATA_FAIL_MAX_CID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5072"
+    ]
+  },
+  "EVENT_PARAM_ERAB_ROHC_UL_DATA_DECONFIG_CID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5072"
+    ]
+  },
+  "EVENT_PARAM_REESTAB_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_PROC_UE_CTXT_FETCH_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_PROCEDURE_STATUS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_HO_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_UE_CTXT_FETCH_DURING_RRC_RECONF_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_UE_CTXT_FETCH_TARGET_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_NEW_X": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_UE_CTXT_FETCH_DURING_RRC_RECONF_CAUSEI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_3023"
+    ]
+  },
+  "EVENT_PARAM_REDIRECT_RELEASE_INFO": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0921",
+      "FAJ_121_4983"
+    ]
+  },
+  "INTERNAL_EVENT_ASM_TRIGGERED_ALARM_SUPPRESSED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4749"
+    ]
+  },
+  "INTERNAL_EVENT_SCELL_CANDIDATE_ADD": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4749"
+    ]
+  },
+  "INTERNAL_EVENT_SCELL_CANDIDATE_REMOVE": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4749"
+    ]
+  },
+  "EVENT_PARAM_DUCT_INTERFERENCE_SLOPE_NUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5065"
+    ]
+  },
+  "EVENT_PARAM_DUCT_INTERFERENCE_CHARSEQ_CORR_PEAK_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5065"
+    ]
+  },
+  "EVENT_PARAM_DUCT_INTERFERENCE_CHAR_SEQ_NUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5065"
+    ]
+  },
+  "EVENT_PARAM_DUCT_INTERFERENCE_CHAR_SEQ_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5065"
+    ]
+  },
+  "EVENT_PARAM_IDC_CAPABLE_USERS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4894"
+    ]
+  },
+  "EVENT_PARAM_IDC_ULCA_CAPABLE_USERS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4894"
+    ]
+  },
+  "EVENT_PARAM_IDC_ULCA_ACTIVE_USERS": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4894"
+    ]
+  },
+  "EVENT_PARAM_IDC_VICTIM_SYSTEM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4894"
+    ]
+  },
+  "EVENT_PARAM_IDC_INDICATION_DIRECTION": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4894"
+    ]
+  },
+  "EVENT_PARAM_PER_DRB_PACKET_DISC_AQM_DL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1713"
+    ]
+  },
+  "INTERNAL_EVENT_NR_FREQUENCY_EXCLUDED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4983"
+    ]
+  },
+  "EVENT_PARAM_MOBILITY_MODE_PER_EXCLUDED_NR_FREQUENCY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_4983"
+    ]
+  },
+  "EVENT_PARAM_PER_UE_PACKET_LOST_PELR_UU_DL_RLCUM": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_0861"
+    ]
+  },
+  "INTERNAL_EVENT_PCI_CONFLICT_DETECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1898"
+    ]
+  },
+  "INTERNAL_EVENT_PCI_CONFLICT_RESOLVED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1898"
+    ]
+  },
+  "INTERNAL_EVENT_NR_PCI_CONFLICT_DETECTED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1898"
+    ]
+  },
+  "INTERNAL_EVENT_NR_PCI_CONFLICT_RESOLVED": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_1898"
+    ]
+  },
+  "EVENT_PARAM_QUEUE_TIME": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_QUEUE_ALLOC_ATTEMPT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_SRB": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_IS_CONN_REQ_FROM_QUEUE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_RRC_REJECT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_UE_ADMISSION_REJECT_CAUSE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5187"
+    ]
+  },
+  "EVENT_PARAM_UE_DYN_BLER_TARGET_DL_BIN_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_UE_DYN_BLER_SINR_DELTA_DL_BIN_": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_CELLRELATION_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_NEIGHBOR_CELL_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5247"
+    ]
+  },
+  "EVENT_PARAM_PRB_UTIL_SUBSCRIPTION_ATT_RESULT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5247"
+    ]
+  },
+  "INTERNAL_EVENT_SC_PERIODIC_EMF_POW_CONTROL": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_5015"
+    ]
+  },
+  "EVENT_PARAM_NCI": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_ASN": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MAIN_PLMN_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_GNB_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_GNB_ID_LENGTH": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_GLOBAL_GNB_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEASURED_FREQUENCY": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEASURED_FREQUENCY_SUBCARRIER_SPACING": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_SERVING_PLMN_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEASUREMENT_COUNT": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEAS_RESULT_P_CELL": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEAS_RESULT_SERVING_MO_LIST": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEAS_RESULT_NEIGH_CELLS_NR_LIST": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_PREF_UE_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_UE_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_UE_MOBILITY_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_UE_SERVICE_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_UE_ADMISSION_GROUP_ID": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "EVENT_PARAM_MEAS_RESULT_NEIGH_CELLS_EUTRAN_LIST": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_5527",
+      "FAJ_121_5565"
+    ]
+  },
+  "INTERNAL_EVENT_ENDC_X": {
+    "type": "internal_event",
+    "features": [
+      "FAJ_121_4697"
+    ]
+  },
+  "EVENT_PARAM_ACC_TYPE": {
+    "type": "event_param",
+    "features": [
+      "FAJ_121_1743"
+    ]
+  }
+}

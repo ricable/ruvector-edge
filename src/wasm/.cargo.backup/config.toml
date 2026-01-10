@@ -1,0 +1,44 @@
+# Cargo Configuration for ELEX WASM RAN SDK
+# Optimized for Phase 7 Performance: <500KB binary, <1ms P95 latency
+
+[build]
+target = "wasm32-unknown-unknown"
+
+[target.wasm32-unknown-unknown]
+rustflags = [
+    # Linker flags
+    "-C", "link-arg=-s",
+    "-C", "link-arg=--import-memory",
+    "-C", "link-arg=--export-table",
+
+    # Enable target features for WASM
+    "-C", "target-feature=+mutable-globals",
+    "-C", "target-feature=+sign-ext",
+    "-C", "target-feature=+nontrapping-fptoint",
+
+    # SIMD support (3-8x speedup)
+    "-C", "target-feature=+simd128",
+
+    # Bulk memory operations
+    "-C", "target-feature=+bulk-memory",
+
+    # Multi-value (allows multiple return values)
+    "-C", "target-feature=+multivalue",
+
+    # Extended const expressions
+    "-C", "target-feature=+extended-const",
+]
+
+[profile.release]
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[profile.release.package.elex-wasm]
+opt-level = "z"
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0

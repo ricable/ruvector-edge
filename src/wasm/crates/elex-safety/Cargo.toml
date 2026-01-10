@@ -1,0 +1,56 @@
+[package]
+name = "elex-safety"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+description = "Safe zone enforcement and rollback mechanisms for ELEX RAN optimization"
+keywords = ["safety", "rollback", "validation", "RAN", "telecommunications"]
+categories = ["networking", "algorithms", "wasm"]
+
+[dependencies]
+# Core workspace dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# SIMD-accelerated validation
+elex-simd = { path = "../elex-simd" }
+
+# WASM dependencies
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+web-sys = { workspace = true, features = [
+    "IdbDatabase",
+    "IdbTransaction",
+    "IdbObjectStore",
+    "IdbRequest",
+    "IdbOpenDbRequest",
+    "IdbCursor",
+    "IdbCursorWithValue",
+    "DomStringList",
+    "Event",
+    "EventTarget",
+] }
+wasm-bindgen-futures = { workspace = true }
+
+# Time handling (WASM-compatible)
+time = { version = "0.3", default-features = false, features = ["serde"] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+console_error_panic_hook = { workspace = true }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+simd = []
+
+[package.metadata.docs.rs]
+default-target = "wasm32-unknown-unknown"
+all-features = true

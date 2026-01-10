@@ -1,0 +1,26 @@
+{
+  "name": "@claude-flow/integration",
+  "version": "3.0.0-alpha.6",
+  "type": "module",
+  "description": "Integration module - agentic-flow@alpha deep integration, ADR-001 compliance",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "agentic-flow": "^2.0.0-alpha"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.16"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "v3alpha"
+  }
+}
