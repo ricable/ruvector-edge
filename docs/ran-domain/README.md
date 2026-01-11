@@ -17,18 +17,29 @@ This section contains specialized documentation for the Radio Access Network (RA
 
 | Metric | Value | Description |
 |--------|-------|-------------|
-| **Feature Agents** | 593 | Specialized RAN feature experts |
-| **Parameters** | 9,432 | Configurable parameters across features |
-| **Counters** | 3,368 | Monitoring counters for each feature |
-| **KPIs** | 199 | Key performance indicators tracked |
-| **Documentation** | 250+ | Agent-specific Q&A and guides |
+| **Feature Documents** | 1,153 | Indexed Ericsson RAN feature documents |
+| **Test Questions** | 250 | Standardized battle test questions (Category A, B, C) |
+| **Feature Agents** | 50 | Specialized agents tested in Battle Arena |
+| **HNSW Indexing** | <1ms | Ultra-fast semantic retrieval performance |
 
 ## Technology Stack
 
 - **Core**: Rust/WASM agents for edge deployment
-- **Memory**: HNSW vector search for feature retrieval (150x-12,500x speedup)
-- **Security**: Ed25519 signatures, AES-256-GCM encryption
+- **Memory**: AgentDB (HNSW vector search) for feature retrieval
+- **Learning**: Q-Learning + Decision Transformer hybrid
 - **Orchestration**: Claude Flow V3 for agent coordination
+
+## Battle Test Suite
+
+The **[250-questions.md](./250-questions.md)** file serves as the standardized benchmark for evaluating agent performance. It covers 50 RAN features with 5 questions each, categorized into:
+- **Category A**: Knowledge Retrieval (125 Qs)
+- **Category B**: Decision Making (75 Qs)
+- **Category C**: Advanced Scenarios (50 Qs)
+
+Usage:
+```bash
+bun run scripts/self-learning-demo/battle-arena.ts --questions-file=docs/ran-domain/250-questions.md
+```
 
 ## Documentation Structure
 
@@ -38,19 +49,18 @@ ran-domain/
 ├── memory-guide.md          # Memory and learning systems
 ├── features-indexing-report.md  # Feature indexing approach
 ├── ai-agents-implementation-summary.md  # Implementation details
-├── 250-questions.md          # Agent Q&A and features
+├── 250-questions.md          # Battle Test Question dataset
 └── agent-questions.md       # Additional agent questions
 ```
 
 ## Quick Reference
 
-| File | Description | Pages |
+| File | Description | Focus |
 |------|-------------|-------|
-| [agent-architecture.md](./agent-architecture.md) | Architecture overview | 15 |
-| [memory-guide.md](./memory-guide.md) | Memory systems | 12 |
-| [features-indexing-report.md](./features-indexing-report.md) | Indexing approach | 8 |
-| [ai-agents-implementation-summary.md](./ai-agents-implementation-summary.md) | Implementation | 20 |
-| [250-questions.md](./250-questions.md) | Agent features | 250+ |
+| [agent-architecture.md](./agent-architecture.md) | Architecture overview | Design Patterns |
+| [250-questions.md](./250-questions.md) | Battle Test Questions | Benchmarking |
+| [memory-guide.md](./memory-guide.md) | Memory systems | HNSW/AgentDB |
+| [features-indexing-report.md](./features-indexing-report.md) | Indexing approach | Data Layout |
 
 ---
 

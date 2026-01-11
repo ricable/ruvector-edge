@@ -1,0 +1,2077 @@
+{
+  "qa:180_22104_LZA7016014_1Uen_AT_Q1:1768141204177": {
+    "questionId": "180_22104_LZA7016014_1Uen_AT_Q1",
+    "question": "How does Multi-Clustered PUSCH interact with other Carrier Aggregation features?",
+    "agentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "expectedAgentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Multi-Clustered PUSCH:**\n\nMulti-Clustered PUSCH is a Carrier Aggregation feature in Ericsson RAN systems. It provides Multi-Clustered PUSCH. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 0 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 50.0% success rate",
+      "confidence": 0.8500000000000001,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.41841700000077253,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 85.0%"
+      ],
+      "sources": [
+        "180_22104_LZA7016014_1Uen_AT",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141204177
+  },
+  "qa:180_22104_LZA7016014_1Uen_AT_Q2:1768141204877": {
+    "questionId": "180_22104_LZA7016014_1Uen_AT_Q2",
+    "question": "What is the recommended procedure for activating Multi-Clustered PUSCH?",
+    "agentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "expectedAgentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on Multi-Clustered PUSCH (PUSCH) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nMulti-Clustered PUSCH is a Carrier Aggregation feature in Ericsson RAN systems. It provides Multi-Clustered PUSCH. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: Multi-Clustered PUSCH\n- FAJ: 180_22104_LZA7016014_1Uen_AT\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.701,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.09704199999760021,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"Multi-Clustered PUSCH\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "180_22104_LZA7016014_1Uen_AT",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141204877
+  },
+  "qa:180_22104_LZA7016014_1Uen_AT_Q3:1768141205592": {
+    "questionId": "180_22104_LZA7016014_1Uen_AT_Q3",
+    "question": "Users are experiencing issues after enabling Multi-Clustered PUSCH. How do you investigate?",
+    "agentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "expectedAgentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_180_22104_LZA7016014_1Uen_AT (Multi-Clustered PUSCH)\n**Domain:** Carrier Aggregation\n\nThe query \"Users are experiencing issues after enabling Multi...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.12941699999646517,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "180_22104_LZA7016014_1Uen_AT",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141205592
+  },
+  "qa:189_22104_LZA7016017_1Uen_V33B_Q1:1768141206318": {
+    "questionId": "189_22104_LZA7016017_1Uen_V33B_Q1",
+    "question": "Explain the key concepts behind RAN Compute Deep Sleep Mode and its role in Carrier Aggregation.",
+    "agentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "expectedAgentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on RAN Compute Deep Sleep Mode (RAN) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nRAN Compute Deep Sleep Mode is a Carrier Aggregation feature in Ericsson RAN systems. It provides RAN Compute Deep Sleep Mode. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: RAN Compute Deep Sleep Mode\n- FAJ: 189_22104_LZA7016017_1Uen_V33B\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.7,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.0553330000002461,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"RAN Compute Deep Sleep Mode\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "189_22104_LZA7016017_1Uen_V33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141206318
+  },
+  "qa:189_22104_LZA7016017_1Uen_V33B_Q2:1768141207042": {
+    "questionId": "189_22104_LZA7016017_1Uen_V33B_Q2",
+    "question": "How do you validate RAN Compute Deep Sleep Mode is working correctly after activation?",
+    "agentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "expectedAgentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for RAN Compute Deep Sleep Mode:**\n\nRAN Compute Deep Sleep Mode is a Carrier Aggregation feature in Ericsson RAN systems. It provides RAN Compute Deep Sleep Mode. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 1 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 0.0% success rate",
+      "confidence": 0.8,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.04012500000317232,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 80.0%"
+      ],
+      "sources": [
+        "189_22104_LZA7016017_1Uen_V33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141207042
+  },
+  "qa:189_22104_LZA7016017_1Uen_V33B_Q3:1768141207753": {
+    "questionId": "189_22104_LZA7016017_1Uen_V33B_Q3",
+    "question": "What logs and counters should be checked when debugging RAN Compute Deep Sleep Mode?",
+    "agentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "expectedAgentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_189_22104_LZA7016017_1Uen_V33B (RAN Compute Deep Sleep Mode)\n**Domain:** Carrier Aggregation\n\nThe query \"What logs and counters should be checked when debu...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.045208999999886146,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "189_22104_LZA7016017_1Uen_V33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141207753
+  },
+  "qa:51_22104_LZA7016017_1Uen_BX33B_Q1:1768141208465": {
+    "questionId": "51_22104_LZA7016017_1Uen_BX33B_Q1",
+    "question": "Explain the key concepts behind NR Uplink Carrier Aggregation High-Band and its role in Carrier Aggregation.",
+    "agentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "expectedAgentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about NR Uplink Carrier Aggregation High-Band, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.09295800000109011,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "51_22104_LZA7016017_1Uen_BX33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141208465
+  },
+  "qa:51_22104_LZA7016017_1Uen_BX33B_Q2:1768141209203": {
+    "questionId": "51_22104_LZA7016017_1Uen_BX33B_Q2",
+    "question": "What is the rollback procedure if NR Uplink Carrier Aggregation High-Band causes issues?",
+    "agentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "expectedAgentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for NR Uplink Carrier Aggregation High-Band:**\n\nTo troubleshoot NR Uplink Carrier Aggregation High-Band: 1) Check feature activation status, 2) Verify prerequisite features are enabled, 3) Review PM counters for anomalies, 4) Examine alarm history, 5) Check parameter settings against deployment guidelines.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 1 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 0.0% success rate",
+      "confidence": 0.8,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.04345900000043912,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 80.0%"
+      ],
+      "sources": [
+        "51_22104_LZA7016017_1Uen_BX33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141209203
+  },
+  "qa:51_22104_LZA7016017_1Uen_BX33B_Q3:1768141209935": {
+    "questionId": "51_22104_LZA7016017_1Uen_BX33B_Q3",
+    "question": "NR Uplink Carrier Aggregation High-Band activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "expectedAgentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about NR Uplink Carrier Aggregation High-Band, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.04579199999716366,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "51_22104_LZA7016017_1Uen_BX33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141209935
+  },
+  "qa:58_22104_LZA7016014_1Uen_AE_Q1:1768141210645": {
+    "questionId": "58_22104_LZA7016014_1Uen_AE_Q1",
+    "question": "What is the purpose of 16-QAM Uplink? How does it differ from other Mobility features?",
+    "agentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "expectedAgentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about 16-QAM Uplink, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Mobility expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.031207999996695435,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "58_22104_LZA7016014_1Uen_AE",
+        "Mobility"
+      ]
+    },
+    "timestamp": 1768141210645
+  },
+  "qtable:agent_180_22104_LZA7016014_1Uen_AT": {
+    "agentId": "agent_180_22104_LZA7016014_1Uen_AT",
+    "qTable": {
+      "agent_180_22104_LZA7016014_1Uen_AT:does_how_interact_multiclustered_pusch:EXPLORING:2": {
+        "stateHash": "agent_180_22104_LZA7016014_1Uen_AT:does_how_interact_multiclustered_pusch:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141204177
+      },
+      "agent_180_22104_LZA7016014_1Uen_AT:for_procedure_recommended_the_what:EXPLORING:0": {
+        "stateHash": "agent_180_22104_LZA7016014_1Uen_AT:for_procedure_recommended_the_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141204877
+      },
+      "agent_180_22104_LZA7016014_1Uen_AT:after_are_experiencing_issues_users:EXPLORING:4": {
+        "stateHash": "agent_180_22104_LZA7016014_1Uen_AT:after_are_experiencing_issues_users:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141205592
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.6666666666666666,
+    "avgResponseTime": 0.21495866666494598,
+    "updatedAt": 1768141222224,
+    "timestamp": 1768141222224
+  },
+  "qtable:agent_189_22104_LZA7016017_1Uen_V33B": {
+    "agentId": "agent_189_22104_LZA7016017_1Uen_V33B",
+    "qTable": {
+      "agent_189_22104_LZA7016017_1Uen_V33B:behind_concepts_explain_key_the:EXPLORING:0": {
+        "stateHash": "agent_189_22104_LZA7016017_1Uen_V33B:behind_concepts_explain_key_the:EXPLORING",
+        "action": 0,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141206318
+      },
+      "agent_189_22104_LZA7016017_1Uen_V33B:compute_how_ran_validate_you:EXPLORING:2": {
+        "stateHash": "agent_189_22104_LZA7016017_1Uen_V33B:compute_how_ran_validate_you:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141207042
+      },
+      "agent_189_22104_LZA7016017_1Uen_V33B:and_counters_logs_should_what:EXPLORING:4": {
+        "stateHash": "agent_189_22104_LZA7016017_1Uen_V33B:and_counters_logs_should_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141207753
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.04688900000110152,
+    "updatedAt": 1768141222993,
+    "timestamp": 1768141222993
+  },
+  "qtable:agent_51_22104_LZA7016017_1Uen_BX33B": {
+    "agentId": "agent_51_22104_LZA7016017_1Uen_BX33B",
+    "qTable": {
+      "agent_51_22104_LZA7016017_1Uen_BX33B:behind_concepts_explain_key_the:EXPLORING:3": {
+        "stateHash": "agent_51_22104_LZA7016017_1Uen_BX33B:behind_concepts_explain_key_the:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141208465
+      },
+      "agent_51_22104_LZA7016017_1Uen_BX33B:procedure_rollback_the_uplink_what:EXPLORING:2": {
+        "stateHash": "agent_51_22104_LZA7016017_1Uen_BX33B:procedure_rollback_the_uplink_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141209203
+      },
+      "agent_51_22104_LZA7016017_1Uen_BX33B:activation_aggregation_carrier_highband_uplink:EXPLORING:3": {
+        "stateHash": "agent_51_22104_LZA7016017_1Uen_BX33B:activation_aggregation_carrier_highband_uplink:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141209935
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.06073633333289763,
+    "updatedAt": 1768141223704,
+    "timestamp": 1768141223704
+  },
+  "qtable:agent_58_22104_LZA7016014_1Uen_AE": {
+    "agentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "qTable": {
+      "agent_58_22104_LZA7016014_1Uen_AE:16qam_purpose_the_uplink_what:EXPLORING:3": {
+        "stateHash": "agent_58_22104_LZA7016014_1Uen_AE:16qam_purpose_the_uplink_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141210645
+      },
+      "agent_58_22104_LZA7016014_1Uen_AE:16qam_purpose_the_uplink_what:EXPLORING:0": {
+        "stateHash": "agent_58_22104_LZA7016014_1Uen_AE:16qam_purpose_the_uplink_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141918850
+      },
+      "agent_58_22104_LZA7016014_1Uen_AE:16qam_how_uplink_validate_you:EXPLORING:3": {
+        "stateHash": "agent_58_22104_LZA7016014_1Uen_AE:16qam_how_uplink_validate_you:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141919572
+      },
+      "agent_58_22104_LZA7016014_1Uen_AE:and_counters_logs_should_what:EXPLORING:1": {
+        "stateHash": "agent_58_22104_LZA7016014_1Uen_AE:and_counters_logs_should_what:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141920302
+      }
+    },
+    "totalInteractions": 4,
+    "successRate": 0.5,
+    "avgResponseTime": 0.04045824999866454,
+    "updatedAt": 1768141953339,
+    "timestamp": 1768141953339
+  },
+  "qtable:agent_238_22104_LZA7016017_1Uen_M33B": {
+    "agentId": "agent_238_22104_LZA7016017_1Uen_M33B",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141225153,
+    "timestamp": 1768141225153
+  },
+  "qtable:agent_10_10948_LZA7016014_1Uen_FT": {
+    "agentId": "agent_10_10948_LZA7016014_1Uen_FT",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141225865,
+    "timestamp": 1768141225865
+  },
+  "qtable:agent_445_22104_LZA7016014_1Uen_AG": {
+    "agentId": "agent_445_22104_LZA7016014_1Uen_AG",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141226584,
+    "timestamp": 1768141226584
+  },
+  "qtable:agent_125_22104_LZA7016014_1Uen_FA": {
+    "agentId": "agent_125_22104_LZA7016014_1Uen_FA",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141227298,
+    "timestamp": 1768141227298
+  },
+  "qtable:agent_128_22104_LZA7016017_1Uen_V33B": {
+    "agentId": "agent_128_22104_LZA7016017_1Uen_V33B",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141228035,
+    "timestamp": 1768141228035
+  },
+  "qtable:agent_466_22104_LZA7016014_1Uen_J": {
+    "agentId": "agent_466_22104_LZA7016014_1Uen_J",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141228742,
+    "timestamp": 1768141228742
+  },
+  "qtable:agent_170_22104_LZA7016017_1Uen_S": {
+    "agentId": "agent_170_22104_LZA7016017_1Uen_S",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141229451,
+    "timestamp": 1768141229451
+  },
+  "qtable:agent_544_22104_LZA7016014_1Uen_AB33": {
+    "agentId": "agent_544_22104_LZA7016014_1Uen_AB33",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141230157,
+    "timestamp": 1768141230157
+  },
+  "qtable:agent_99_22104_LZA7016014_1Uen_CA": {
+    "agentId": "agent_99_22104_LZA7016014_1Uen_CA",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141230860,
+    "timestamp": 1768141230860
+  },
+  "qtable:agent_13_22104_LZA7016014_1Uen_AG": {
+    "agentId": "agent_13_22104_LZA7016014_1Uen_AG",
+    "qTable": {},
+    "totalInteractions": 0,
+    "successRate": 0.5,
+    "avgResponseTime": 0,
+    "updatedAt": 1768141231568,
+    "timestamp": 1768141231568
+  },
+  "qa:2_1553_LZA7016005Uen_AX_Q1:1768141907844": {
+    "questionId": "2_1553_LZA7016005Uen_AX_Q1",
+    "question": "What is the purpose of Manage Radio Network? How does it differ from other Carrier Aggregation features?",
+    "agentId": "agent_2_1553_LZA7016005Uen_AX",
+    "expectedAgentId": "agent_2_1553_LZA7016005Uen_AX",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for Manage Radio Network:**\n\nManage Radio Network is a Carrier Aggregation feature in Ericsson RAN systems. It provides ![Image](../images/2_1553-LZA7016005Uen.AX/additional_3_CP.png). For detailed technical information, refer to the feature documentation.\n\n**Reasoning Quality:**\n- Query type: Knowledge\n- Agent state: EXPLORING\n- Experience level: 0 interactions\n\n**Confidence Factors:**\n- Feature expertise: 0.75\n- Query familiarity: 0.30",
+      "confidence": 0.8999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.5021249999990687,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"What is the purpose of Manage ...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 90%"
+      ],
+      "sources": [
+        "2_1553_LZA7016005Uen_AX",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141907844
+  },
+  "qa:2_1553_LZA7016005Uen_AX_Q2:1768141908591": {
+    "questionId": "2_1553_LZA7016005Uen_AX_Q2",
+    "question": "What is the recommended procedure for activating Manage Radio Network?",
+    "agentId": "agent_2_1553_LZA7016005Uen_AX",
+    "expectedAgentId": "agent_2_1553_LZA7016005Uen_AX",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_2_1553_LZA7016005Uen_AX (Manage Radio Network)\n**Domain:** Carrier Aggregation\n\nThe query \"What is the recommended procedure for activating M...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.07595800000126474,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "2_1553_LZA7016005Uen_AX",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141908591
+  },
+  "qa:2_1553_LZA7016005Uen_AX_Q3:1768141909326": {
+    "questionId": "2_1553_LZA7016005Uen_AX_Q3",
+    "question": "How do you troubleshoot when Manage Radio Network is not providing expected performance?",
+    "agentId": "agent_2_1553_LZA7016005Uen_AX",
+    "expectedAgentId": "agent_2_1553_LZA7016005Uen_AX",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for Manage Radio Network:**\n\nTo troubleshoot Manage Radio Network: 1) Check feature activation status, 2) Verify prerequisite features are enabled, 3) Review PM counters for anomalies, 4) Examine alarm history, 5) Check parameter settings against deployment guidelines.\n\n**Reasoning Quality:**\n- Query type: Decision\n- Agent state: EXPLORING\n- Experience level: 2 interactions\n\n**Confidence Factors:**\n- Feature expertise: 0.75\n- Query familiarity: 0.32",
+      "confidence": 0.9999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.06929200000013225,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"How do you troubleshoot when M...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 100%"
+      ],
+      "sources": [
+        "2_1553_LZA7016005Uen_AX",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141909327
+  },
+  "qa:156_1553_LZA7016014_1Uen_B_Q1:1768141910067": {
+    "questionId": "156_1553_LZA7016014_1Uen_B_Q1",
+    "question": "How does Manage Antenna System interact with other Carrier Aggregation features?",
+    "agentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "expectedAgentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for Manage Antenna System:**\n\nManage Antenna System is a Carrier Aggregation feature in Ericsson RAN systems. It provides Manage Antenna System. For detailed technical information, refer to the feature documentation.\n\n**Reasoning Quality:**\n- Query type: Procedural\n- Agent state: EXPLORING\n- Experience level: 0 interactions\n\n**Confidence Factors:**\n- Feature expertise: 0.75\n- Query familiarity: 0.30",
+      "confidence": 0.8999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.06116699999984121,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"How does Manage Antenna System...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 90%"
+      ],
+      "sources": [
+        "156_1553_LZA7016014_1Uen_B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141910067
+  },
+  "qa:156_1553_LZA7016014_1Uen_B_Q2:1768141910786": {
+    "questionId": "156_1553_LZA7016014_1Uen_B_Q2",
+    "question": "What is the recommended procedure for activating Manage Antenna System?",
+    "agentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "expectedAgentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for Manage Antenna System:**\n\nManage Antenna System is a Carrier Aggregation feature in Ericsson RAN systems. It provides Manage Antenna System. For detailed technical information, refer to the feature documentation.\n\n**Reasoning Quality:**\n- Query type: Knowledge\n- Agent state: EXPLORING\n- Experience level: 1 interactions\n\n**Confidence Factors:**\n- Feature expertise: 1.00\n- Query familiarity: 0.31",
+      "confidence": 0.8999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.05220799999733572,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"What is the recommended proced...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 90%"
+      ],
+      "sources": [
+        "156_1553_LZA7016014_1Uen_B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141910786
+  },
+  "qa:156_1553_LZA7016014_1Uen_B_Q3:1768141911524": {
+    "questionId": "156_1553_LZA7016014_1Uen_B_Q3",
+    "question": "Manage Antenna System activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "expectedAgentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Manage Antenna System:**\n\nManage Antenna System is a Carrier Aggregation feature in Ericsson RAN systems. It provides Manage Antenna System. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 2 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 100.0% success rate",
+      "confidence": 0.9,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.16575000000011642,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 90.0%"
+      ],
+      "sources": [
+        "156_1553_LZA7016014_1Uen_B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141911524
+  },
+  "qa:33_1553_LZA7016017_1Uen_FJ_Q1:1768141912238": {
+    "questionId": "33_1553_LZA7016017_1Uen_FJ_Q1",
+    "question": "What is the purpose of UE Grouping Framework? How does it differ from other Carrier Aggregation features?",
+    "agentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "expectedAgentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for UE Grouping Framework:**\n\nUE Grouping Framework is a Carrier Aggregation feature in Ericsson RAN systems. It provides UE Grouping Framework. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 0 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 50.0% success rate",
+      "confidence": 0.8500000000000001,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.051124999998137355,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 85.0%"
+      ],
+      "sources": [
+        "33_1553_LZA7016017_1Uen_FJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141912238
+  },
+  "qa:33_1553_LZA7016017_1Uen_FJ_Q2:1768141912977": {
+    "questionId": "33_1553_LZA7016017_1Uen_FJ_Q2",
+    "question": "How do you validate UE Grouping Framework is working correctly after activation?",
+    "agentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "expectedAgentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_33_1553_LZA7016017_1Uen_FJ (UE Grouping Framework)\n**Domain:** Carrier Aggregation\n\nThe query \"How do you validate UE Grouping Framework is worki...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.03862500000104774,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "33_1553_LZA7016017_1Uen_FJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141912977
+  },
+  "qa:33_1553_LZA7016017_1Uen_FJ_Q3:1768141913692": {
+    "questionId": "33_1553_LZA7016017_1Uen_FJ_Q3",
+    "question": "UE Grouping Framework activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "expectedAgentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for UE Grouping Framework:**\n\nUE Grouping Framework is a Carrier Aggregation feature in Ericsson RAN systems. It provides UE Grouping Framework. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 2 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 50.0% success rate",
+      "confidence": 0.8500000000000001,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.03337499999906868,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 85.0%"
+      ],
+      "sources": [
+        "33_1553_LZA7016017_1Uen_FJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141913692
+  },
+  "qa:35_22104_LZA7016017_1Uen_AY_Q1:1768141914480": {
+    "questionId": "35_22104_LZA7016017_1Uen_AY_Q1",
+    "question": "How does High Speed UE High-Band interact with other Carrier Aggregation features?",
+    "agentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "expectedAgentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on High Speed UE High-Band (UE) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nHigh Speed UE High-Band is a Carrier Aggregation feature in Ericsson RAN systems. It provides High Speed UE High-Band. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: High Speed UE High-Band\n- FAJ: 35_22104_LZA7016017_1Uen_AY\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.7,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.1795830000010028,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"High Speed UE High-Band\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "35_22104_LZA7016017_1Uen_AY",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141914480
+  },
+  "qa:35_22104_LZA7016017_1Uen_AY_Q2:1768141915206": {
+    "questionId": "35_22104_LZA7016017_1Uen_AY_Q2",
+    "question": "What is the recommended procedure for activating High Speed UE High-Band?",
+    "agentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "expectedAgentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about High Speed UE High-Band, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.08437499999854481,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "35_22104_LZA7016017_1Uen_AY",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141915206
+  },
+  "qa:35_22104_LZA7016017_1Uen_AY_Q3:1768141915940": {
+    "questionId": "35_22104_LZA7016017_1Uen_AY_Q3",
+    "question": "How do you troubleshoot when High Speed UE High-Band is not providing expected performance?",
+    "agentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "expectedAgentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on High Speed UE High-Band (UE) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nTo troubleshoot High Speed UE High-Band: 1) Check feature activation status, 2) Verify prerequisite features are enabled, 3) Review PM counters for anomalies, 4) Examine alarm history, 5) Check parameter settings against deployment guidelines.\n\n**Parameters:**\n- Feature: High Speed UE High-Band\n- FAJ: 35_22104_LZA7016017_1Uen_AY\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.702,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.046000000002095476,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"High Speed UE High-Band\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "35_22104_LZA7016017_1Uen_AY",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141915940
+  },
+  "qa:57_22104_LZA7016017_1Uen_AB33B_Q1:1768141916668": {
+    "questionId": "57_22104_LZA7016017_1Uen_AB33B_Q1",
+    "question": "How does Common Channel Beamforming on Remote Radio Units interact with other Carrier Aggregation features?",
+    "agentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "expectedAgentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for Common Channel Beamforming on Remote Radio Units:**\n\nCommon Channel Beamforming on Remote Radio Units is a Carrier Aggregation feature in Ericsson RAN systems. It provides Common Channel Beamforming on Remote Radio Units. For detailed technical information, refer to the feature documentation.\n\n**Reasoning Quality:**\n- Query type: Procedural\n- Agent state: EXPLORING\n- Experience level: 0 interactions\n\n**Confidence Factors:**\n- Feature expertise: 0.75\n- Query familiarity: 0.30",
+      "confidence": 0.8999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.049958999999944353,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"How does Common Channel Beamfo...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 90%"
+      ],
+      "sources": [
+        "57_22104_LZA7016017_1Uen_AB33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141916668
+  },
+  "qa:57_22104_LZA7016017_1Uen_AB33B_Q2:1768141917393": {
+    "questionId": "57_22104_LZA7016017_1Uen_AB33B_Q2",
+    "question": "What prerequisites must be met before enabling Common Channel Beamforming on Remote Radio Units?",
+    "agentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "expectedAgentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Common Channel Beamforming on Remote Radio Units:**\n\nCommon Channel Beamforming on Remote Radio Units is a Carrier Aggregation feature in Ericsson RAN systems. It provides Common Channel Beamforming on Remote Radio Units. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 1 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 100.0% success rate",
+      "confidence": 0.9,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.03087500000037835,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 90.0%"
+      ],
+      "sources": [
+        "57_22104_LZA7016017_1Uen_AB33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141917393
+  },
+  "qa:57_22104_LZA7016017_1Uen_AB33B_Q3:1768141918114": {
+    "questionId": "57_22104_LZA7016017_1Uen_AB33B_Q3",
+    "question": "Users are experiencing issues after enabling Common Channel Beamforming on Remote Radio Units. How do you investigate?",
+    "agentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "expectedAgentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Common Channel Beamforming on Remote Radio Units:**\n\nTo troubleshoot Common Channel Beamforming on Remote Radio Units: 1) Check feature activation status, 2) Verify prerequisite features are enabled, 3) Review PM counters for anomalies, 4) Examine alarm history, 5) Check parameter settings against deployment guidelines.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 2 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 100.0% success rate",
+      "confidence": 0.9,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.043541999999433756,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 90.0%"
+      ],
+      "sources": [
+        "57_22104_LZA7016017_1Uen_AB33B",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141918114
+  },
+  "qa:58_22104_LZA7016014_1Uen_AE_Q1:1768141918850": {
+    "questionId": "58_22104_LZA7016014_1Uen_AE_Q1",
+    "question": "What is the purpose of 16-QAM Uplink? How does it differ from other Mobility features?",
+    "agentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "expectedAgentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on 16-QAM Uplink (QAM) documentation:\n\n**Feature Domain:** Mobility\n\n**Answer:**\n16-QAM Uplink is a Mobility feature in Ericsson RAN systems. It provides ![Image](../images/58_22104-LZA7016014_1Uen.AE/additional_3_CP.png). For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: 16-QAM Uplink\n- FAJ: 58_22104_LZA7016014_1Uen_AE\n- Domain: Mobility\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.701,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.037166999994951766,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"16-QAM Uplink\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "58_22104_LZA7016014_1Uen_AE",
+        "Mobility"
+      ]
+    },
+    "timestamp": 1768141918850
+  },
+  "qa:58_22104_LZA7016014_1Uen_AE_Q2:1768141919572": {
+    "questionId": "58_22104_LZA7016014_1Uen_AE_Q2",
+    "question": "How do you validate 16-QAM Uplink is working correctly after activation?",
+    "agentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "expectedAgentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about 16-QAM Uplink, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Mobility expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.0385420000020531,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "58_22104_LZA7016014_1Uen_AE",
+        "Mobility"
+      ]
+    },
+    "timestamp": 1768141919572
+  },
+  "qa:58_22104_LZA7016014_1Uen_AE_Q3:1768141920302": {
+    "questionId": "58_22104_LZA7016014_1Uen_AE_Q3",
+    "question": "What logs and counters should be checked when debugging 16-QAM Uplink?",
+    "agentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "expectedAgentId": "agent_58_22104_LZA7016014_1Uen_AE",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Reasoned Response for 16-QAM Uplink:**\n\nPerformance monitoring for 16-QAM Uplink uses PM counters that track activation events, success rates, and resource utilization. These metrics help optimize feature operation.\n\n**Reasoning Quality:**\n- Query type: Knowledge\n- Agent state: EXPLORING\n- Experience level: 3 interactions\n\n**Confidence Factors:**\n- Feature expertise: 0.67\n- Query familiarity: 0.33",
+      "confidence": 0.8999999999999999,
+      "action": "REASON_STEP_BY_STEP",
+      "latency": 0.054916000000957865,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[REASON] Applying 4-step reasoning pipeline",
+        "[STEP 1: RETRIEVE] Finding relevant patterns for \"What logs and counters should ...\"",
+        "[STEP 2: JUDGE] Evaluating 3 potential responses",
+        "[STEP 3: DISTILL] Extracting key insights from best response",
+        "[STEP 4: CONSOLIDATE] Forming final response with confidence 90%"
+      ],
+      "sources": [
+        "58_22104_LZA7016014_1Uen_AE",
+        "Mobility"
+      ]
+    },
+    "timestamp": 1768141920302
+  },
+  "qa:141_1553_LZA7016014_1Uen_AH_Q1:1768141921045": {
+    "questionId": "141_1553_LZA7016014_1Uen_AH_Q1",
+    "question": "What is the purpose of Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve? How does it differ from other Carrier Aggregation features?",
+    "agentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "expectedAgentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_141_1553_LZA7016014_1Uen_AH (Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve)\n**Domain:** Carrier Aggregation\n\nThe query \"What is the purpose of Expand Baseband Radio Node ...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.05458399999770336,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "141_1553_LZA7016014_1Uen_AH",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141921045
+  },
+  "qa:141_1553_LZA7016014_1Uen_AH_Q2:1768141921764": {
+    "questionId": "141_1553_LZA7016014_1Uen_AH_Q2",
+    "question": "What prerequisites must be met before enabling Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve?",
+    "agentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "expectedAgentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve (LC) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nExpand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve is a Carrier Aggregation feature in Ericsson RAN systems. It provides Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conversion Mode. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve\n- FAJ: 141_1553_LZA7016014_1Uen_AH\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.701,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.053958000004058704,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "141_1553_LZA7016014_1Uen_AH",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141921764
+  },
+  "qa:141_1553_LZA7016014_1Uen_AH_Q3:1768141922497": {
+    "questionId": "141_1553_LZA7016014_1Uen_AH_Q3",
+    "question": "Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "expectedAgentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Expand Baseband Radio Node with Radio Gateway or LC-05 9xCPRI Line Card in Conve, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.02958299999590963,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "141_1553_LZA7016014_1Uen_AH",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141922497
+  },
+  "qa:41_22104_LZA7016014_1Uen_AJ_Q1:1768141923248": {
+    "questionId": "41_22104_LZA7016014_1Uen_AJ_Q1",
+    "question": "What are the main benefits of enabling Emergency Call Handling for CS Fallback in a production environment?",
+    "agentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "expectedAgentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_41_22104_LZA7016014_1Uen_AJ (Emergency Call Handling for CS Fallback)\n**Domain:** Carrier Aggregation\n\nThe query \"What are the main benefits of enabling Emergency C...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.03800000000046566,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "41_22104_LZA7016014_1Uen_AJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141923248
+  },
+  "qa:41_22104_LZA7016014_1Uen_AJ_Q2:1768141923971": {
+    "questionId": "41_22104_LZA7016014_1Uen_AJ_Q2",
+    "question": "What is the recommended procedure for activating Emergency Call Handling for CS Fallback?",
+    "agentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "expectedAgentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Emergency Call Handling for CS Fallback, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.04420899999968242,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "41_22104_LZA7016014_1Uen_AJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141923971
+  },
+  "qa:41_22104_LZA7016014_1Uen_AJ_Q3:1768141924694": {
+    "questionId": "41_22104_LZA7016014_1Uen_AJ_Q3",
+    "question": "Emergency Call Handling for CS Fallback activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "expectedAgentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Emergency Call Handling for CS Fallback, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.02787499999976717,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "41_22104_LZA7016014_1Uen_AJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141924695
+  },
+  "qa:161_22104_LZA7016017_1Uen_AX33_Q1:1768141925425": {
+    "questionId": "161_22104_LZA7016017_1Uen_AX33_Q1",
+    "question": "What is the purpose of NR Remote Interference Management? How does it differ from other Carrier Aggregation features?",
+    "agentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "expectedAgentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on NR Remote Interference Management (NR) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nNR Remote Interference Management is a Carrier Aggregation feature in Ericsson RAN systems. It provides NR Remote Interference Management. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: NR Remote Interference Management\n- FAJ: 161_22104_LZA7016017_1Uen_AX33\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.7,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.04770799999823794,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"NR Remote Interference Management\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "161_22104_LZA7016017_1Uen_AX33",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141925425
+  },
+  "qa:161_22104_LZA7016017_1Uen_AX33_Q2:1768141926169": {
+    "questionId": "161_22104_LZA7016017_1Uen_AX33_Q2",
+    "question": "What is the recommended procedure for activating NR Remote Interference Management?",
+    "agentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "expectedAgentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for NR Remote Interference Management:**\n\nNR Remote Interference Management is a Carrier Aggregation feature in Ericsson RAN systems. It provides NR Remote Interference Management. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 1 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 0.0% success rate",
+      "confidence": 0.8,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.04691599999932805,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 80.0%"
+      ],
+      "sources": [
+        "161_22104_LZA7016017_1Uen_AX33",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141926169
+  },
+  "qa:161_22104_LZA7016017_1Uen_AX33_Q3:1768141926905": {
+    "questionId": "161_22104_LZA7016017_1Uen_AX33_Q3",
+    "question": "What logs and counters should be checked when debugging NR Remote Interference Management?",
+    "agentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "expectedAgentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_161_22104_LZA7016017_1Uen_AX33 (NR Remote Interference Management)\n**Domain:** Carrier Aggregation\n\nThe query \"What logs and counters should be checked when debu...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.03187500000058208,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "161_22104_LZA7016017_1Uen_AX33",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141926905
+  },
+  "qa:297_22104_LZA7016014_1Uen_BM_Q1:1768141927637": {
+    "questionId": "297_22104_LZA7016014_1Uen_BM_Q1",
+    "question": "What is the purpose of Low Energy Scheduler Solution? How does it differ from other Carrier Aggregation features?",
+    "agentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "expectedAgentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Low Energy Scheduler Solution, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.034166999997978564,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "297_22104_LZA7016014_1Uen_BM",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141927637
+  },
+  "qa:297_22104_LZA7016014_1Uen_BM_Q2:1768141928376": {
+    "questionId": "297_22104_LZA7016014_1Uen_BM_Q2",
+    "question": "What prerequisites must be met before enabling Low Energy Scheduler Solution?",
+    "agentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "expectedAgentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_297_22104_LZA7016014_1Uen_BM (Low Energy Scheduler Solution)\n**Domain:** Carrier Aggregation\n\nThe query \"What prerequisites must be met before enabling Low...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.029958999999507796,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "297_22104_LZA7016014_1Uen_BM",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141928376
+  },
+  "qa:297_22104_LZA7016014_1Uen_BM_Q3:1768141929137": {
+    "questionId": "297_22104_LZA7016014_1Uen_BM_Q3",
+    "question": "How do you troubleshoot when Low Energy Scheduler Solution is not providing expected performance?",
+    "agentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "expectedAgentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on Low Energy Scheduler Solution (BM) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nTo troubleshoot Low Energy Scheduler Solution: 1) Check feature activation status, 2) Verify prerequisite features are enabled, 3) Review PM counters for anomalies, 4) Examine alarm history, 5) Check parameter settings against deployment guidelines.\n\n**Parameters:**\n- Feature: Low Energy Scheduler Solution\n- FAJ: 297_22104_LZA7016014_1Uen_BM\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.702,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.04045899999618996,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"Low Energy Scheduler Solution\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "297_22104_LZA7016014_1Uen_BM",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141929137
+  },
+  "qa:149_22104_LZA7016014_1Uen_AK_Q1:1768141929860": {
+    "questionId": "149_22104_LZA7016014_1Uen_AK_Q1",
+    "question": "Explain the key concepts behind Bridged Virtual Interface and its role in Carrier Aggregation.",
+    "agentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "expectedAgentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Bridged Virtual Interface, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.028958000002603512,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "149_22104_LZA7016014_1Uen_AK",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141929860
+  },
+  "qa:149_22104_LZA7016014_1Uen_AK_Q2:1768141930575": {
+    "questionId": "149_22104_LZA7016014_1Uen_AK_Q2",
+    "question": "How do you validate Bridged Virtual Interface is working correctly after activation?",
+    "agentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "expectedAgentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_149_22104_LZA7016014_1Uen_AK (Bridged Virtual Interface)\n**Domain:** Carrier Aggregation\n\nThe query \"How do you validate Bridged Virtual Interface is w...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.03083399999741232,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "149_22104_LZA7016014_1Uen_AK",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141930575
+  },
+  "qa:149_22104_LZA7016014_1Uen_AK_Q3:1768141931326": {
+    "questionId": "149_22104_LZA7016014_1Uen_AK_Q3",
+    "question": "What logs and counters should be checked when debugging Bridged Virtual Interface?",
+    "agentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "expectedAgentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Bridged Virtual Interface:**\n\nPerformance monitoring for Bridged Virtual Interface uses PM counters that track activation events, success rates, and resource utilization. These metrics help optimize feature operation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 2 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 0.0% success rate",
+      "confidence": 0.8,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.05129099999612663,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 80.0%"
+      ],
+      "sources": [
+        "149_22104_LZA7016014_1Uen_AK",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141931326
+  },
+  "qa:60_22104_LZA7016017_1Uen_U_Q1:1768141932082": {
+    "questionId": "60_22104_LZA7016017_1Uen_U_Q1",
+    "question": "What are the main benefits of enabling CQI-Based UE Energy Efficiency Enhancement in a production environment?",
+    "agentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on CQI-Based UE Energy Efficiency Enhancement (CQI) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nCQI-Based UE Energy Efficiency Enhancement is a Carrier Aggregation feature in Ericsson RAN systems. It provides CQI-Based UE Energy Efficiency Enhancement. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: CQI-Based UE Energy Efficiency Enhancement\n- FAJ: 60_22104_LZA7016017_1Uen_U\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.7,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.04624999999941792,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"CQI-Based UE Energy Efficiency Enhancement\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "60_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141932082
+  },
+  "qa:60_22104_LZA7016017_1Uen_U_Q2:1768141932814": {
+    "questionId": "60_22104_LZA7016017_1Uen_U_Q2",
+    "question": "What prerequisites must be met before enabling CQI-Based UE Energy Efficiency Enhancement?",
+    "agentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about CQI-Based UE Energy Efficiency Enhancement, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.04070800000044983,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "60_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141932814
+  },
+  "qa:60_22104_LZA7016017_1Uen_U_Q3:1768141933544": {
+    "questionId": "60_22104_LZA7016017_1Uen_U_Q3",
+    "question": "CQI-Based UE Energy Efficiency Enhancement activation is failing. What are the diagnostic steps?",
+    "agentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on CQI-Based UE Energy Efficiency Enhancement (CQI) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nCQI-Based UE Energy Efficiency Enhancement is a Carrier Aggregation feature in Ericsson RAN systems. It provides CQI-Based UE Energy Efficiency Enhancement. For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: CQI-Based UE Energy Efficiency Enhancement\n- FAJ: 60_22104_LZA7016017_1Uen_U\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.702,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.05304199999955017,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"CQI-Based UE Energy Efficiency Enhancement\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "60_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141933544
+  },
+  "qa:202_22104_LZA7016014_1Uen_BJ_Q1:1768141934291": {
+    "questionId": "202_22104_LZA7016014_1Uen_BJ_Q1",
+    "question": "What are the main benefits of enabling Dynamic Load Control in a production environment?",
+    "agentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "expectedAgentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "This query may require expertise from another domain agent.\n\n**Current Agent:** agent_202_22104_LZA7016014_1Uen_BJ (Dynamic Load Control)\n**Domain:** Carrier Aggregation\n\nThe query \"What are the main benefits of enabling Dynamic Loa...\" appears to require knowledge outside my primary expertise. \n\nIn a full swarm deployment, this would be routed to a more appropriate agent through the federated coordination layer.",
+      "confidence": 0.6,
+      "action": "DELEGATE_TO_PEER",
+      "latency": 0.05645799999911105,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.05,
+      "reasoning": [
+        "[DELEGATE] Query may be better handled by peer agent"
+      ],
+      "sources": [
+        "202_22104_LZA7016014_1Uen_BJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141934291
+  },
+  "qa:202_22104_LZA7016014_1Uen_BJ_Q2:1768141935017": {
+    "questionId": "202_22104_LZA7016014_1Uen_BJ_Q2",
+    "question": "What is the recommended procedure for activating Dynamic Load Control?",
+    "agentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "expectedAgentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "Based on Dynamic Load Control (BJ) documentation:\n\n**Feature Domain:** Carrier Aggregation\n\n**Answer:**\nDynamic Load Control is a Carrier Aggregation feature in Ericsson RAN systems. It provides ![Image](../images/202_22104-LZA7016014_1Uen.BJ/additional_3_CP.png). For detailed technical information, refer to the feature documentation.\n\n**Parameters:**\n- Feature: Dynamic Load Control\n- FAJ: 202_22104_LZA7016014_1Uen_BJ\n- Domain: Carrier Aggregation\n\n**Source:** Ericsson RAN Feature Documentation indexed in AgentDB",
+      "confidence": 0.701,
+      "action": "RETRIEVE_KNOWLEDGE",
+      "latency": 0.040750000000116415,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[RETRIEVE] Searching knowledge base for \"Dynamic Load Control\"",
+        "[RETRIEVE] Found relevant documentation"
+      ],
+      "sources": [
+        "202_22104_LZA7016014_1Uen_BJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141935017
+  },
+  "qa:202_22104_LZA7016014_1Uen_BJ_Q3:1768141935733": {
+    "questionId": "202_22104_LZA7016014_1Uen_BJ_Q3",
+    "question": "What logs and counters should be checked when debugging Dynamic Load Control?",
+    "agentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "expectedAgentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Dynamic Load Control, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.029291999999259133,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "202_22104_LZA7016014_1Uen_BJ",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141935733
+  },
+  "qa:166_22104_LZA7016017_1Uen_U_Q1:1768141936475": {
+    "questionId": "166_22104_LZA7016017_1Uen_U_Q1",
+    "question": "How does Point-to-Multipoint Packet Fronthaul interact with other Carrier Aggregation features?",
+    "agentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Point-to-Multipoint Packet Fronthaul:**\n\nPoint-to-Multipoint Packet Fronthaul is a Carrier Aggregation feature in Ericsson RAN systems. It provides Point-to-Multipoint Packet Fronthaul. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 0 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 50.0% success rate",
+      "confidence": 0.8500000000000001,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.04245899999659741,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 85.0%"
+      ],
+      "sources": [
+        "166_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141936475
+  },
+  "qa:166_22104_LZA7016017_1Uen_U_Q2:1768141937199": {
+    "questionId": "166_22104_LZA7016017_1Uen_U_Q2",
+    "question": "What is the recommended procedure for activating Point-to-Multipoint Packet Fronthaul?",
+    "agentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": true,
+      "response": "**Synthesized Answer for Point-to-Multipoint Packet Fronthaul:**\n\nPoint-to-Multipoint Packet Fronthaul is a Carrier Aggregation feature in Ericsson RAN systems. It provides Point-to-Multipoint Packet Fronthaul. For detailed technical information, refer to the feature documentation.\n\n**Cross-Referenced Information:**\n- Domain: Carrier Aggregation\n- Related features: Consulted via swarm coordination\n- Confidence: Based on 1 prior interactions\n\n**Synthesis Quality:** Agent in EXPLORING state with 100.0% success rate",
+      "confidence": 0.9,
+      "action": "SYNTHESIZE_RESPONSE",
+      "latency": 0.041833999996015336,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0.1,
+      "reasoning": [
+        "[SYNTHESIZE] Combining knowledge from multiple sources",
+        "[SYNTHESIZE] Response generated with confidence 90.0%"
+      ],
+      "sources": [
+        "166_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141937199
+  },
+  "qa:166_22104_LZA7016017_1Uen_U_Q3:1768141937909": {
+    "questionId": "166_22104_LZA7016017_1Uen_U_Q3",
+    "question": "What logs and counters should be checked when debugging Point-to-Multipoint Packet Fronthaul?",
+    "agentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "expectedAgentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "isCorrectAgent": true,
+    "result": {
+      "success": false,
+      "response": "To provide a more accurate response about Point-to-Multipoint Packet Fronthaul, please clarify:\n\n1. Are you asking about configuration, troubleshooting, or optimization?\n2. What is the current deployment context (single-cell, multi-cell, etc.)?\n3. Are there specific KPIs or parameters you're interested in?\n\nOnce clarified, I can provide a more targeted response based on Carrier Aggregation expertise.",
+      "confidence": 0.5,
+      "action": "REQUEST_CLARIFICATION",
+      "latency": 0.038541000001714565,
+      "state": {
+        "name": "EXPLORING",
+        "value": "EXPLORING"
+      },
+      "qValue": 0,
+      "reasoning": [
+        "[CLARIFY] Query requires more context"
+      ],
+      "sources": [
+        "166_22104_LZA7016017_1Uen_U",
+        "Carrier Aggregation"
+      ]
+    },
+    "timestamp": 1768141937909
+  },
+  "qtable:agent_2_1553_LZA7016005Uen_AX": {
+    "agentId": "agent_2_1553_LZA7016005Uen_AX",
+    "qTable": {
+      "agent_2_1553_LZA7016005Uen_AX:manage_purpose_radio_the_what:EXPLORING:1": {
+        "stateHash": "agent_2_1553_LZA7016005Uen_AX:manage_purpose_radio_the_what:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141907844
+      },
+      "agent_2_1553_LZA7016005Uen_AX:for_procedure_recommended_the_what:EXPLORING:4": {
+        "stateHash": "agent_2_1553_LZA7016005Uen_AX:for_procedure_recommended_the_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141908591
+      },
+      "agent_2_1553_LZA7016005Uen_AX:how_manage_troubleshoot_when_you:EXPLORING:1": {
+        "stateHash": "agent_2_1553_LZA7016005Uen_AX:how_manage_troubleshoot_when_you:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141909326
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.6666666666666666,
+    "avgResponseTime": 0.2157916666668219,
+    "updatedAt": 1768141949704,
+    "timestamp": 1768141949704
+  },
+  "qtable:agent_156_1553_LZA7016014_1Uen_B": {
+    "agentId": "agent_156_1553_LZA7016014_1Uen_B",
+    "qTable": {
+      "agent_156_1553_LZA7016014_1Uen_B:antenna_does_how_manage_system:EXPLORING:1": {
+        "stateHash": "agent_156_1553_LZA7016014_1Uen_B:antenna_does_how_manage_system:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141910067
+      },
+      "agent_156_1553_LZA7016014_1Uen_B:for_procedure_recommended_the_what:EXPLORING:1": {
+        "stateHash": "agent_156_1553_LZA7016014_1Uen_B:for_procedure_recommended_the_what:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141910786
+      },
+      "agent_156_1553_LZA7016014_1Uen_B:activation_antenna_failing_manage_system:EXPLORING:2": {
+        "stateHash": "agent_156_1553_LZA7016014_1Uen_B:activation_antenna_failing_manage_system:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141911524
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 1,
+    "avgResponseTime": 0.09304166666576445,
+    "updatedAt": 1768141950426,
+    "timestamp": 1768141950426
+  },
+  "qtable:agent_33_1553_LZA7016017_1Uen_FJ": {
+    "agentId": "agent_33_1553_LZA7016017_1Uen_FJ",
+    "qTable": {
+      "agent_33_1553_LZA7016017_1Uen_FJ:framework_grouping_purpose_the_what:EXPLORING:2": {
+        "stateHash": "agent_33_1553_LZA7016017_1Uen_FJ:framework_grouping_purpose_the_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141912238
+      },
+      "agent_33_1553_LZA7016017_1Uen_FJ:framework_grouping_how_validate_you:EXPLORING:4": {
+        "stateHash": "agent_33_1553_LZA7016017_1Uen_FJ:framework_grouping_how_validate_you:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141912977
+      },
+      "agent_33_1553_LZA7016017_1Uen_FJ:activation_failing_framework_grouping_what:EXPLORING:2": {
+        "stateHash": "agent_33_1553_LZA7016017_1Uen_FJ:activation_failing_framework_grouping_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141913692
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.6666666666666666,
+    "avgResponseTime": 0.04104166666608459,
+    "updatedAt": 1768141951162,
+    "timestamp": 1768141951162
+  },
+  "qtable:agent_35_22104_LZA7016017_1Uen_AY": {
+    "agentId": "agent_35_22104_LZA7016017_1Uen_AY",
+    "qTable": {
+      "agent_35_22104_LZA7016017_1Uen_AY:does_high_highband_how_speed:EXPLORING:0": {
+        "stateHash": "agent_35_22104_LZA7016017_1Uen_AY:does_high_highband_how_speed:EXPLORING",
+        "action": 0,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141914480
+      },
+      "agent_35_22104_LZA7016017_1Uen_AY:for_procedure_recommended_the_what:EXPLORING:3": {
+        "stateHash": "agent_35_22104_LZA7016017_1Uen_AY:for_procedure_recommended_the_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141915206
+      },
+      "agent_35_22104_LZA7016017_1Uen_AY:high_how_troubleshoot_when_you:EXPLORING:0": {
+        "stateHash": "agent_35_22104_LZA7016017_1Uen_AY:high_how_troubleshoot_when_you:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141915940
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.10331933333388103,
+    "updatedAt": 1768141951887,
+    "timestamp": 1768141951887
+  },
+  "qtable:agent_57_22104_LZA7016017_1Uen_AB33B": {
+    "agentId": "agent_57_22104_LZA7016017_1Uen_AB33B",
+    "qTable": {
+      "agent_57_22104_LZA7016017_1Uen_AB33B:beamforming_channel_common_does_how:EXPLORING:1": {
+        "stateHash": "agent_57_22104_LZA7016017_1Uen_AB33B:beamforming_channel_common_does_how:EXPLORING",
+        "action": 1,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141916668
+      },
+      "agent_57_22104_LZA7016017_1Uen_AB33B:before_met_must_prerequisites_what:EXPLORING:2": {
+        "stateHash": "agent_57_22104_LZA7016017_1Uen_AB33B:before_met_must_prerequisites_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141917393
+      },
+      "agent_57_22104_LZA7016017_1Uen_AB33B:after_are_experiencing_issues_users:EXPLORING:2": {
+        "stateHash": "agent_57_22104_LZA7016017_1Uen_AB33B:after_are_experiencing_issues_users:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141918114
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 1,
+    "avgResponseTime": 0.041458666666585486,
+    "updatedAt": 1768141952620,
+    "timestamp": 1768141952620
+  },
+  "qtable:agent_141_1553_LZA7016014_1Uen_AH": {
+    "agentId": "agent_141_1553_LZA7016014_1Uen_AH",
+    "qTable": {
+      "agent_141_1553_LZA7016014_1Uen_AH:baseband_expand_purpose_the_what:EXPLORING:4": {
+        "stateHash": "agent_141_1553_LZA7016014_1Uen_AH:baseband_expand_purpose_the_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141921045
+      },
+      "agent_141_1553_LZA7016014_1Uen_AH:before_met_must_prerequisites_what:EXPLORING:0": {
+        "stateHash": "agent_141_1553_LZA7016014_1Uen_AH:before_met_must_prerequisites_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141921764
+      },
+      "agent_141_1553_LZA7016014_1Uen_AH:baseband_expand_node_radio_with:EXPLORING:3": {
+        "stateHash": "agent_141_1553_LZA7016014_1Uen_AH:baseband_expand_node_radio_with:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141922497
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.04604166666589057,
+    "updatedAt": 1768141954067,
+    "timestamp": 1768141954067
+  },
+  "qtable:agent_41_22104_LZA7016014_1Uen_AJ": {
+    "agentId": "agent_41_22104_LZA7016014_1Uen_AJ",
+    "qTable": {
+      "agent_41_22104_LZA7016014_1Uen_AJ:are_benefits_main_the_what:EXPLORING:4": {
+        "stateHash": "agent_41_22104_LZA7016014_1Uen_AJ:are_benefits_main_the_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141923248
+      },
+      "agent_41_22104_LZA7016014_1Uen_AJ:for_procedure_recommended_the_what:EXPLORING:3": {
+        "stateHash": "agent_41_22104_LZA7016014_1Uen_AJ:for_procedure_recommended_the_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141923971
+      },
+      "agent_41_22104_LZA7016014_1Uen_AJ:call_emergency_fallback_for_handling:EXPLORING:3": {
+        "stateHash": "agent_41_22104_LZA7016014_1Uen_AJ:call_emergency_fallback_for_handling:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141924694
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0,
+    "avgResponseTime": 0.03669466666663842,
+    "updatedAt": 1768141954780,
+    "timestamp": 1768141954780
+  },
+  "qtable:agent_161_22104_LZA7016017_1Uen_AX33": {
+    "agentId": "agent_161_22104_LZA7016017_1Uen_AX33",
+    "qTable": {
+      "agent_161_22104_LZA7016017_1Uen_AX33:interference_purpose_remote_the_what:EXPLORING:0": {
+        "stateHash": "agent_161_22104_LZA7016017_1Uen_AX33:interference_purpose_remote_the_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141925425
+      },
+      "agent_161_22104_LZA7016017_1Uen_AX33:for_procedure_recommended_the_what:EXPLORING:2": {
+        "stateHash": "agent_161_22104_LZA7016017_1Uen_AX33:for_procedure_recommended_the_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141926169
+      },
+      "agent_161_22104_LZA7016017_1Uen_AX33:and_counters_logs_should_what:EXPLORING:4": {
+        "stateHash": "agent_161_22104_LZA7016017_1Uen_AX33:and_counters_logs_should_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141926905
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.04216633333271602,
+    "updatedAt": 1768141955518,
+    "timestamp": 1768141955518
+  },
+  "qtable:agent_297_22104_LZA7016014_1Uen_BM": {
+    "agentId": "agent_297_22104_LZA7016014_1Uen_BM",
+    "qTable": {
+      "agent_297_22104_LZA7016014_1Uen_BM:energy_low_purpose_the_what:EXPLORING:3": {
+        "stateHash": "agent_297_22104_LZA7016014_1Uen_BM:energy_low_purpose_the_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141927637
+      },
+      "agent_297_22104_LZA7016014_1Uen_BM:before_met_must_prerequisites_what:EXPLORING:4": {
+        "stateHash": "agent_297_22104_LZA7016014_1Uen_BM:before_met_must_prerequisites_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141928376
+      },
+      "agent_297_22104_LZA7016014_1Uen_BM:how_low_troubleshoot_when_you:EXPLORING:0": {
+        "stateHash": "agent_297_22104_LZA7016014_1Uen_BM:how_low_troubleshoot_when_you:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141929137
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.034861666664558776,
+    "updatedAt": 1768141956235,
+    "timestamp": 1768141956235
+  },
+  "qtable:agent_149_22104_LZA7016014_1Uen_AK": {
+    "agentId": "agent_149_22104_LZA7016014_1Uen_AK",
+    "qTable": {
+      "agent_149_22104_LZA7016014_1Uen_AK:behind_concepts_explain_key_the:EXPLORING:3": {
+        "stateHash": "agent_149_22104_LZA7016014_1Uen_AK:behind_concepts_explain_key_the:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141929860
+      },
+      "agent_149_22104_LZA7016014_1Uen_AK:bridged_how_validate_virtual_you:EXPLORING:4": {
+        "stateHash": "agent_149_22104_LZA7016014_1Uen_AK:bridged_how_validate_virtual_you:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141930575
+      },
+      "agent_149_22104_LZA7016014_1Uen_AK:and_counters_logs_should_what:EXPLORING:2": {
+        "stateHash": "agent_149_22104_LZA7016014_1Uen_AK:and_counters_logs_should_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141931326
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.03702766666538082,
+    "updatedAt": 1768141956996,
+    "timestamp": 1768141956996
+  },
+  "qtable:agent_60_22104_LZA7016017_1Uen_U": {
+    "agentId": "agent_60_22104_LZA7016017_1Uen_U",
+    "qTable": {
+      "agent_60_22104_LZA7016017_1Uen_U:are_benefits_main_the_what:EXPLORING:0": {
+        "stateHash": "agent_60_22104_LZA7016017_1Uen_U:are_benefits_main_the_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141932082
+      },
+      "agent_60_22104_LZA7016017_1Uen_U:before_met_must_prerequisites_what:EXPLORING:3": {
+        "stateHash": "agent_60_22104_LZA7016017_1Uen_U:before_met_must_prerequisites_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141932814
+      },
+      "agent_60_22104_LZA7016017_1Uen_U:activation_cqibased_efficiency_energy_enhancement:EXPLORING:0": {
+        "stateHash": "agent_60_22104_LZA7016017_1Uen_U:activation_cqibased_efficiency_energy_enhancement:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141933544
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.04666666666647264,
+    "updatedAt": 1768141957722,
+    "timestamp": 1768141957722
+  },
+  "qtable:agent_202_22104_LZA7016014_1Uen_BJ": {
+    "agentId": "agent_202_22104_LZA7016014_1Uen_BJ",
+    "qTable": {
+      "agent_202_22104_LZA7016014_1Uen_BJ:are_benefits_main_the_what:EXPLORING:4": {
+        "stateHash": "agent_202_22104_LZA7016014_1Uen_BJ:are_benefits_main_the_what:EXPLORING",
+        "action": 4,
+        "qValue": 0.05,
+        "visits": 1,
+        "lastUpdated": 1768141934291
+      },
+      "agent_202_22104_LZA7016014_1Uen_BJ:for_procedure_recommended_the_what:EXPLORING:0": {
+        "stateHash": "agent_202_22104_LZA7016014_1Uen_BJ:for_procedure_recommended_the_what:EXPLORING",
+        "action": 0,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141935017
+      },
+      "agent_202_22104_LZA7016014_1Uen_BJ:and_counters_logs_should_what:EXPLORING:3": {
+        "stateHash": "agent_202_22104_LZA7016014_1Uen_BJ:and_counters_logs_should_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141935733
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.3333333333333333,
+    "avgResponseTime": 0.0421666666661622,
+    "updatedAt": 1768141958452,
+    "timestamp": 1768141958452
+  },
+  "qtable:agent_166_22104_LZA7016017_1Uen_U": {
+    "agentId": "agent_166_22104_LZA7016017_1Uen_U",
+    "qTable": {
+      "agent_166_22104_LZA7016017_1Uen_U:does_fronthaul_how_packet_pointtomultipoint:EXPLORING:2": {
+        "stateHash": "agent_166_22104_LZA7016017_1Uen_U:does_fronthaul_how_packet_pointtomultipoint:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141936475
+      },
+      "agent_166_22104_LZA7016017_1Uen_U:for_procedure_recommended_the_what:EXPLORING:2": {
+        "stateHash": "agent_166_22104_LZA7016017_1Uen_U:for_procedure_recommended_the_what:EXPLORING",
+        "action": 2,
+        "qValue": 0.1,
+        "visits": 1,
+        "lastUpdated": 1768141937199
+      },
+      "agent_166_22104_LZA7016017_1Uen_U:and_counters_logs_should_what:EXPLORING:3": {
+        "stateHash": "agent_166_22104_LZA7016017_1Uen_U:and_counters_logs_should_what:EXPLORING",
+        "action": 3,
+        "qValue": 0,
+        "visits": 1,
+        "lastUpdated": 1768141937909
+      }
+    },
+    "totalInteractions": 3,
+    "successRate": 0.6666666666666666,
+    "avgResponseTime": 0.040944666664775774,
+    "updatedAt": 1768141959203,
+    "timestamp": 1768141959203
+  }
+}

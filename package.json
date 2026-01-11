@@ -67,6 +67,9 @@
     "scripts:index": "bun run scripts/indexing/index-ran-features.ts",
     "scripts:optimize": "bun run scripts/optimization/execute-energy-optimization.ts",
     "scripts:security": "bun run scripts/security/validate-security-hardening.ts",
+    "demo:self-learn": "bun run scripts/self-learning-demo/interactive-cli.ts",
+    "demo:self-learn:auto": "bun run scripts/self-learning-demo/interactive-cli.ts --auto",
+    "demo:battle-arena": "bun run scripts/self-learning-demo/battle-arena.ts",
     "prepublishOnly": "bun run build"
   },
   "keywords": [

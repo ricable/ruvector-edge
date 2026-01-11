@@ -1,0 +1,48 @@
+{
+  "sync:sync_1768141211375_6khlo": {
+    "updatesSent": 78,
+    "updatesReceived": 78,
+    "conflictsResolved": 4,
+    "syncTimeMs": 0.06670800000210875,
+    "peers": [
+      "agent_180_22104_LZA7016014_1Uen_AT",
+      "agent_189_22104_LZA7016017_1Uen_V33B",
+      "agent_51_22104_LZA7016017_1Uen_BX33B",
+      "agent_58_22104_LZA7016014_1Uen_AE",
+      "agent_238_22104_LZA7016017_1Uen_M33B",
+      "agent_10_10948_LZA7016014_1Uen_FT",
+      "agent_445_22104_LZA7016014_1Uen_AG",
+      "agent_125_22104_LZA7016014_1Uen_FA",
+      "agent_128_22104_LZA7016017_1Uen_V33B",
+      "agent_466_22104_LZA7016014_1Uen_J",
+      "agent_170_22104_LZA7016017_1Uen_S",
+      "agent_544_22104_LZA7016014_1Uen_AB33",
+      "agent_99_22104_LZA7016014_1Uen_CA",
+      "agent_13_22104_LZA7016014_1Uen_AG"
+    ],
+    "timestamp": 1768141211376
+  },
+  "sync:sync_1768141938673_2f3dpi": {
+    "updatesSent": 78,
+    "updatesReceived": 78,
+    "conflictsResolved": 4,
+    "syncTimeMs": 0.08229099999880418,
+    "peers": [
+      "agent_2_1553_LZA7016005Uen_AX",
+      "agent_156_1553_LZA7016014_1Uen_B",
+      "agent_33_1553_LZA7016017_1Uen_FJ",
+      "agent_35_22104_LZA7016017_1Uen_AY",
+      "agent_57_22104_LZA7016017_1Uen_AB33B",
+      "agent_58_22104_LZA7016014_1Uen_AE",
+      "agent_141_1553_LZA7016014_1Uen_AH",
+      "agent_41_22104_LZA7016014_1Uen_AJ",
+      "agent_161_22104_LZA7016017_1Uen_AX33",
+      "agent_297_22104_LZA7016014_1Uen_BM",
+      "agent_149_22104_LZA7016014_1Uen_AK",
+      "agent_60_22104_LZA7016017_1Uen_U",
+      "agent_202_22104_LZA7016014_1Uen_BJ",
+      "agent_166_22104_LZA7016017_1Uen_U"
+    ],
+    "timestamp": 1768141938673
+  }
+}

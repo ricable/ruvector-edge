@@ -1,0 +1,502 @@
+{
+  "battle:1768141296616": {
+    "totalRounds": 1,
+    "totalQueries": 40,
+    "configWins": {
+      "Q-Learning Only": 1,
+      "Decision Transformer": 0,
+      "Hybrid (Q+DT)": 0,
+      "Full Stack": 0
+    },
+    "overallWinner": "Q-Learning Only",
+    "detailedResults": [
+      {
+        "configName": "Q-Learning Only",
+        "totalQueries": 10,
+        "successfulQueries": 8,
+        "successRate": 0.8,
+        "averageConfidence": 0.775,
+        "averageLatency": 0.06828740000128164,
+        "minLatency": 0.008958000005804934,
+        "maxLatency": 0.4462500000008731,
+        "p95Latency": 0.4462500000008731,
+        "totalQValue": 0.7,
+        "averageQValue": 0.06999999999999999,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Decision Transformer",
+        "totalQueries": 10,
+        "successfulQueries": 8,
+        "successRate": 0.8,
+        "averageConfidence": 0.7601000000000001,
+        "averageLatency": 0.01057900000087102,
+        "minLatency": 0.004583000001730397,
+        "maxLatency": 0.025708000001031905,
+        "p95Latency": 0.025708000001031905,
+        "totalQValue": 0.7,
+        "averageQValue": 0.06999999999999999,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Hybrid (Q+DT)",
+        "totalQueries": 10,
+        "successfulQueries": 8,
+        "successRate": 0.8,
+        "averageConfidence": 0.7051999999999999,
+        "averageLatency": 0.0072628000016266014,
+        "minLatency": 0.004207999998470768,
+        "maxLatency": 0.014834000001428649,
+        "p95Latency": 0.014834000001428649,
+        "totalQValue": 0.6,
+        "averageQValue": 0.06,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Full Stack",
+        "totalQueries": 10,
+        "successfulQueries": 8,
+        "successRate": 0.8,
+        "averageConfidence": 0.6900999999999999,
+        "averageLatency": 0.006104400000185706,
+        "minLatency": 0.003625000004831236,
+        "maxLatency": 0.010625000002619345,
+        "p95Latency": 0.010625000002619345,
+        "totalQValue": 0.6,
+        "averageQValue": 0.06,
+        "actionDistribution": {}
+      }
+    ],
+    "timestamp": 1768141296616
+  },
+  "battle:1768142106487": {
+    "totalRounds": 3,
+    "totalQueries": 600,
+    "configWins": {
+      "Q-Learning Only": 0,
+      "Decision Transformer": 3,
+      "Hybrid (Q+DT)": 0,
+      "Full Stack": 0
+    },
+    "overallWinner": "Decision Transformer",
+    "detailedResults": [
+      {
+        "configName": "Decision Transformer",
+        "totalQueries": 150,
+        "successfulQueries": 126,
+        "successRate": 0.84,
+        "averageConfidence": 0.7430266677766677,
+        "averageLatency": 0.0047219466666380576,
+        "minLatency": 0.001374999999825377,
+        "maxLatency": 0.028124999997089617,
+        "p95Latency": 0.010833333336146703,
+        "totalQValue": 4.146666666666667,
+        "averageQValue": 0.08293333333333335,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Q-Learning Only",
+        "totalQueries": 150,
+        "successfulQueries": 123,
+        "successRate": 0.82,
+        "averageConfidence": 0.708377801827802,
+        "averageLatency": 0.009229959999987235,
+        "minLatency": 0.0013330000001587905,
+        "maxLatency": 0.35141599999769824,
+        "p95Latency": 0.0262223333362878,
+        "totalQValue": 3.891666666666667,
+        "averageQValue": 0.07783333333333335,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Full Stack",
+        "totalQueries": 150,
+        "successfulQueries": 117,
+        "successRate": 0.78,
+        "averageConfidence": 0.7162228989528989,
+        "averageLatency": 0.0035897199999211198,
+        "minLatency": 0.0012500000011641532,
+        "maxLatency": 0.01299999999901047,
+        "p95Latency": 0.007472333330952097,
+        "totalQValue": 3.6900000000000013,
+        "averageQValue": 0.07380000000000002,
+        "actionDistribution": {}
+      },
+      {
+        "configName": "Hybrid (Q+DT)",
+        "totalQueries": 150,
+        "successfulQueries": 114,
+        "successRate": 0.76,
+        "averageConfidence": 0.7071389947089948,
+        "averageLatency": 0.004059979999874485,
+        "minLatency": 0.0011669999948935583,
+        "maxLatency": 0.026499999999941792,
+        "p95Latency": 0.008583333335991483,
+        "totalQValue": 3.656666666666668,
+        "averageQValue": 0.07313333333333336,
+        "actionDistribution": {}
+      }
+    ],
+    "timestamp": 1768142106487
+  },
+  "battle:1768143916436": {
+    "totalRounds": 5,
+    "totalQueries": 5000,
+    "configWins": {
+      "Q-Learning Only": 1,
+      "Decision Transformer": 0,
+      "Hybrid (Q+DT)": 2,
+      "Full Stack": 2
+    },
+    "overallWinner": "Hybrid (Q+DT)",
+    "detailedResults": [
+      {
+        "configName": "Full Stack",
+        "totalQueries": 240,
+        "successfulQueries": 215,
+        "successRate": 0.8733333333333334,
+        "averageConfidence": 0.816589849863976,
+        "averageLatency": 0.005141316667504725,
+        "minLatency": 0.0014580000133719295,
+        "maxLatency": 0.055958000011742115,
+        "p95Latency": 0.009250000002793968,
+        "totalQValue": 41.90090000000006,
+        "averageQValue": 0.17458708333333356,
+        "actionDistribution": {
+          "RETRIEVE_KNOWLEDGE": 106,
+          "REASON_STEP_BY_STEP": 43,
+          "SYNTHESIZE_RESPONSE": 33,
+          "DELEGATE_TO_PEER": 33,
+          "REQUEST_CLARIFICATION": 25
+        },
+        "categoryResults": {
+          "A": {
+            "total": 120,
+            "correct": 109,
+            "accuracy": 0.8766666666666666
+          },
+          "B": {
+            "total": 75,
+            "correct": 66,
+            "accuracy": 0.8560000000000001
+          },
+          "C": {
+            "total": 45,
+            "correct": 40,
+            "accuracy": 0.8933333333333333
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 15,
+          "qLearningConvergence": 15,
+          "crossFeatureCoordination": 20
+        },
+        "finalScore": 217.66666666666669
+      },
+      {
+        "configName": "Hybrid (Q+DT)",
+        "totalQueries": 240,
+        "successfulQueries": 209,
+        "successRate": 0.8783333333333333,
+        "averageConfidence": 0.804142832383308,
+        "averageLatency": 0.007224987500861365,
+        "minLatency": 0.001707999996142462,
+        "maxLatency": 0.16750000001047738,
+        "p95Latency": 0.01362500002142042,
+        "totalQValue": 42.31785000000008,
+        "averageQValue": 0.17632437500000034,
+        "actionDistribution": {
+          "RETRIEVE_KNOWLEDGE": 106,
+          "REQUEST_CLARIFICATION": 31,
+          "REASON_STEP_BY_STEP": 35,
+          "DELEGATE_TO_PEER": 34,
+          "SYNTHESIZE_RESPONSE": 34
+        },
+        "categoryResults": {
+          "A": {
+            "total": 120,
+            "correct": 108,
+            "accuracy": 0.9083333333333332
+          },
+          "B": {
+            "total": 75,
+            "correct": 62,
+            "accuracy": 0.8480000000000001
+          },
+          "C": {
+            "total": 45,
+            "correct": 39,
+            "accuracy": 0.8488888888888889
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 15,
+          "qLearningConvergence": 15,
+          "crossFeatureCoordination": 20
+        },
+        "finalScore": 216.66666666666666
+      },
+      {
+        "configName": "Q-Learning Only",
+        "totalQueries": 240,
+        "successfulQueries": 219,
+        "successRate": 0.8783333333333333,
+        "averageConfidence": 0.8266098347200791,
+        "averageLatency": 0.005236087501665073,
+        "minLatency": 0.0016250000044237822,
+        "maxLatency": 0.10912499998812564,
+        "p95Latency": 0.010167000000365078,
+        "totalQValue": 45.050500000000014,
+        "averageQValue": 0.1877104166666667,
+        "actionDistribution": {
+          "RETRIEVE_KNOWLEDGE": 105,
+          "SYNTHESIZE_RESPONSE": 43,
+          "REQUEST_CLARIFICATION": 21,
+          "REASON_STEP_BY_STEP": 40,
+          "DELEGATE_TO_PEER": 31
+        },
+        "categoryResults": {
+          "A": {
+            "total": 120,
+            "correct": 112,
+            "accuracy": 0.8966666666666667
+          },
+          "B": {
+            "total": 75,
+            "correct": 68,
+            "accuracy": 0.8826666666666666
+          },
+          "C": {
+            "total": 45,
+            "correct": 39,
+            "accuracy": 0.8222222222222222
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 15,
+          "qLearningConvergence": 15,
+          "crossFeatureCoordination": 20
+        },
+        "finalScore": 214.66666666666666
+      },
+      {
+        "configName": "Decision Transformer",
+        "totalQueries": 240,
+        "successfulQueries": 208,
+        "successRate": 0.8741666666666668,
+        "averageConfidence": 0.8187843307786715,
+        "averageLatency": 0.006049508333429306,
+        "minLatency": 0.0014999999839346856,
+        "maxLatency": 0.0952920000127051,
+        "p95Latency": 0.010666999995009974,
+        "totalQValue": 44.526750000000035,
+        "averageQValue": 0.18552812500000015,
+        "actionDistribution": {
+          "DELEGATE_TO_PEER": 26,
+          "REASON_STEP_BY_STEP": 46,
+          "REQUEST_CLARIFICATION": 32,
+          "RETRIEVE_KNOWLEDGE": 104,
+          "SYNTHESIZE_RESPONSE": 32
+        },
+        "categoryResults": {
+          "A": {
+            "total": 120,
+            "correct": 109,
+            "accuracy": 0.8866666666666667
+          },
+          "B": {
+            "total": 75,
+            "correct": 67,
+            "accuracy": 0.8640000000000001
+          },
+          "C": {
+            "total": 45,
+            "correct": 32,
+            "accuracy": 0.8577777777777778
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 15,
+          "qLearningConvergence": 0,
+          "crossFeatureCoordination": 10
+        },
+        "finalScore": 202.83333333333334
+      }
+    ],
+    "timestamp": 1768143916436
+  },
+  "battle:1768145227050": {
+    "totalRounds": 1,
+    "totalQueries": 8,
+    "configWins": {
+      "Q-Learning Only": 0,
+      "Decision Transformer": 0,
+      "Hybrid (Q+DT)": 0,
+      "Full Stack": 1
+    },
+    "overallWinner": "Full Stack",
+    "detailedResults": [
+      {
+        "configName": "Full Stack",
+        "totalQueries": 2,
+        "successfulQueries": 2,
+        "successRate": 1,
+        "averageConfidence": 0.6499999999999999,
+        "averageLatency": 0.056479499995475635,
+        "minLatency": 0.031583999982103705,
+        "maxLatency": 0.08137500000884756,
+        "p95Latency": 0.08137500000884756,
+        "totalQValue": 0.1,
+        "averageQValue": 0.05,
+        "actionDistribution": {
+          "DELEGATE_TO_PEER": 1,
+          "RETRIEVE_KNOWLEDGE": 1
+        },
+        "categoryResults": {
+          "A": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "B": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "C": {
+            "total": 0,
+            "correct": 0,
+            "accuracy": 0
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 10,
+          "qLearningConvergence": 10,
+          "crossFeatureCoordination": 7.5
+        },
+        "finalScore": 227.5
+      },
+      {
+        "configName": "Hybrid (Q+DT)",
+        "totalQueries": 2,
+        "successfulQueries": 2,
+        "successRate": 1,
+        "averageConfidence": 0.775,
+        "averageLatency": 0.09193799999775365,
+        "minLatency": 0.08279200000106357,
+        "maxLatency": 0.10108399999444373,
+        "p95Latency": 0.10108399999444373,
+        "totalQValue": 0.15000000000000002,
+        "averageQValue": 0.07500000000000001,
+        "actionDistribution": {
+          "RETRIEVE_KNOWLEDGE": 1,
+          "SYNTHESIZE_RESPONSE": 1
+        },
+        "categoryResults": {
+          "A": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "B": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "C": {
+            "total": 0,
+            "correct": 0,
+            "accuracy": 0
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 10,
+          "qLearningConvergence": 10,
+          "crossFeatureCoordination": 5
+        },
+        "finalScore": 225
+      },
+      {
+        "configName": "Decision Transformer",
+        "totalQueries": 2,
+        "successfulQueries": 2,
+        "successRate": 1,
+        "averageConfidence": 0.875,
+        "averageLatency": 0.20274999998218846,
+        "minLatency": 0.11041699998895638,
+        "maxLatency": 0.29508299997542053,
+        "p95Latency": 0.29508299997542053,
+        "totalQValue": 0.2,
+        "averageQValue": 0.1,
+        "actionDistribution": {
+          "SYNTHESIZE_RESPONSE": 1,
+          "REASON_STEP_BY_STEP": 1
+        },
+        "categoryResults": {
+          "A": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "B": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "C": {
+            "total": 0,
+            "correct": 0,
+            "accuracy": 0
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 15,
+          "qLearningConvergence": 0,
+          "crossFeatureCoordination": 5
+        },
+        "finalScore": 220
+      },
+      {
+        "configName": "Q-Learning Only",
+        "totalQueries": 2,
+        "successfulQueries": 1,
+        "successRate": 0.5,
+        "averageConfidence": 0.6,
+        "averageLatency": 0.25322900000901427,
+        "minLatency": 0.018500000005587935,
+        "maxLatency": 0.4879580000124406,
+        "p95Latency": 0.4879580000124406,
+        "totalQValue": 0.05,
+        "averageQValue": 0.025,
+        "actionDistribution": {
+          "RETRIEVE_KNOWLEDGE": 1,
+          "REQUEST_CLARIFICATION": 1
+        },
+        "categoryResults": {
+          "A": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1
+          },
+          "B": {
+            "total": 1,
+            "correct": 0,
+            "accuracy": 0
+          },
+          "C": {
+            "total": 0,
+            "correct": 0,
+            "accuracy": 0
+          }
+        },
+        "bonusPoints": {
+          "oodaEfficiency": 10,
+          "qLearningConvergence": 0,
+          "crossFeatureCoordination": 5
+        },
+        "finalScore": 115
+      }
+    ],
+    "timestamp": 1768145227050
+  }
+}

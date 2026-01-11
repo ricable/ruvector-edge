@@ -20,6 +20,8 @@ import init, {
     get_supported_features
 } from './elex_wasm.js';
 
+import { questions as QUESTIONS } from './questions.js';
+
 // ============================================================================
 // DOM Elements
 // ============================================================================
@@ -45,6 +47,8 @@ const els = {
     syncBtn: document.getElementById('syncBtn'),
     trainBtn: document.getElementById('trainBtn'),
     batchBtn: document.getElementById('batchBtn'),
+    simBtn: document.getElementById('simBtn'),
+    feedArea: document.getElementById('feedArea'),
 };
 
 // ============================================================================
@@ -69,6 +73,8 @@ let lastRespondingAgentId = null;
 let queryHistory = [];
 let totalQueries = 0;
 let successfulQueries = 0;
+let isSimulating = false;
+let simInterval = null;
 
 // ============================================================================
 // Logging
@@ -147,6 +153,8 @@ async function initializeSwarm() {
         els.syncBtn.disabled = false;
         els.trainBtn.disabled = false;
         els.batchBtn.disabled = false;
+        els.simBtn.disabled = false;
+
 
         showWelcomeMessage();
         await updateStats();
@@ -497,6 +505,110 @@ async function runBatchQueries() {
     els.batchBtn.textContent = '⚡ BATCH';
 }
 
+async function toggleSimulation() {
+    if (isSimulating) {
+        // Stop simulation
+        isSimulating = false;
+        clearInterval(simInterval);
+        els.simBtn.textContent = '🌊 LIVE';
+        els.simBtn.classList.remove('sim-active');
+        log('Live simulation stopped', 'info');
+    } else {
+        // Start simulation
+        if (!QUESTIONS || QUESTIONS.length === 0) {
+            log('No questions available for simulation', 'error');
+            return;
+        }
+
+        isSimulating = true;
+        els.simBtn.textContent = '🛑 STOP';
+        els.simBtn.classList.add('sim-active');
+        log('Starting live traffic simulation...', 'learning');
+
+        // Clear feed placeholder
+        if (els.feedArea.querySelector('.feed-placeholder')) {
+            els.feedArea.innerHTML = '';
+        }
+
+        // Run immediately then interval
+        runSimulationStep();
+        simInterval = setInterval(runSimulationStep, 4000);
+    }
+}
+
+async function runSimulationStep() {
+    if (!isSimulating) return;
+
+    // Pick random question
+    const q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+
+    // Add to feed
+    addToFeed(q);
+
+    // Execute query
+    els.queryInput.value = q.text;
+
+    // Log intent
+    log(`Incoming query: [${q.id}] ${q.feature}`, 'info');
+
+    await handleQuery();
+
+    // Auto-feedback (simulate user satisfaction based on confidence?)
+    // In a real demo, we might want to vary this
+    if (lastRespondingAgentId) {
+        // 80% chance of positive feedback
+        const positive = Math.random() > 0.2;
+        setTimeout(() => {
+            if (isSimulating) {
+                provideFeedback(positive ? 1.0 : -0.5);
+            }
+        }, 1500);
+    }
+}
+
+function addToFeed(q) {
+    if (!els.feedArea) return;
+
+    // Remove placeholder if present
+    const placeholder = els.feedArea.querySelector('.feed-placeholder');
+    if (placeholder) placeholder.remove();
+
+    const item = document.createElement('div');
+    item.className = `feed-item category-${q.category}`;
+
+    // Truncate text if too long
+    const text = q.text.length > 80 ? q.text.substring(0, 80) + '...' : q.text;
+    const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric", second: "numeric" });
+
+    item.innerHTML = `
+        <div class="feed-header">
+            <span class="feed-badge">${q.id}</span>
+            <span class="feed-time">${time}</span>
+        </div>
+        <div class="feed-meta">
+            <span class="feed-feature">${q.feature}</span> • 
+            <span class="feed-type">${q.type}</span>
+        </div>
+        <div class="feed-text">${text}</div>
+    `;
+
+    els.feedArea.insertBefore(item, els.feedArea.firstChild);
+
+    // Keep feed size manageable
+    while (els.feedArea.children.length > 50) {
+        els.feedArea.removeChild(els.feedArea.lastChild);
+    }
+}
+
+// ============================================================================
+// Live Simulation
+// ============================================================================
+
+
+
+
+
+
 // ============================================================================
 // UI Updates
 // ============================================================================
@@ -626,6 +738,8 @@ document.getElementById('feedbackBad')?.addEventListener('click', () => provideF
 els.syncBtn?.addEventListener('click', triggerFederatedSync);
 els.trainBtn?.addEventListener('click', triggerBatchTraining);
 els.batchBtn?.addEventListener('click', runBatchQueries);
+els.simBtn?.addEventListener('click', toggleSimulation);
+
 
 // ============================================================================
 // Initialize

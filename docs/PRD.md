@@ -586,7 +586,7 @@ RETURN f1, f2 ORDER BY f1.priority DESC
 
 ### 11.5 Dynamic Min-Cut Integrity
 
-Breakthrough subpolynomial algorithm for RAN topology analysis:
+Breakthrough subpolynomial algorithm for RAN topology analysis, based on the December 2025 paper ["Deterministic and Exact Fully-dynamic Minimum Cut of Superpolylogarithmic Size in Subpolynomial Time"](https://arxiv.org/abs/2512.13105):
 
 - First deterministic exact fully-dynamic min-cut algorithm
 - n^0.12 subpolynomial update scaling
@@ -2470,6 +2470,12 @@ npx @claude-flow/cli@latest performance profile --target "query-pipeline"
 
 ---
 
-*End of PRD v3.1.0*
+## Cross-References
 
-**Platform:** @ruvector/edge + claude-flow v3 | **Cost:** $0-50/month | **Scale:** Unlimited (edge-first) | **ROI:** 90% cost reduction vs. cloud AI
+> **Implementation Details**: For WASM crate implementations, code samples, and detailed Rust specifications, see [self-learning-swarm-PRD.md](./self-learning-swarm-PRD.md).
+
+---
+
+*End of PRD v4.0.0*
+
+**Platform:** @ruvector/edge (npm) + elex-* (Rust crates) + claude-flow v3 | **Cost:** $0-50/month | **Scale:** Unlimited (edge-first) | **ROI:** 90% cost reduction vs. cloud AI

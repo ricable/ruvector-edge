@@ -725,3 +725,26 @@ cd src/wasm && wasm-pack build --target web crates/elex-wasm
 - [ ] Battle arena produces comparison table
 - [ ] SIMD speedup 3-8x verified
 - [ ] Memory usage <500MB with 50 cached agents
+
+---
+
+## Cross-References
+
+> **Architecture Details**: For complete system architecture, agent specifications, and comprehensive requirements, see [PRD.md](./PRD.md).
+
+---
+
+## Naming Convention
+
+This project uses a **hybrid naming convention**:
+
+| Package Type | Convention | Examples |
+|--------------|------------|----------|
+| **npm packages** | `@ruvector/*` | `@ruvector/edge`, `@ruvector/memory` |
+| **Rust/WASM crates** | `elex-*` | `elex-memory`, `elex-qlearning`, `elex-reasoningbank` |
+
+---
+
+## References
+
+- **Min-Cut Algorithm**: [Deterministic and Exact Fully-dynamic Minimum Cut of Superpolylogarithmic Size in Subpolynomial Time](https://arxiv.org/abs/2512.13105) (December 2025)

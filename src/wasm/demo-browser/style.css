@@ -123,6 +123,14 @@ header {
     cursor: not-allowed;
 }
 
+.control-btn.active {
+    background: rgba(255, 68, 68, 0.2);
+    /* Red tint for STOP action */
+    border-color: var(--danger);
+    color: var(--danger);
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.2);
+}
+
 .status-badge {
     display: flex;
     align-items: center;
@@ -764,5 +772,145 @@ header {
 
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* ============================================================================
+   Live Feed Section
+   ============================================================================ */
+
+.feed-card {
+    margin-bottom: 1.5rem;
+}
+
+.feed-area {
+    height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-right: 0.5rem;
+}
+
+.feed-area::-webkit-scrollbar {
+    width: 4px;
+}
+
+.feed-area::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 2px;
+}
+
+.feed-placeholder {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.feed-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    animation: slideIn 0.3s ease-out;
+    border-left: 3px solid var(--primary);
+    transition: all 0.2s ease;
+    margin-bottom: 0.8rem;
+}
+
+.feed-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(2px);
+}
+
+.feed-item.category-A {
+    border-left-color: var(--primary);
+}
+
+.feed-item.category-B {
+    border-left-color: var(--secondary);
+}
+
+.feed-item.category-C {
+    border-left-color: var(--danger);
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.feed-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text);
+}
+
+.feed-time {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.feed-meta {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.feed-feature {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.feed-text {
+    line-height: 1.4;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Simulation Active State */
+button.sim-active {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
     }
 }
