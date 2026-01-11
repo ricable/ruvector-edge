@@ -1,0 +1,1431 @@
+--- src/domains/agent-lifecycle/aggregates/autonomous-state-machine.ts	2026-01-11 02:00:53
++++ src/domains/intelligence/aggregates/autonomous-state-machine.ts	2026-01-11 01:57:57
+@@ -1,1002 +1,617 @@
+ /**
+- * AutonomousStateMachine Aggregate Root (Agent Lifecycle Context)
++ * AutonomousStateMachine Aggregate Root
+  *
+- * Manages agent state transitions, OODA loop execution for autonomous decision-making.
+- * This is the Agent Lifecycle context version which follows the bounded context map specification.
++ * Manages agent state transitions, OODA loop execution, and Q-learning integration
++ * for autonomous decision-making in the Intelligence bounded context.
+  *
+- * Implements:
+- * - Event sourcing for state transitions
+- * - Invariants preservation (state transition rules, health thresholds)
+- * - Domain event publishing
+- * - Proper encapsulation
++ * Implements the autonomous agent lifecycle:
++ * - Initializing -> ColdStart -> Ready -> (Busy <-> Ready) -> Degraded -> Recovering -> Ready
+  */
+ 
+-import {
+-  HealthScore,
+-  AgentLifecycleState,
+-  AgentLifecycleStateVO
+-} from '../value-objects';
+-import {
+-  AgentLifecycleEvent,
+-  StateTransitionedEvent,
+-  AutonomousDecisionMadeEvent,
+-  ColdStartCompletedEvent,
+-  HealthThresholdBreachedEvent,
+-  AgentDegradedEvent,
+-  AgentRecoveredEvent
+-} from '../domain-events';
++import { State } from '../value-objects/state';
++import { Action } from '../value-objects/action';
++import { Reward } from '../value-objects/reward';
++import { QTable, QTableConfig } from './q-table';
+ 
+ /**
+- * State transition trigger
++ * Agent States for AutonomousStateMachine
+  */
+-export type StateTrigger =
+-  | 'knowledge_loaded'
+-  | 'cold_start_complete'
+-  | 'query_received'
+-  | 'query_completed'
+-  | 'health_threshold_breached'
+-  | 'health_recovered'
+-  | 'shutdown_requested';
++export enum AgentState {
++  /** Agent is initializing internal structures */
++  INITIALIZING = 'initializing',
+ 
++  /** Agent is learning from interactions (cold start phase) */
++  COLD_START = 'cold_start',
++
++  /** Agent is ready to process queries */
++  READY = 'ready',
++
++  /** Agent is actively processing a query */
++  BUSY = 'busy',
++
++  /** Agent performance is degraded, needs recovery */
++  DEGRADED = 'degraded',
++
++  /** Agent is recovering from degraded state */
++  RECOVERING = 'recovering',
++
++  /** Agent has encountered critical error */
++  FAILED = 'failed'
++}
++
+ /**
+- * State transition rule
++ * Configuration for AutonomousStateMachine
+  */
+-interface TransitionRule {
+-  readonly from: AgentLifecycleState;
+-  readonly to: AgentLifecycleState;
+-  readonly trigger: StateTrigger;
+-  readonly guard: (context: TransitionGuardContext) => boolean;
++export interface AutonomousStateMachineConfig {
++  readonly agentId: string;
++  readonly coldStartThreshold: number;       // Interactions before Ready (default: 100)
++  readonly degradedThreshold: number;        // Health threshold for Degraded state (default: 0.5)
++  readonly explorationBaseRate: number;      // Base epsilon for exploration (default: 0.1)
++  readonly recoveryThreshold: number;        // Health threshold for recovery (default: 0.3)
+ }
+ 
+ /**
+- * Context for guard condition evaluation
++ * Observations from the OODA Observe phase
+  */
+-interface TransitionGuardContext {
++export interface Observations {
++  readonly state: State;
++  readonly health: number;
++  readonly successRate: number;
++  readonly confidence: number;
+   readonly interactionCount: number;
+-  readonly healthScore: HealthScore;
+-  readonly knowledgeLoaded: boolean;
+-  readonly shutdownRequested: boolean;
+-  readonly hasCurrentQuery: boolean;
++  readonly timestamp: Date;
+ }
+ 
+ /**
+- * Configuration for AutonomousStateMachine
++ * Orientation from the OODA Orient phase
+  */
+-export interface AutonomousStateMachineConfig {
+-  readonly coldStartThreshold: number;        // Interactions before Ready (default: 100)
+-  readonly healthWarningThreshold: number;    // Health < 0.7 -> Warning (default: 0.7)
+-  readonly healthCriticalThreshold: number;   // Health < 0.5 -> Degraded (default: 0.5)
+-  readonly recoveryThreshold: number;         // Health > 0.8 -> Recovered (default: 0.8)
+-  readonly maxConsecutiveFailures: number;    // Max failures before degradation (default: 5)
+-  readonly observationWindowMs: number;       // OODA observation window (default: 5000)
++export interface Orientation {
++  readonly shouldExplore: boolean;
++  readonly shouldSync: boolean;
++  readonly shouldRecover: boolean;
++  readonly confidence: number;
++  readonly explorationRate: number;
++  readonly reasoning: string;
+ }
+ 
+ /**
+- * Default configuration
++ * Decision from the OODA Decide phase
+  */
+-export const DEFAULT_STATE_MACHINE_CONFIG: AutonomousStateMachineConfig = {
+-  coldStartThreshold: 100,
+-  healthWarningThreshold: 0.7,
+-  healthCriticalThreshold: 0.5,
+-  recoveryThreshold: 0.8,
+-  maxConsecutiveFailures: 5,
+-  observationWindowMs: 5000
+-};
++export interface Decision {
++  readonly action: Action;
++  readonly triggerRecovery: boolean;
++  readonly triggerSync: boolean;
++  readonly recoveryReason?: string;
++  readonly confidence: number;
++}
+ 
+ /**
+- * State statistics
++ * Action result from the OODA Act phase
+  */
+-export interface StateStatistics {
+-  readonly currentState: AgentLifecycleState;
+-  readonly previousState: AgentLifecycleState | null;
+-  readonly timeInState: number;
+-  readonly totalTransitions: number;
+-  readonly coldStartCompleted: boolean;
+-  readonly healthScore: number;
+-  readonly interactionCount: number;
++export interface ActionResult {
++  readonly action: Action;
++  readonly success: boolean;
++  readonly reward: Reward;
++  readonly nextState: State | null;
++  readonly timestamp: Date;
+ }
+ 
+ /**
+- * OODA Loop Context
++ * Domain Events for AutonomousStateMachine
+  */
+-interface OODAContext {
+-  readonly phase: 'Observe' | 'Orient' | 'Decide' | 'Act';
+-  readonly observations: Map<string, unknown>;
+-  readonly orientation: {
+-    readonly currentState: AgentLifecycleState;
+-    readonly healthTrend: 'improving' | 'stable' | 'declining';
+-    readonly recentSuccesses: number;
+-    readonly recentFailures: number;
+-  };
+-  readonly decision?: {
+-    readonly action: string;
+-    readonly confidence: number;
+-    readonly reasoning: string;
+-  };
++export interface StateTransitionedEvent {
++  readonly type: 'StateTransitioned';
++  readonly machineId: string;
++  readonly fromState: AgentState;
++  readonly toState: AgentState;
++  readonly reason?: string;
++  readonly timestamp: Date;
+ }
+ 
++export interface OODAUpdateEvent {
++  readonly type: 'OODAUpdate';
++  readonly machineId: string;
++  readonly phase: 'observe' | 'orient' | 'decide' | 'act';
++  readonly observations?: Observations;
++  readonly orientation?: Orientation;
++  readonly decision?: Decision;
++  readonly timestamp: Date;
++}
++
++export type AutonomousStateMachineEvent = StateTransitionedEvent | OODAUpdateEvent;
++
+ /**
+  * AutonomousStateMachine Aggregate Root
+  *
+- * Manages the 6-state lifecycle machine with OODA loop for autonomous decision making.
+- *
+- * State Flow:
+- *   Initializing -> ColdStart -> Ready <-> Busy
+- *       ^                |           |
+- *       |                v           v
+- *       +------------- Degraded <----+
+- *                     |    |
+- *                     v    |
+- *                  Offline <--- (any state on shutdown)
++ * Manages agent autonomous behavior through:
++ * 1. State transitions based on health and experience
++ * 2. OODA loop (Observe, Orient, Decide, Act) for decision-making
++ * 3. Q-learning integration for action selection
++ * 4. Domain event emission for external coordination
+  */
+ export class AutonomousStateMachine {
+   readonly id: string;
+   readonly agentId: string;
+-  readonly config: AutonomousStateMachineConfig;
+-
+-  // Aggregate state
+-  private _currentState: AgentLifecycleState;
+-  private _previousState: AgentLifecycleState | null;
+-  private _healthScore: HealthScore;
++  private _state: AgentState;
++  private _qTable: QTable;
++  private _config: Required<AutonomousStateMachineConfig>;
++  private _events: AutonomousStateMachineEvent[];
+   private _interactionCount: number;
+-  private _consecutiveFailures: number;
+-  private _knowledgeLoaded: boolean;
+-  private _shutdownRequested: boolean;
+-  private _coldStartCompleted: boolean;
++  private _successCount: number;
++  private _health: number;
++  private _currentTrajectory: Array<{
++    state: State;
++    action: Action;
++    reward: Reward;
++    nextState: State | null;
++    timestamp: number;
++  }> | null;
++  private _explorationRate: number;
++  private _isBusy: boolean;
+ 
+-  // OODA loop state
+-  private _oodaContext: OODAContext;
+-
+-  // Timing
+-  private _stateEnteredAt: Date;
+-  private _lastTransitionAt: Date;
+-  private _coldStartStartedAt: Date | null;
+-  private _degradedEnteredAt: Date | null;
+-
+-  // Event sourcing
+-  private _events: AgentLifecycleEvent[];
+-  private _version: number;
+-
+-  // State transition rules (invariants)
+-  private static readonly TRANSITION_RULES: ReadonlyArray<TransitionRule> = [
+-    // Initializing transitions
+-    {
+-      from: AgentLifecycleState.INITIALIZING,
+-      to: AgentLifecycleState.COLD_START,
+-      trigger: 'knowledge_loaded',
+-      guard: (ctx) => ctx.knowledgeLoaded
+-    },
+-    {
+-      from: AgentLifecycleState.INITIALIZING,
+-      to: AgentLifecycleState.OFFLINE,
+-      trigger: 'shutdown_requested',
+-      guard: (ctx) => ctx.shutdownRequested
+-    },
+-
+-    // ColdStart transitions
+-    {
+-      from: AgentLifecycleState.COLD_START,
+-      to: AgentLifecycleState.READY,
+-      trigger: 'cold_start_complete',
+-      guard: (ctx) => ctx.interactionCount >= 100
+-    },
+-    {
+-      from: AgentLifecycleState.COLD_START,
+-      to: AgentLifecycleState.OFFLINE,
+-      trigger: 'shutdown_requested',
+-      guard: (ctx) => ctx.shutdownRequested
+-    },
+-
+-    // Ready transitions
+-    {
+-      from: AgentLifecycleState.READY,
+-      to: AgentLifecycleState.BUSY,
+-      trigger: 'query_received',
+-      guard: (ctx) => ctx.hasCurrentQuery
+-    },
+-    {
+-      from: AgentLifecycleState.READY,
+-      to: AgentLifecycleState.DEGRADED,
+-      trigger: 'health_threshold_breached',
+-      guard: (ctx) => ctx.healthScore.score < 0.5
+-    },
+-    {
+-      from: AgentLifecycleState.READY,
+-      to: AgentLifecycleState.OFFLINE,
+-      trigger: 'shutdown_requested',
+-      guard: (ctx) => ctx.shutdownRequested
+-    },
+-
+-    // Busy transitions
+-    {
+-      from: AgentLifecycleState.BUSY,
+-      to: AgentLifecycleState.READY,
+-      trigger: 'query_completed',
+-      guard: () => true // Always allow completion
+-    },
+-    {
+-      from: AgentLifecycleState.BUSY,
+-      to: AgentLifecycleState.DEGRADED,
+-      trigger: 'health_threshold_breached',
+-      guard: (ctx) => ctx.healthScore.score < 0.5
+-    },
+-    {
+-      from: AgentLifecycleState.BUSY,
+-      to: AgentLifecycleState.OFFLINE,
+-      trigger: 'shutdown_requested',
+-      guard: (ctx) => ctx.shutdownRequested
+-    },
+-
+-    // Degraded transitions
+-    {
+-      from: AgentLifecycleState.DEGRADED,
+-      to: AgentLifecycleState.READY,
+-      trigger: 'health_recovered',
+-      guard: (ctx) => ctx.healthScore.score >= 0.8
+-    },
+-    {
+-      from: AgentLifecycleState.DEGRADED,
+-      to: AgentLifecycleState.OFFLINE,
+-      trigger: 'shutdown_requested',
+-      guard: (ctx) => ctx.shutdownRequested
+-    },
+-
+-    // Offline is terminal (no outgoing transitions)
+-  ];
+-
+-  private constructor(
++  constructor(
+     id: string,
+-    agentId: string,
+-    config: AutonomousStateMachineConfig = DEFAULT_STATE_MACHINE_CONFIG
++    config: AutonomousStateMachineConfig,
++    qTableConfig?: QTableConfig
+   ) {
+     this.id = id;
+-    this.agentId = agentId;
+-    this.config = config;
+-
+-    // Initialize state
+-    this._currentState = AgentLifecycleState.INITIALIZING;
+-    this._previousState = null;
+-    this._healthScore = HealthScore.create(1.0);
+-    this._interactionCount = 0;
+-    this._consecutiveFailures = 0;
+-    this._knowledgeLoaded = false;
+-    this._shutdownRequested = false;
+-    this._coldStartCompleted = false;
+-
+-    // Initialize OODA context
+-    this._oodaContext = {
+-      phase: 'Observe',
+-      observations: new Map(),
+-      orientation: {
+-        currentState: AgentLifecycleState.INITIALIZING,
+-        healthTrend: 'stable',
+-        recentSuccesses: 0,
+-        recentFailures: 0
+-      }
++    this.agentId = config.agentId;
++    this._config = {
++      agentId: config.agentId,
++      coldStartThreshold: config.coldStartThreshold ?? 100,
++      degradedThreshold: config.degradedThreshold ?? 0.5,
++      explorationBaseRate: config.explorationBaseRate ?? 0.1,
++      recoveryThreshold: config.recoveryThreshold ?? 0.3
+     };
+-
+-    // Timing
+-    const now = new Date();
+-    this._stateEnteredAt = now;
+-    this._lastTransitionAt = now;
+-    this._coldStartStartedAt = null;
+-    this._degradedEnteredAt = null;
+-
+-    // Event sourcing
++    this._state = AgentState.INITIALIZING;
++    this._qTable = new QTable(`${id}-qtable`, config.agentId, qTableConfig);
+     this._events = [];
+-    this._version = 0;
++    this._interactionCount = 0;
++    this._successCount = 0;
++    // Agents with knowledge start with high health (0.7)
++    // This reflects that they have domain knowledge even without interactions
++    this._health = 0.7;
++    this._currentTrajectory = null;
++    this._explorationRate = this._config.explorationBaseRate;
++    this._isBusy = false;
+   }
+ 
+-  // ===========================================================================
+-  // FACTORY METHODS
+-  // ===========================================================================
++  // ==================== State Management ====================
+ 
+   /**
+-   * Factory method to create new state machine
++   * Load knowledge and transition from Initializing to ColdStart
+    */
+-  static create(
+-    agentId: string,
+-    config?: AutonomousStateMachineConfig
+-  ): AutonomousStateMachine {
+-    const id = `asm-${agentId}-${Date.now()}`;
+-    return new AutonomousStateMachine(id, agentId, config);
++  loadKnowledge(): AutonomousStateMachineEvent[] {
++    if (this._state !== AgentState.INITIALIZING) {
++      return [];
++    }
++
++    this.transitionTo(AgentState.COLD_START, 'Knowledge loaded');
++    return this.getUncommittedEvents();
+   }
+ 
+   /**
+-   * Factory method to create with custom ID
++   * Transition to a new state with event emission
+    */
+-  static createWithId(
+-    id: string,
+-    agentId: string,
+-    config?: AutonomousStateMachineConfig
+-  ): AutonomousStateMachine {
+-    return new AutonomousStateMachine(id, agentId, config);
+-  }
++  private transitionTo(newState: AgentState, reason?: string): void {
++    const fromState = this._state;
+ 
+-  // ===========================================================================
+-  // PUBLIC API - State Transitions
+-  // ===========================================================================
++    if (fromState === newState) {
++      return;
++    }
+ 
+-  /**
+-   * Get current lifecycle state
+-   */
+-  getCurrentState(): AgentLifecycleState {
+-    return this._currentState;
+-  }
++    this._state = newState;
+ 
+-  /**
+-   * Get current state as value object
+-   */
+-  getCurrentStateVO(): AgentLifecycleStateVO {
+-    return AgentLifecycleStateVO.create(this._currentState);
++    this.raise({
++      type: 'StateTransitioned',
++      machineId: this.id,
++      fromState,
++      toState: newState,
++      reason,
++      timestamp: new Date()
++    });
+   }
+ 
+-  /**
+-   * Check if transition to target state is valid
+-   */
+-  canTransitionTo(targetState: AgentLifecycleState): boolean {
+-    const currentStateVO = AgentLifecycleStateVO.create(this._currentState);
+-    const targetStateVO = AgentLifecycleStateVO.create(targetState);
+-    return currentStateVO.canTransitionTo(targetStateVO);
+-  }
++  // ==================== Interaction Recording ====================
+ 
+   /**
+-   * Execute state transition by trigger
++   * Record an interaction and update learning metrics
+    */
+-  async transition(trigger: StateTrigger, context?: Partial<TransitionGuardContext>): Promise<void> {
+-    const rule = this.findTransitionRule(trigger);
++  recordInteraction(state: State, action: Action, reward: Reward): void {
++    this._interactionCount++;
+ 
+-    if (!rule) {
+-      throw new Error(
+-        `Invalid transition trigger '${trigger}' from state '${this._currentState}'`
+-      );
++    // Track success rate
++    if (reward.total() > 0) {
++      this._successCount++;
+     }
+ 
+-    // Build guard context
+-    const guardContext: TransitionGuardContext = {
+-      interactionCount: context?.interactionCount ?? this._interactionCount,
+-      healthScore: context?.healthScore ?? this._healthScore,
+-      knowledgeLoaded: context?.knowledgeLoaded ?? this._knowledgeLoaded,
+-      shutdownRequested: context?.shutdownRequested ?? this._shutdownRequested,
+-      hasCurrentQuery: context?.hasCurrentQuery ?? false
+-    };
++    // Update health (exponential moving average)
++    const rewardSignal = reward.total();
++    this._health = 0.95 * this._health + 0.05 * Math.max(0, Math.min(1, rewardSignal + 1) / 2);
+ 
+-    // Check guard condition (invariant preservation)
+-    if (!rule.guard(guardContext)) {
+-      throw new Error(
+-        `Guard condition failed for transition from '${this._currentState}' to '${rule.to}'`
+-      );
++    // Update Q-table (use the same state as next state for terminal episodes)
++    this._qTable.update(state, action, reward, state);
++
++    // Record in trajectory if active
++    if (this._currentTrajectory) {
++      this._currentTrajectory.push({
++        state,
++        action,
++        reward,
++        nextState: state, // Use same state for terminal episodes
++        timestamp: Date.now()
++      });
+     }
+ 
+-    // Execute transition
+-    await this.executeTransition(rule, trigger, guardContext);
++    // Check state transitions based on metrics
++    this.checkStateTransitions();
+   }
+ 
+   /**
+-   * Load knowledge (feature catalog) and transition to ColdStart
++   * Check and execute state transitions based on current metrics
+    */
+-  async loadKnowledge(): Promise<void> {
+-    if (this._currentState !== AgentLifecycleState.INITIALIZING) {
+-      throw new Error('Cannot load knowledge: not in Initializing state');
+-    }
++  private checkStateTransitions(): void {
++    switch (this._state) {
++      case AgentState.COLD_START:
++        // Transition to Ready after threshold interactions
++        if (this._interactionCount >= this._config.coldStartThreshold) {
++          this.transitionTo(AgentState.READY, 'Cold start threshold reached');
++        }
++        break;
+ 
+-    this._knowledgeLoaded = true;
+-    await this.transition('knowledge_loaded', { knowledgeLoaded: true });
+-  }
++      case AgentState.BUSY:
++        // Transition back to Ready when not busy
++        if (!this._isBusy) {
++          this.transitionTo(AgentState.READY, 'Query completed');
++        }
++        break;
+ 
+-  /**
+-   * Record interaction and check for cold start completion
+-   */
+-  async recordInteraction(success: boolean = true): Promise<void> {
+-    this._interactionCount++;
++      case AgentState.READY:
++        // Transition to Degraded if health falls below threshold
++        if (this._health < this._config.degradedThreshold) {
++          this.transitionTo(AgentState.DEGRADED, `Health degraded to ${this._health.toFixed(2)}`);
++        }
++        break;
+ 
+-    if (success) {
+-      this._consecutiveFailures = 0;
+-      this._oodaContext.orientation.recentSuccesses++;
+-    } else {
+-      this._consecutiveFailures++;
+-      this._oodaContext.orientation.recentFailures++;
+-    }
++      case AgentState.DEGRADED:
++        // Transition to Recovering if health recovers
++        if (this._health >= this._config.recoveryThreshold) {
++          this.transitionTo(AgentState.RECOVERING, 'Health recovering');
++        }
++        break;
+ 
+-    // Check cold start completion
+-    if (
+-      this._currentState === AgentLifecycleState.COLD_START &&
+-      this._interactionCount >= this.config.coldStartThreshold &&
+-      !this._coldStartCompleted
+-    ) {
+-      await this.transition('cold_start_complete');
++      case AgentState.RECOVERING:
++        // Transition back to Ready when fully recovered
++        if (this._health > this._config.degradedThreshold + 0.1) {
++          this.transitionTo(AgentState.READY, 'Health restored');
++        }
++        break;
+     }
+   }
+ 
+-  /**
+-   * Receive query and transition to Busy
+-   */
+-  async receiveQuery(queryId: string): Promise<void> {
+-    if (this._currentState !== AgentLifecycleState.READY) {
+-      throw new Error(`Cannot receive query: not in Ready state (current: ${this._currentState})`);
+-    }
++  // ==================== Query Lifecycle ====================
+ 
+-    await this.transition('query_received', { hasCurrentQuery: true });
+-  }
+-
+   /**
+-   * Complete query and transition back to Ready
++   * Mark the start of a query processing
+    */
+-  async completeQuery(): Promise<void> {
+-    if (this._currentState !== AgentLifecycleState.BUSY) {
+-      throw new Error(`Cannot complete query: not in Busy state (current: ${this._currentState})`);
++  startQuery(): void {
++    this._isBusy = true;
++    if (this._state === AgentState.READY) {
++      this.transitionTo(AgentState.BUSY, 'Processing query');
+     }
+-
+-    await this.transition('query_completed');
+-    await this.recordInteraction(true);
+   }
+ 
+   /**
+-   * Update health score and check for degraded state
++   * Mark the completion of a query processing
+    */
+-  async updateHealth(score: HealthScore): Promise<void> {
+-    const previousScore = this._healthScore;
+-    this._healthScore = score;
+-
+-    // Update health trend
+-    if (score.score > previousScore.score + 0.1) {
+-      this._oodaContext.orientation.healthTrend = 'improving';
+-    } else if (score.score < previousScore.score - 0.1) {
+-      this._oodaContext.orientation.healthTrend = 'declining';
++  completeQuery(): void {
++    this._isBusy = false;
++    if (this._state === AgentState.BUSY) {
++      this.transitionTo(AgentState.READY, 'Query completed');
+     }
+-
+-    // Check for degradation
+-    if (
+-      (this._currentState === AgentLifecycleState.READY ||
+-        this._currentState === AgentLifecycleState.BUSY) &&
+-      score.score < this.config.healthCriticalThreshold
+-    ) {
+-      await this.transition('health_threshold_breached', { healthScore: score });
+-    }
+-
+-    // Check for recovery
+-    if (
+-      this._currentState === AgentLifecycleState.DEGRADED &&
+-      score.score >= this.config.recoveryThreshold
+-    ) {
+-      await this.transition('health_recovered', { healthScore: score });
+-    }
+   }
+ 
++  // ==================== OODA Loop ====================
++
+   /**
+-   * Request graceful shutdown
++   * OODA Loop - Observe phase
++   * Gather observations about current state and environment
+    */
+-  async requestShutdown(): Promise<void> {
+-    this._shutdownRequested = true;
+-    await this.transition('shutdown_requested', { shutdownRequested: true });
++  observe(state: State): Observations {
++    return {
++      state,
++      health: this._health,
++      successRate: this.successRate,
++      confidence: this.calculateConfidence(state),
++      interactionCount: this._interactionCount,
++      timestamp: new Date()
++    };
+   }
+ 
+-  // ===========================================================================
+-  // OODA LOOP IMPLEMENTATION
+-  // ===========================================================================
+-
+   /**
+-   * Execute one OODA loop iteration
+-   *
+-   * Observe -> Orient -> Decide -> Act
++   * OODA Loop - Orient phase
++   * Analyze observations and determine strategy
+    */
+-  async executeOODALoop(): Promise<void> {
+-    // OBSERVE: Gather current state information
+-    const observations = await this.observe();
++  orient(observations: Observations): Orientation {
++    const shouldExplore = observations.successRate < 0.7;
++    const shouldSync = observations.confidence < 0.6;
++    const shouldRecover = observations.health < this._config.recoveryThreshold;
+ 
+-    // ORIENT: Analyze context and update orientation
+-    const orientation = await this.orient(observations);
++    // Adjust exploration rate based on success
++    let explorationRate = this._explorationRate;
++    if (shouldExplore) {
++      explorationRate = Math.min(1.0, explorationRate * 1.5);
++    } else {
++      explorationRate = Math.max(0.01, explorationRate * 0.99);
++    }
++    this._explorationRate = explorationRate;
+ 
+-    // DECIDE: Select action based on orientation
+-    const decision = await this.decide(orientation);
+-
+-    // ACT: Execute the decision
+-    await this.act(decision);
++    const reasoning = [
++      shouldExplore ? 'Low success rate, increasing exploration' : 'Good success rate, exploiting knowledge',
++      shouldSync ? 'Low confidence, requesting federated sync' : 'Confidence adequate',
++      shouldRecover ? 'Health critical, triggering recovery' : 'Health normal'
++    ].join('. ');
+ 
+-    // Publish autonomous decision event
+-    this.raise({
+-      type: 'AutonomousDecisionMade',
+-      aggregateId: this.id,
+-      aggregateType: 'agent-lifecycle',
+-      version: ++this._version,
+-      timestamp: new Date(),
+-      payload: {
+-        agentId: this.agentId,
+-        currentState: this._currentState,
+-        contextState: orientation.currentState,
+-        action: decision.action,
+-        confidence: decision.confidence,
+-        qValue: decision.qValue ?? 0,
+-        reasoning: decision.reasoning
+-      }
+-    });
++    return {
++      shouldExplore,
++      shouldSync,
++      shouldRecover,
++      confidence: observations.confidence,
++      explorationRate,
++      reasoning
++    };
+   }
+ 
+   /**
+-   * OBSERVE: Collect current state metrics
++   * OODA Loop - Decide phase
++   * Select action based on orientation and Q-learning
+    */
+-  private async observe(): Promise<Map<string, unknown>> {
+-    const observations = new Map<string, unknown>();
++  decide(state: State, orientation?: Orientation): Decision {
++    const currentOrientation = orientation ?? this.orient(this.observe(state));
+ 
+-    observations.set('currentState', this._currentState);
+-    observations.set('healthScore', this._healthScore.score);
+-    observations.set('interactionCount', this._interactionCount);
+-    observations.set('consecutiveFailures', this._consecutiveFailures);
+-    observations.set('timeInState', Date.now() - this._stateEnteredAt.getTime());
+-    observations.set('healthTrend', this._oodaContext.orientation.healthTrend);
+-
+-    // State-specific observations
+-    switch (this._currentState) {
+-      case AgentLifecycleState.COLD_START:
+-        observations.set('progress', this._interactionCount / this.config.coldStartThreshold);
+-        observations.set('remaining', this.config.coldStartThreshold - this._interactionCount);
+-        break;
+-
+-      case AgentLifecycleState.DEGRADED:
+-        observations.set(
+-          'timeInDegraded',
+-          this._degradedEnteredAt ? Date.now() - this._degradedEnteredAt.getTime() : 0
+-        );
+-        observations.set('recoveryPlan', this.generateRecoveryPlan());
+-        break;
+-
+-      case AgentLifecycleState.BUSY:
+-        observations.set('queryDuration', Date.now() - this._stateEnteredAt.getTime());
+-        break;
++    // Check if recovery is needed
++    if (currentOrientation.shouldRecover &&
++        (this._state === AgentState.DEGRADED || this._state === AgentState.RECOVERING)) {
++      return {
++        action: Action.CONSULT_PEER,
++        triggerRecovery: true,
++        triggerSync: false,
++        recoveryReason: 'Health critical, initiating recovery',
++        confidence: currentOrientation.confidence
++      };
+     }
+ 
+-    this._oodaContext = { ...this._oodaContext, phase: 'Observe', observations };
++    // Select action using Q-learning
++    const action = this._qTable.selectAction(state, currentOrientation.shouldExplore);
+ 
+-    return observations;
++    return {
++      action,
++      triggerRecovery: false,
++      triggerSync: currentOrientation.shouldSync,
++      confidence: currentOrientation.confidence
++    };
+   }
+ 
+   /**
+-   * ORIENT: Analyze observations and build orientation
++   * OODA Loop - Act phase
++   * Execute the action and return result
+    */
+-  private async orient(observations: Map<string, unknown>): Promise<{
+-    currentState: AgentLifecycleState;
+-    healthTrend: 'improving' | 'stable' | 'declining';
+-    recentSuccesses: number;
+-    recentFailures: number;
+-    situation: string;
+-  }> {
+-    const healthScore = this._healthScore.score;
+-    let situation = 'normal';
++  act(decision: Decision, state: State): ActionResult {
++    const action = decision.action;
+ 
+-    // Determine situation
+-    if (this._currentState === AgentLifecycleState.DEGRADED) {
+-      situation = 'degraded';
+-    } else if (this._currentState === AgentLifecycleState.COLD_START) {
+-      situation = 'cold_start';
+-    } else if (healthScore < this.config.healthWarningThreshold) {
+-      situation = 'warning';
+-    } else if (this._consecutiveFailures >= this.config.maxConsecutiveFailures) {
+-      situation = 'critical';
+-    }
++    // Simulate action execution (in real system, this would invoke the action)
++    const success = !decision.triggerRecovery;
++    const reward = success ? Reward.success(1.0) : Reward.failure(-0.5);
+ 
+-    this._oodaContext = {
+-      ...this._oodaContext,
+-      phase: 'Orient',
+-      orientation: {
+-        currentState: this._currentState,
+-        healthTrend: this._oodaContext.orientation.healthTrend,
+-        recentSuccesses: this._oodaContext.orientation.recentSuccesses,
+-        recentFailures: this._oodaContext.orientation.recentFailures
+-      }
+-    };
+-
+     return {
+-      currentState: this._currentState,
+-      healthTrend: this._oodaContext.orientation.healthTrend,
+-      recentSuccesses: this._oodaContext.orientation.recentSuccesses,
+-      recentFailures: this._oodaContext.orientation.recentFailures,
+-      situation
++      action,
++      success,
++      reward,
++      nextState: state, // Use same state for terminal episodes
++      timestamp: new Date()
+     };
+   }
+ 
+   /**
+-   * DECIDE: Select action based on orientation
++   * Run complete OODA loop
+    */
+-  private async decide(orientation: Awaited<ReturnType<typeof this.orient>>): Promise<{
+-    action: string;
+-    confidence: number;
+-    reasoning: string;
+-    qValue?: number;
+-  }> {
+-    this._oodaContext = { ...this._oodaContext, phase: 'Decide' };
++  runOODALoop(state: State): {
++    observations: Observations;
++    orientation: Orientation;
++    decision: Decision;
++    result: ActionResult;
++  } {
++    // Observe
++    const observations = this.observe(state);
++    this.raise({
++      type: 'OODAUpdate',
++      machineId: this.id,
++      phase: 'observe',
++      observations,
++      timestamp: new Date()
++    });
+ 
+-    // Decision logic based on state and orientation
+-    let action: string;
+-    let reasoning: string;
+-    let confidence = this._healthScore.score;
++    // Orient
++    const orientation = this.orient(observations);
++    this.raise({
++      type: 'OODAUpdate',
++      machineId: this.id,
++      phase: 'orient',
++      orientation,
++      timestamp: new Date()
++    });
+ 
+-    switch (this._currentState) {
+-      case AgentLifecycleState.COLD_START:
+-        // Prioritize exploration and learning
+-        action = 'explore';
+-        reasoning = `Cold start: ${this._interactionCount}/${this.config.coldStartThreshold} interactions completed`;
+-        confidence = this._interactionCount / this.config.coldStartThreshold;
+-        break;
++    // Decide
++    const decision = this.decide(state, orientation);
++    this.raise({
++      type: 'OODAUpdate',
++      machineId: this.id,
++      phase: 'decide',
++      decision,
++      timestamp: new Date()
++    });
+ 
+-      case AgentLifecycleState.READY:
+-        // Decide based on health trend
+-        if (orientation.healthTrend === 'declining') {
+-          action = 'increase_exploration';
+-          reasoning = 'Health declining: increasing exploration to find better strategies';
+-          confidence = this._healthScore.score * 0.8;
+-        } else {
+-          action = 'exploit';
+-          reasoning = 'Health stable: exploiting known successful patterns';
+-        }
+-        break;
++    // Act
++    const result = this.act(decision, state);
++    this.raise({
++      type: 'OODAUpdate',
++      machineId: this.id,
++      phase: 'act',
++      timestamp: new Date()
++    });
+ 
+-      case AgentLifecycleState.DEGRADED:
+-        // Recovery actions
+-        action = 'execute_recovery_plan';
+-        reasoning = `Degraded: executing recovery plan (${this.generateRecoveryPlan().join(', ')})`;
+-        confidence = 1 - this._healthScore.score; // Lower confidence when degraded
+-        break;
++    // Record the interaction
++    this.recordInteraction(state, result.action, result.reward);
+ 
+-      case AgentLifecycleState.BUSY:
+-        action = 'continue_query';
+-        reasoning = 'Query in progress: continuing execution';
+-        confidence = 0.9;
+-        break;
++    return { observations, orientation, decision, result };
++  }
+ 
+-      default:
+-        action = 'maintain';
+-        reasoning = `Maintaining current state: ${this._currentState}`;
+-        break;
+-    }
++  // ==================== Q-Learning Integration ====================
+ 
+-    // Store decision in context
+-    this._oodaContext = {
+-      ...this._oodaContext,
+-      decision: { action, confidence, reasoning }
+-    };
+-
+-    return { action, confidence, reasoning };
++  /**
++   * Select action using Q-learning with epsilon-greedy exploration
++   */
++  selectAction(state: State, explore?: boolean): Action {
++    return this._qTable.selectAction(state, explore ?? true);
+   }
+ 
+   /**
+-   * ACT: Execute the decided action
++   * Get Q-value for state-action pair
+    */
+-  private async act(decision: Awaited<ReturnType<typeof this.decide>>): Promise<void> {
+-    this._oodaContext = { ...this._oodaContext, phase: 'Act' };
+-
+-    // Execute action based on decision
+-    switch (decision.action) {
+-      case 'explore':
+-      case 'exploit':
+-      case 'increase_exploration':
+-      case 'continue_query':
+-      case 'maintain':
+-      case 'execute_recovery_plan':
+-        // Actions are handled by external systems
+-        break;
+-    }
++  getQValue(state: State, action: Action): number {
++    return this._qTable.lookup(state, action);
+   }
+ 
+-  // ===========================================================================
+-  // PRIVATE HELPERS
+-  // ===========================================================================
+-
+   /**
+-   * Find transition rule by trigger
++   * Get confidence for state-action pair
+    */
+-  private findTransitionRule(trigger: StateTrigger): TransitionRule | undefined {
+-    return AutonomousStateMachine.TRANSITION_RULES.find(
+-      rule => rule.from === this._currentState && rule.trigger === trigger
+-    );
++  getConfidence(state: State, action: Action): number {
++    return this._qTable.getConfidence(state, action);
+   }
+ 
+   /**
+-   * Execute state transition
++   * Calculate overall confidence for a state
+    */
+-  private async executeTransition(
+-    rule: TransitionRule,
+-    trigger: StateTrigger,
+-    context: TransitionGuardContext
+-  ): Promise<void> {
+-    const fromState = this._currentState;
+-    const toState = rule.to;
++  private calculateConfidence(state: State): number {
++    let totalConfidence = 0;
++    let actionCount = 0;
+ 
+-    // Update state
+-    this._previousState = fromState;
+-    this._currentState = toState;
+-    this._lastTransitionAt = new Date();
+-    this._stateEnteredAt = new Date();
++    for (const action of [Action.DIRECT_ANSWER, Action.CONTEXT_ANSWER, Action.CONSULT_PEER]) {
++      const conf = this.getConfidence(state, action);
++      totalConfidence += conf;
++      actionCount++;
++    }
+ 
+-    // State-specific initialization
+-    switch (toState) {
+-      case AgentLifecycleState.COLD_START:
+-        this._coldStartStartedAt = new Date();
+-        break;
++    // Return baseline confidence even for unvisited states
++    // Agents with knowledge should have some confidence from the start
++    const avgConfidence = actionCount > 0 ? totalConfidence / actionCount : 0;
++    return Math.max(0.3, avgConfidence); // Minimum 30% confidence for agents with knowledge
++  }
+ 
+-      case AgentLifecycleState.DEGRADED:
+-        this._degradedEnteredAt = new Date();
+-        break;
+-
+-      case AgentLifecycleState.OFFLINE:
+-        // Terminal state: cleanup
+-        break;
+-    }
++  // ==================== Trajectory Management ====================
+ 
+-    // Publish domain events
+-    this.raise({
+-      type: 'StateTransitioned',
+-      aggregateId: this.id,
+-      aggregateType: 'agent-lifecycle',
+-      version: ++this._version,
+-      timestamp: new Date(),
+-      payload: {
+-        agentId: this.agentId,
+-        fromState,
+-        toState,
+-        trigger,
+-        interactionCount: context.interactionCount,
+-        healthScore: context.healthScore.score
+-      }
+-    });
+-
+-    // Special case events
+-    if (toState === AgentLifecycleState.READY && fromState === AgentLifecycleState.COLD_START) {
+-      const coldStartDuration = this._coldStartStartedAt
+-        ? Date.now() - this._coldStartStartedAt.getTime()
+-        : 0;
+-
+-      this.raise({
+-        type: 'ColdStartCompleted',
+-        aggregateId: this.id,
+-        aggregateType: 'agent-lifecycle',
+-        version: ++this._version,
+-        timestamp: new Date(),
+-        payload: {
+-          agentId: this.agentId,
+-          interactionCount: this._interactionCount,
+-          finalConfidence: this._healthScore.score,
+-          qTableSize: 0,
+-          duration: coldStartDuration
+-        }
+-      });
+-    }
+-
+-    if (toState === AgentLifecycleState.DEGRADED) {
+-      this.raise({
+-        type: 'AgentDegraded',
+-        aggregateId: this.id,
+-        aggregateType: 'agent-lifecycle',
+-        version: ++this._version,
+-        timestamp: new Date(),
+-        payload: {
+-          agentId: this.agentId,
+-          previousState: fromState,
+-          healthScore: this._healthScore.score,
+-          recoveryPlan: this.generateRecoveryPlan()
+-        }
+-      });
+-    }
+-
+-    if (fromState === AgentLifecycleState.DEGRADED && toState === AgentLifecycleState.READY) {
+-      const recoveryDuration = this._degradedEnteredAt
+-        ? Date.now() - this._degradedEnteredAt.getTime()
+-        : 0;
+-
+-      this.raise({
+-        type: 'AgentRecovered',
+-        aggregateId: this.id,
+-        aggregateType: 'agent-lifecycle',
+-        version: ++this._version,
+-        timestamp: new Date(),
+-        payload: {
+-          agentId: this.agentId,
+-          healthScore: this._healthScore.score,
+-          recoveryDuration
+-        }
+-      });
+-    }
+-  }
+-
+   /**
+-   * Generate recovery plan for degraded state
++   * Start recording a trajectory
+    */
+-  private generateRecoveryPlan(): string[] {
+-    const plan: string[] = [];
+-
+-    if (this._healthScore.score < 0.3) {
+-      plan.push('emergency_memory_cleanup');
+-      plan.push('reset_learning_rates');
+-    } else {
+-      plan.push('prune_low_value_trajectories');
+-      plan.push('increase_exploration_temporarily');
+-    }
+-
+-    if (this._consecutiveFailures > 0) {
+-      plan.push('analyze_failure_patterns');
+-      plan.push('request_federated_sync');
+-    }
+-
+-    return plan;
++  startTrajectory(): void {
++    this._currentTrajectory = [];
+   }
+ 
+   /**
+-   * Raise domain event
++   * End trajectory recording and return trajectory data
+    */
+-  private raise(event: AgentLifecycleEvent): void {
+-    this._events.push(event);
+-  }
++  endTrajectory(success: boolean) {
++    if (!this._currentTrajectory || this._currentTrajectory.length === 0) {
++      return null;
++    }
+ 
+-  // ===========================================================================
+-  // GETTERS
+-  // ===========================================================================
++    const trajectory = {
++      agentId: this.agentId,
++      steps: [...this._currentTrajectory],
++      success,
++      cumulativeReward: this._currentTrajectory.reduce((sum, step) => sum + step.reward.total(), 0),
++      startTime: this._currentTrajectory[0]?.timestamp ?? Date.now(),
++      endTime: Date.now(),
++      metadata: {
++        state: this._state,
++        health: this._health,
++        explorationRate: this._explorationRate
++      }
++    };
+ 
+-  get currentState(): AgentLifecycleState {
+-    return this._currentState;
++    this._currentTrajectory = null;
++    return trajectory;
+   }
+ 
+-  get previousState(): AgentLifecycleState | null {
+-    return this._previousState;
+-  }
++  // ==================== Domain Events ====================
+ 
+-  get healthScore(): HealthScore {
+-    return this._healthScore;
++  private raise(event: AutonomousStateMachineEvent): void {
++    this._events.push(event);
+   }
+ 
+-  get interactionCount(): number {
+-    return this._interactionCount;
++  /**
++   * Get and clear uncommitted domain events
++   */
++  getUncommittedEvents(): AutonomousStateMachineEvent[] {
++    const events = [...this._events];
++    this._events = [];
++    return events;
+   }
+ 
+-  get consecutiveFailures(): number {
+-    return this._consecutiveFailures;
+-  }
++  // ==================== Getters ====================
+ 
+-  get coldStartCompleted(): boolean {
+-    return this._coldStartCompleted;
++  get currentState(): AgentState {
++    return this._state;
+   }
+ 
+-  get oodaPhase(): string {
+-    return this._oodaContext.phase;
++  get health(): number {
++    return this._health;
+   }
+ 
+-  get timeInCurrentState(): number {
+-    return Date.now() - this._stateEnteredAt.getTime();
++  get successRate(): number {
++    return this._interactionCount > 0
++      ? this._successCount / this._interactionCount
++      : 0;
+   }
+ 
+-  get version(): number {
+-    return this._version;
++  get explorationRate(): number {
++    return this._explorationRate;
+   }
+ 
+-  // ===========================================================================
+-  // EVENT SOURCING
+-  // ===========================================================================
+-
+   /**
+-   * Get uncommitted domain events
++   * Manually set exploration rate (for testing)
+    */
+-  getUncommittedEvents(): AgentLifecycleEvent[] {
+-    return [...this._events];
++  setExplorationRate(rate: number): void {
++    this._explorationRate = Math.max(0, Math.min(1, rate));
+   }
+ 
+-  /**
+-   * Clear uncommitted events
+-   */
+-  markEventsAsCommitted(): void {
+-    this._events = [];
++  get interactionCount(): number {
++    return this._interactionCount;
+   }
+ 
+-  /**
+-   * Rebuild aggregate from event history
+-   */
+-  static fromHistory(events: AgentLifecycleEvent[]): AutonomousStateMachine {
+-    if (events.length === 0) {
+-      throw new Error('Cannot rebuild from empty event history');
+-    }
+-
+-    const firstEvent = events[0];
+-    if (!firstEvent.aggregateId.startsWith('asm-')) {
+-      throw new Error('Invalid event history for AutonomousStateMachine');
+-    }
+-
+-    // Extract agent ID from aggregate ID
+-    const agentId = firstEvent.payload.agentId;
+-    const stateMachine = AutonomousStateMachine.create(agentId);
+-    stateMachine._events = []; // Clear initial events
+-
+-    // Replay events
+-    for (const event of events) {
+-      if (event.type === 'StateTransitioned') {
+-        stateMachine._currentState = event.payload.toState;
+-        stateMachine._previousState = event.payload.fromState;
+-        stateMachine._lastTransitionAt = event.timestamp;
+-        stateMachine._stateEnteredAt = event.timestamp;
+-        stateMachine._version = event.version;
+-
+-        if (event.payload.interactionCount !== undefined) {
+-          stateMachine._interactionCount = event.payload.interactionCount;
+-        }
+-        if (event.payload.healthScore !== undefined) {
+-          stateMachine._healthScore = HealthScore.create(event.payload.healthScore);
+-        }
+-      }
+-    }
+-
+-    return stateMachine;
++  get qTable(): QTable {
++    return this._qTable;
+   }
+ 
+-  // ===========================================================================
+-  // UTILITY METHODS
+-  // ===========================================================================
++  // ==================== Equality and Representation ====================
+ 
+-  /**
+-   * Check if agent is in operational state (Ready or Busy)
+-   */
+-  isOperational(): boolean {
+-    const stateVO = AgentLifecycleStateVO.create(this._currentState);
+-    return stateVO.isOperational;
+-  }
+-
+-  /**
+-   * Check if agent is in healthy state
+-   */
+-  isHealthy(): boolean {
+-    return this._healthScore.isHealthy();
+-  }
+-
+-  /**
+-   * Get state statistics
+-   */
+-  getStateStatistics(): StateStatistics {
+-    return {
+-      currentState: this._currentState,
+-      previousState: this._previousState,
+-      timeInState: this.timeInCurrentState,
+-      totalTransitions: this._version,
+-      coldStartCompleted: this._coldStartCompleted,
+-      healthScore: this._healthScore.score,
+-      interactionCount: this._interactionCount
+-    };
+-  }
+-
+-  /**
+-   * Value equality
+-   */
+   equals(other: AutonomousStateMachine): boolean {
+     return this.id === other.id;
+   }
+ 
+-  /**
+-   * String representation
+-   */
+   toString(): string {
+-    return `AutonomousStateMachine(${this.id}, state=${this._currentState}, health=${this._healthScore})`;
++    return `AutonomousStateMachine(${this.id}, state=${this._state}, health=${this._health.toFixed(2)})`;
+   }
+ 
+-  /**
+-   * JSON representation
+-   */
+   toJSON(): object {
+     return {
+       id: this.id,
+       agentId: this.agentId,
+-      currentState: this._currentState,
+-      previousState: this._previousState,
+-      healthScore: this._healthScore.score,
+-      interactionCount: this._interactionCount,
+-      coldStartCompleted: this._coldStartCompleted,
+-      oodaPhase: this._oodaContext.phase,
+-      version: this._version
++      state: this._state,
++      health: this._health,
++      successRate: this.successRate,
++      explorationRate: this._explorationRate,
++      interactionCount: this._interactionCount
+     };
+   }
+ }
+-
+-// =============================================================================
+-// EXPORTS
+-// =============================================================================
+-
+-export {
+-  type TransitionGuardContext,
+-  type TransitionRule,
+-  type OODAContext
+-};
+-
+-export default AutonomousStateMachine;

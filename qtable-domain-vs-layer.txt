@@ -1,0 +1,593 @@
+--- src/domains/intelligence/aggregates/q-table.ts	2026-01-11 01:57:02
++++ src/layers/intelligence/q-learning/q-table.ts	2026-01-09 13:36:43
+@@ -1,281 +1,404 @@
+ /**
+- * QTable Aggregate Root
+- *
+- * Stores learned state-action values for Q-learning.
+- * This is the main learning data structure for the Intelligence context.
++ * Q-Table
++ * Tabular Q-Learning implementation with state-action value storage
+  */
+ 
+-import { State } from '../value-objects/state';
+-import { Action, ALL_ACTIONS, ACTION_METADATA } from '../value-objects/action';
+-import { Reward } from '../value-objects/reward';
+-import { QEntry } from '../entities/q-entry';
++import type {
++  State,
++  Action,
++  StateActionKey,
++  QValueEntry,
++  QTableData,
++  QLearningConfig,
++  QTableUpdatedEvent,
++  ActionSelectedEvent,
++} from '../types';
++import { StateEncoder } from './state-encoder';
+ 
+-export interface QTableConfig {
+-  readonly gamma: number;   // Discount factor (default: 0.95)
+-  readonly alpha: number;   // Learning rate (default: 0.1)
+-  readonly epsilon: number; // Exploration rate (default: 0.1)
+-}
++/** Q-Table event callback type */
++export type QTableEventCallback = (event: QTableUpdatedEvent | ActionSelectedEvent) => void;
+ 
+-export interface StateActionKey {
+-  readonly stateKey: string;
+-  readonly action: Action;
+-}
++const DEFAULT_CONFIG: QLearningConfig = {
++  alpha: 0.1,      // Learning rate
++  gamma: 0.95,     // Discount factor
++  epsilon: 0.1,    // Exploration rate
++  initialQValue: 0.0,
++};
+ 
+ /**
+- * Domain Events for QTable
++ * QTable implements the Q-Learning algorithm with tabular storage
++ * Q(s,a) <- Q(s,a) + alpha * [r + gamma * max(Q(s',a')) - Q(s,a)]
+  */
+-export interface QTableUpdated {
+-  readonly type: 'QTableUpdated';
+-  readonly qTableId: string;
+-  readonly stateKey: string;
+-  readonly action: Action;
+-  readonly newQValue: number;
+-  readonly timestamp: Date;
+-}
+-
+-export interface QTableMerged {
+-  readonly type: 'QTableMerged';
+-  readonly qTableId: string;
+-  readonly peerId: string;
+-  readonly mergedEntries: number;
+-  readonly timestamp: Date;
+-}
+-
+-export type QTableEvent = QTableUpdated | QTableMerged;
+-
+-/**
+- * QTable Aggregate Root
+- */
+ export class QTable {
+-  readonly id: string;
+-  readonly agentId: string;
+-  private _gamma: number;
+-  private _alpha: number;
+-  private _epsilon: number;
+-  private _entries: Map<string, QEntry>;
+-  private _events: QTableEvent[];
++  private readonly entries: Map<StateActionKey, QValueEntry>;
++  private readonly config: QLearningConfig;
++  private readonly encoder: StateEncoder;
++  private readonly agentId: string;
++  private version: number;
++  private readonly createdAt: number;
++  private updatedAt: number;
++  private eventListeners: QTableEventCallback[];
++  private explorationEnabled: boolean;
+ 
+   constructor(
+-    id: string,
+     agentId: string,
+-    config: QTableConfig = { gamma: 0.95, alpha: 0.1, epsilon: 0.1 }
++    config: Partial<QLearningConfig> = {},
++    encoder?: StateEncoder
+   ) {
+-    this.id = id;
+     this.agentId = agentId;
+-    this._gamma = config.gamma;
+-    this._alpha = config.alpha;
+-    this._epsilon = config.epsilon;
+-    this._entries = new Map();
+-    this._events = [];
++    this.config = { ...DEFAULT_CONFIG, ...config };
++    this.encoder = encoder ?? new StateEncoder();
++    this.entries = new Map();
++    this.version = 0;
++    this.createdAt = Date.now();
++    this.updatedAt = Date.now();
++    this.eventListeners = [];
++    this.explorationEnabled = true;
+   }
+ 
+   /**
+-   * Look up Q-value for a state-action pair
++   * Get Q-value for a state-action pair
+    */
+-  lookup(state: State, action: Action): number {
+-    const entry = this.getEntry(state, action);
+-    return entry?.qValue ?? 0;
++  getQValue(state: State, action: Action): number {
++    const key = this.encoder.encodeStateAction(state, action);
++    const entry = this.entries.get(key);
++    return entry?.value ?? this.config.initialQValue;
+   }
+ 
+   /**
+-   * Get confidence for a state-action pair
++   * Get Q-value entry with metadata
+    */
+-  getConfidence(state: State, action: Action): number {
+-    const entry = this.getEntry(state, action);
+-    return entry?.confidence ?? 0;
++  getQValueEntry(state: State, action: Action): QValueEntry | null {
++    const key = this.encoder.encodeStateAction(state, action);
++    return this.entries.get(key) ?? null;
+   }
+ 
+   /**
+-   * Update Q-value based on experience
++   * Get all Q-values for a state
+    */
+-  update(state: State, action: Action, reward: Reward, nextState: State): void {
+-    const key = this.makeKey(state, action);
+-    let entry = this._entries.get(key);
++  getQValuesForState(state: State): Map<Action, number> {
++    const actions = this.encoder.getAllActions();
++    const qValues = new Map<Action, number>();
+ 
+-    if (!entry) {
+-      entry = new QEntry();
+-      this._entries.set(key, entry);
++    for (const action of actions) {
++      qValues.set(action, this.getQValue(state, action));
+     }
+ 
+-    // Find max Q-value for next state
+-    const nextMaxQ = this.getMaxQ(nextState);
+-
+-    // Update the entry
+-    entry.update(reward.total(), nextMaxQ, this._alpha, this._gamma);
+-
+-    this.raise({
+-      type: 'QTableUpdated',
+-      qTableId: this.id,
+-      stateKey: state.toKey(),
+-      action,
+-      newQValue: entry.qValue,
+-      timestamp: new Date()
+-    });
++    return qValues;
+   }
+ 
+   /**
+-   * Select best action for a state (with epsilon-greedy exploration)
++   * Select action using epsilon-greedy policy
+    */
+-  selectAction(state: State, explore: boolean = true): Action {
+-    // Epsilon-greedy exploration
+-    if (explore && Math.random() < this._epsilon) {
+-      return ALL_ACTIONS[Math.floor(Math.random() * ALL_ACTIONS.length)];
++  selectAction(state: State, forceExplore: boolean = false): { action: Action; isExploration: boolean } {
++    const shouldExplore = this.explorationEnabled &&
++      (forceExplore || Math.random() < this.config.epsilon);
++
++    let action: Action;
++    let isExploration: boolean;
++
++    if (shouldExplore) {
++      // Exploration: random action
++      const actions = this.encoder.getAllActions();
++      action = actions[Math.floor(Math.random() * actions.length)];
++      isExploration = true;
++    } else {
++      // Exploitation: best action
++      action = this.getBestAction(state);
++      isExploration = false;
+     }
+ 
+-    // Greedy selection
+-    return this.getBestAction(state);
++    // Emit action selected event
++    this.emitEvent({
++      type: 'action_selected',
++      timestamp: Date.now(),
++      agentId: this.agentId,
++      state,
++      action,
++      qValue: this.getQValue(state, action),
++      isExploration,
++    });
++
++    return { action, isExploration };
+   }
+ 
+   /**
+-   * Get the best action for a state (pure exploitation)
++   * Get best action for a state (greedy selection)
+    */
+   getBestAction(state: State): Action {
+-    let bestAction = ALL_ACTIONS[0];
+-    let bestValue = Number.NEGATIVE_INFINITY;
+-    const values = new Map<Action, number>();
++    const actions = this.encoder.getAllActions();
++    let bestAction = actions[0];
++    let bestValue = this.getQValue(state, bestAction);
+ 
+-    for (const action of ALL_ACTIONS) {
+-      const value = this.lookup(state, action);
+-      values.set(action, value);
++    for (let i = 1; i < actions.length; i++) {
++      const value = this.getQValue(state, actions[i]);
+       if (value > bestValue) {
+         bestValue = value;
+-        bestAction = action;
++        bestAction = actions[i];
+       }
+     }
+ 
+-    // If all values are equal (all 0 for unvisited states),
+-    // prefer actions with lower base cost (DIRECT_ANSWER has cost 0)
+-    if (bestValue === 0) {
+-      let lowestCost = Number.POSITIVE_INFINITY;
+-      for (const action of ALL_ACTIONS) {
+-        const metadata = ACTION_METADATA.get(action);
+-        if (metadata && metadata.baseCost < lowestCost) {
+-          lowestCost = metadata.baseCost;
+-          bestAction = action;
+-        }
+-      }
+-    }
+-
+     return bestAction;
+   }
+ 
+   /**
+-   * Get maximum Q-value for a state across all actions
++   * Get maximum Q-value for a state
+    */
+-  getMaxQ(state: State): number {
+-    let maxQ = Number.NEGATIVE_INFINITY;
+-
+-    for (const action of ALL_ACTIONS) {
+-      const q = this.lookup(state, action);
+-      if (q > maxQ) {
+-        maxQ = q;
+-      }
+-    }
+-
+-    return maxQ === Number.NEGATIVE_INFINITY ? 0 : maxQ;
++  getMaxQValue(state: State): number {
++    const qValues = this.getQValuesForState(state);
++    return Math.max(...qValues.values());
+   }
+ 
+   /**
+-   * Merge with another Q-table (for federated learning)
++   * Update Q-value using Q-Learning update rule
++   * Q(s,a) <- Q(s,a) + alpha * [r + gamma * max(Q(s',a')) - Q(s,a)]
+    */
+-  merge(peerQTable: QTable): void {
+-    let mergedCount = 0;
++  update(
++    state: State,
++    action: Action,
++    reward: number,
++    nextState: State | null
++  ): number {
++    const key = this.encoder.encodeStateAction(state, action);
++    const currentEntry = this.entries.get(key);
++    const currentQ = currentEntry?.value ?? this.config.initialQValue;
++    const currentVisits = currentEntry?.visits ?? 0;
+ 
+-    for (const [key, peerEntry] of peerQTable._entries) {
+-      const localEntry = this._entries.get(key);
++    // Calculate max Q(s', a') for next state
++    const maxNextQ = nextState !== null ? this.getMaxQValue(nextState) : 0;
+ 
+-      if (localEntry) {
+-        // Merge existing entries
+-        const mergedEntry = localEntry.merge(peerEntry);
+-        this._entries.set(key, mergedEntry);
+-      } else {
+-        // Add new entries from peer
+-        this._entries.set(key, new QEntry(
+-          peerEntry.qValue,
+-          peerEntry.visits,
+-          peerEntry.confidence,
+-          [...peerEntry.outcomes],
+-          peerEntry.lastUpdated
+-        ));
+-      }
+-      mergedCount++;
++    // Q-Learning update rule
++    const tdTarget = reward + this.config.gamma * maxNextQ;
++    const tdError = tdTarget - currentQ;
++    const newQ = currentQ + this.config.alpha * tdError;
++
++    // Update entry
++    const newEntry: QValueEntry = {
++      value: newQ,
++      visits: currentVisits + 1,
++      lastUpdated: Date.now(),
++    };
++    this.entries.set(key, newEntry);
++
++    // Update metadata
++    this.version++;
++    this.updatedAt = Date.now();
++
++    // Emit update event
++    this.emitEvent({
++      type: 'q_table_updated',
++      timestamp: Date.now(),
++      agentId: this.agentId,
++      stateActionKey: key,
++      oldValue: currentQ,
++      newValue: newQ,
++      reward,
++    });
++
++    return newQ;
++  }
++
++  /**
++   * Batch update from trajectory
++   */
++  updateFromTrajectory(
++    steps: Array<{ state: State; action: Action; reward: number; nextState: State | null }>
++  ): void {
++    for (const step of steps) {
++      this.update(step.state, step.action, step.reward, step.nextState);
+     }
++  }
+ 
+-    this.raise({
+-      type: 'QTableMerged',
+-      qTableId: this.id,
+-      peerId: peerQTable.agentId,
+-      mergedEntries: mergedCount,
+-      timestamp: new Date()
++  /**
++   * Set Q-value directly (used for federated merging)
++   */
++  setQValue(state: State, action: Action, value: number, visits: number = 1): void {
++    const key = this.encoder.encodeStateAction(state, action);
++    const existingEntry = this.entries.get(key);
++
++    this.entries.set(key, {
++      value,
++      visits: existingEntry ? existingEntry.visits + visits : visits,
++      lastUpdated: Date.now(),
+     });
++
++    this.version++;
++    this.updatedAt = Date.now();
+   }
+ 
+   /**
+-   * Decay epsilon over time (for annealing exploration)
++   * Import entries from another Q-Table (for federated merging)
+    */
+-  decayEpsilon(factor: number = 0.995, minEpsilon: number = 0.01): void {
+-    this._epsilon = Math.max(minEpsilon, this._epsilon * factor);
++  importEntries(entries: Map<StateActionKey, QValueEntry>): void {
++    for (const [key, entry] of entries) {
++      this.entries.set(key, { ...entry });
++    }
++    this.version++;
++    this.updatedAt = Date.now();
+   }
+ 
+   /**
+-   * Get entry for state-action pair
++   * Get all entries (for federated sync)
+    */
+-  private getEntry(state: State, action: Action): QEntry | undefined {
+-    return this._entries.get(this.makeKey(state, action));
++  getAllEntries(): Map<StateActionKey, QValueEntry> {
++    return new Map(this.entries);
+   }
+ 
+   /**
+-   * Create map key from state and action
++   * Get entries modified since timestamp
+    */
+-  private makeKey(state: State, action: Action): string {
+-    return `${state.toKey()}:${action}`;
++  getEntriesSince(since: number): Map<StateActionKey, QValueEntry> {
++    const result = new Map<StateActionKey, QValueEntry>();
++    for (const [key, entry] of this.entries) {
++      if (entry.lastUpdated > since) {
++        result.set(key, entry);
++      }
++    }
++    return result;
+   }
+ 
+-  private raise(event: QTableEvent): void {
+-    this._events.push(event);
++  /**
++   * Get Q-Table data for serialization
++   */
++  toData(): QTableData {
++    return {
++      entries: new Map(this.entries),
++      version: this.version,
++      agentId: this.agentId,
++      createdAt: this.createdAt,
++      updatedAt: this.updatedAt,
++    };
+   }
+ 
+-  // Getters
+-  get gamma(): number { return this._gamma; }
+-  get alpha(): number { return this._alpha; }
+-  get epsilon(): number { return this._epsilon; }
+-  get entryCount(): number { return this._entries.size; }
++  /**
++   * Load Q-Table from data
++   */
++  static fromData(data: QTableData, config?: Partial<QLearningConfig>): QTable {
++    const qTable = new QTable(data.agentId, config);
++    qTable.importEntries(data.entries);
++    return qTable;
++  }
+ 
+   /**
+-   * Get all entries as array
++   * Enable or disable exploration
+    */
+-  get entries(): Array<{ key: string; entry: QEntry }> {
+-    return Array.from(this._entries.entries()).map(([key, entry]) => ({ key, entry }));
++  setExplorationEnabled(enabled: boolean): void {
++    this.explorationEnabled = enabled;
+   }
+ 
+   /**
+-   * Get and clear uncommitted domain events
++   * Update epsilon (exploration rate)
+    */
+-  getUncommittedEvents(): QTableEvent[] {
+-    const events = [...this._events];
+-    this._events = [];
+-    return events;
++  setEpsilon(epsilon: number): void {
++    this.config.epsilon = Math.max(0, Math.min(1, epsilon));
+   }
+ 
+   /**
+-   * Identity equality
++   * Decay epsilon for exploration annealing
+    */
+-  equals(other: QTable): boolean {
+-    return this.id === other.id;
++  decayEpsilon(decayRate: number = 0.995, minEpsilon: number = 0.01): void {
++    this.config.epsilon = Math.max(minEpsilon, this.config.epsilon * decayRate);
+   }
+ 
+-  toString(): string {
+-    return `QTable(${this.id}, entries=${this._entries.size}, eps=${this._epsilon.toFixed(3)})`;
++  /**
++   * Add event listener
++   */
++  addEventListener(callback: QTableEventCallback): void {
++    this.eventListeners.push(callback);
+   }
+ 
+-  toJSON(): object {
++  /**
++   * Remove event listener
++   */
++  removeEventListener(callback: QTableEventCallback): void {
++    const index = this.eventListeners.indexOf(callback);
++    if (index !== -1) {
++      this.eventListeners.splice(index, 1);
++    }
++  }
++
++  private emitEvent(event: QTableUpdatedEvent | ActionSelectedEvent): void {
++    for (const listener of this.eventListeners) {
++      try {
++        listener(event);
++      } catch (error) {
++        console.error('Error in Q-Table event listener:', error);
++      }
++    }
++  }
++
++  /**
++   * Get statistics about the Q-Table
++   */
++  getStats(): {
++    entryCount: number;
++    version: number;
++    avgQValue: number;
++    maxQValue: number;
++    minQValue: number;
++    totalVisits: number;
++    avgVisitsPerEntry: number;
++    epsilon: number;
++    alpha: number;
++    gamma: number;
++  } {
++    let sum = 0;
++    let max = -Infinity;
++    let min = Infinity;
++    let totalVisits = 0;
++
++    for (const entry of this.entries.values()) {
++      sum += entry.value;
++      max = Math.max(max, entry.value);
++      min = Math.min(min, entry.value);
++      totalVisits += entry.visits;
++    }
++
++    const entryCount = this.entries.size;
++    const avgQValue = entryCount > 0 ? sum / entryCount : 0;
++    const avgVisitsPerEntry = entryCount > 0 ? totalVisits / entryCount : 0;
++
+     return {
+-      id: this.id,
+-      agentId: this.agentId,
+-      gamma: this._gamma,
+-      alpha: this._alpha,
+-      epsilon: this._epsilon,
+-      entryCount: this._entries.size
++      entryCount,
++      version: this.version,
++      avgQValue,
++      maxQValue: entryCount > 0 ? max : 0,
++      minQValue: entryCount > 0 ? min : 0,
++      totalVisits,
++      avgVisitsPerEntry,
++      epsilon: this.config.epsilon,
++      alpha: this.config.alpha,
++      gamma: this.config.gamma,
+     };
+   }
++
++  /**
++   * Clear all entries (for reset)
++   */
++  clear(): void {
++    this.entries.clear();
++    this.version++;
++    this.updatedAt = Date.now();
++  }
++
++  /**
++   * Get agent ID
++   */
++  getAgentId(): string {
++    return this.agentId;
++  }
++
++  /**
++   * Get version
++   */
++  getVersion(): number {
++    return this.version;
++  }
++
++  /**
++   * Get encoder
++   */
++  getEncoder(): StateEncoder {
++    return this.encoder;
++  }
+ }

@@ -1,0 +1,606 @@
+--- src/domains/intelligence/aggregates/q-table.ts	2026-01-11 01:57:02
++++ src/domains/intelligence/aggregates/ran-q-table.ts	2026-01-11 02:03:24
+@@ -1,281 +1,430 @@
+ /**
+- * QTable Aggregate Root
++ * RAN Q-Table Aggregate Root
+  *
+- * Stores learned state-action values for Q-learning.
+- * This is the main learning data structure for the Intelligence context.
++ * RAN-specific Q-table implementation for RAN feature agents with:
++ * - Feature-specific state-action mappings
++ * - KPI-based reward calculation
++ * - RAN domain knowledge integration
++ * - Battle test learning support
++ *
++ * @module intelligence/aggregates/ran-q-table
+  */
+ 
+ import { State } from '../value-objects/state';
+-import { Action, ALL_ACTIONS, ACTION_METADATA } from '../value-objects/action';
++import { Action, ALL_ACTIONS } from '../value-objects/action';
+ import { Reward } from '../value-objects/reward';
+ import { QEntry } from '../entities/q-entry';
++import { QTable, QTableConfig, StateActionKey } from './q-table';
+ 
+-export interface QTableConfig {
+-  readonly gamma: number;   // Discount factor (default: 0.95)
+-  readonly alpha: number;   // Learning rate (default: 0.1)
+-  readonly epsilon: number; // Exploration rate (default: 0.1)
++/**
++ * RAN Feature Domains
++ */
++export enum RANFeatureDomain {
++  CARRIER_AGGREGATION = 'CA',
++  RADIO_RESOURCE_MANAGEMENT = 'RRM',
++  NR_5G = 'NR',
++  TRANSPORT = 'Transport',
++  MIMO_ANTENNA = 'MIMO',
++  MOBILITY = 'Mobility',
++  ENERGY_SAVING = 'Energy',
++  COVERAGE_CAPACITY = 'Coverage',
++  VOICE_IMS = 'Voice',
++  UE_HANDLING = 'UE',
++  QOS = 'QoS',
++  INTERFERENCE = 'Interference',
++  TIMING = 'Timing',
++  SECURITY = 'Security',
++  SON = 'SON'
+ }
+ 
+-export interface StateActionKey {
+-  readonly stateKey: string;
+-  readonly action: Action;
++/**
++ * RAN-specific state components
++ */
++export interface RANStateContext {
++  readonly domain: RANFeatureDomain;
++  readonly queryType: 'parameter' | 'troubleshoot' | 'procedure' | 'general';
++  readonly complexity: 'low' | 'medium' | 'high';
++  readonly contextHash: string;
++  readonly confidenceLevel: number;
++  readonly kpiStatus: 'normal' | 'degraded' | 'critical';
+ }
+ 
+ /**
+- * Domain Events for QTable
++ * RAN Q-Table Configuration
+  */
+-export interface QTableUpdated {
+-  readonly type: 'QTableUpdated';
++export interface RANQTableConfig extends QTableConfig {
++  readonly featureDomain: RANFeatureDomain;
++  readonly featureAcronym: string;
++  readonly enableKPIReward?: boolean;
++  readonly enableBattleTestLearning?: boolean;
++}
++
++/**
++ * RAN-specific domain events
++ */
++export interface RANQTableUpdated {
++  readonly type: 'RANQTableUpdated';
+   readonly qTableId: string;
++  readonly featureAcronym: string;
++  readonly domain: RANFeatureDomain;
+   readonly stateKey: string;
+   readonly action: Action;
+   readonly newQValue: number;
++  readonly kpiReward?: number;
+   readonly timestamp: Date;
+ }
+ 
+-export interface QTableMerged {
+-  readonly type: 'QTableMerged';
+-  readonly qTableId: string;
+-  readonly peerId: string;
+-  readonly mergedEntries: number;
+-  readonly timestamp: Date;
+-}
++export type RANQTableEvent = RANQTableUpdated;
+ 
+-export type QTableEvent = QTableUpdated | QTableMerged;
+-
+ /**
+- * QTable Aggregate Root
++ * RAN Q-Table Aggregate Root
++ *
++ * Extends base QTable with RAN-specific functionality:
++ * - Domain-aware action selection
++ * - KPI-based reward calculation
++ * - Battle test optimization
++ * - Feature specialization
+  */
+-export class QTable {
+-  readonly id: string;
+-  readonly agentId: string;
+-  private _gamma: number;
+-  private _alpha: number;
+-  private _epsilon: number;
+-  private _entries: Map<string, QEntry>;
+-  private _events: QTableEvent[];
++export class RANQTable extends QTable {
++  readonly featureDomain: RANFeatureDomain;
++  readonly featureAcronym: string;
++  private readonly _enableKPIReward: boolean;
++  private readonly _enableBattleTestLearning: boolean;
++  private readonly _ranEvents: RANQTableEvent[];
+ 
+-  constructor(
++  private constructor(
+     id: string,
+     agentId: string,
+-    config: QTableConfig = { gamma: 0.95, alpha: 0.1, epsilon: 0.1 }
++    config: RANQTableConfig
+   ) {
+-    this.id = id;
+-    this.agentId = agentId;
+-    this._gamma = config.gamma;
+-    this._alpha = config.alpha;
+-    this._epsilon = config.epsilon;
+-    this._entries = new Map();
+-    this._events = [];
++    // Initialize base QTable with standard config
++    const baseConfig: QTableConfig = {
++      gamma: config.gamma,
++      alpha: config.alpha,
++      epsilon: config.epsilon
++    };
++
++    super(id, agentId, baseConfig);
++
++    this.featureDomain = config.featureDomain;
++    this.featureAcronym = config.featureAcronym;
++    this._enableKPIReward = config.enableKPIReward ?? true;
++    this._enableBattleTestLearning = config.enableBattleTestLearning ?? true;
++    this._ranEvents = [];
+   }
+ 
+   /**
+-   * Look up Q-value for a state-action pair
++   * Factory method to create RAN Q-Table
+    */
+-  lookup(state: State, action: Action): number {
+-    const entry = this.getEntry(state, action);
+-    return entry?.qValue ?? 0;
++  static async create(config: RANQTableConfig): Promise<RANQTable> {
++    const id = `ran-qtable-${config.featureAcronym.toLowerCase()}`;
++    const agentId = `agent-${config.featureAcronym.toLowerCase()}`;
++    return new RANQTable(id, agentId, config);
+   }
+ 
+   /**
+-   * Get confidence for a state-action pair
++   * Parse RAN state from State value object
+    */
+-  getConfidence(state: State, action: Action): number {
+-    const entry = this.getEntry(state, action);
+-    return entry?.confidence ?? 0;
++  parseRANState(state: State): RANStateContext | null {
++    const parts = state.toKey().split(':');
++    if (parts.length < 4) return null;
++
++    return {
++      domain: this.featureDomain,
++      queryType: parts[0] as RANStateContext['queryType'],
++      complexity: parts[1] as RANStateContext['complexity'],
++      contextHash: parts[2],
++      confidenceLevel: parseInt(parts[3] || '7'),
++      kpiStatus: 'normal'
++    };
+   }
+ 
+   /**
+-   * Update Q-value based on experience
++   * Create RAN-specific state key
+    */
+-  update(state: State, action: Action, reward: Reward, nextState: State): void {
+-    const key = this.makeKey(state, action);
+-    let entry = this._entries.get(key);
++  createRANStateKey(context: RANStateContext): string {
++    return `${context.queryType}:${context.complexity}:${context.contextHash}:${context.confidenceLevel}`;
++  }
+ 
+-    if (!entry) {
+-      entry = new QEntry();
+-      this._entries.set(key, entry);
++  /**
++   * Update with RAN-specific reward calculation
++   */
++  updateWithRANReward(
++    state: State,
++    action: Action,
++    baseReward: Reward,
++    kpiImprovement?: number,
++    battleTestSuccess?: boolean
++  ): void {
++    // Calculate KPI-based reward bonus
++    let kpiReward = 0;
++    if (this._enableKPIReward && kpiImprovement !== undefined) {
++      // KPI improvement: -1 (worsened) to +1 (improved)
++      // Scale to reward: -0.5 to +0.5
++      kpiReward = kpiImprovement * 0.5;
+     }
+ 
+-    // Find max Q-value for next state
+-    const nextMaxQ = this.getMaxQ(nextState);
++    // Battle test success bonus
++    let battleBonus = 0;
++    if (this._enableBattleTestLearning && battleTestSuccess) {
++      battleBonus = 0.3; // Significant reward for battle test success
++    }
+ 
+-    // Update the entry
+-    entry.update(reward.total(), nextMaxQ, this._alpha, this._gamma);
++    // Combine rewards
++    const totalReward = new Reward(
++      baseReward.semanticRelevance + kpiReward * 0.3,
++      baseReward.resolutionSuccess + battleBonus,
++      baseReward.efficiency + kpiReward * 0.2,
++      baseReward.novelty
++    );
+ 
+-    this.raise({
+-      type: 'QTableUpdated',
+-      qTableId: this.id,
+-      stateKey: state.toKey(),
+-      action,
+-      newQValue: entry.qValue,
+-      timestamp: new Date()
+-    });
++    // Update base Q-table
++    this.update(state, action, totalReward, state);
++
++    // Raise RAN-specific event
++    const entry = this.getEntry(state, action);
++    if (entry) {
++      this.raiseRANEvent({
++        type: 'RANQTableUpdated',
++        qTableId: this.id,
++        featureAcronym: this.featureAcronym,
++        domain: this.featureDomain,
++        stateKey: state.toKey(),
++        action,
++        newQValue: entry.qValue,
++        kpiReward: kpiReward !== 0 ? kpiReward : undefined,
++        timestamp: new Date()
++      });
++    }
+   }
+ 
+   /**
+-   * Select best action for a state (with epsilon-greedy exploration)
++   * Select action with domain-aware preferences
+    */
+-  selectAction(state: State, explore: boolean = true): Action {
+-    // Epsilon-greedy exploration
+-    if (explore && Math.random() < this._epsilon) {
+-      return ALL_ACTIONS[Math.floor(Math.random() * ALL_ACTIONS.length)];
++  selectRANAction(state: State, explore: boolean = true): Action {
++    const ranState = this.parseRANState(state);
++
++    // If exploring, use epsilon-greedy with domain bias
++    if (explore && Math.random() < this.epsilon) {
++      return this.selectDomainBiasedAction(ranState);
+     }
+ 
+-    // Greedy selection
++    // Otherwise, use best action from Q-table
+     return this.getBestAction(state);
+   }
+ 
+   /**
+-   * Get the best action for a state (pure exploitation)
++   * Select action with domain-specific bias
+    */
+-  getBestAction(state: State): Action {
+-    let bestAction = ALL_ACTIONS[0];
+-    let bestValue = Number.NEGATIVE_INFINITY;
+-    const values = new Map<Action, number>();
++  private selectDomainBiasedAction(ranState: RANStateContext | null): Action {
++    // Different domains prefer different exploration strategies
++    const domainPreferences = this.getDomainActionPreferences(ranState?.domain);
+ 
+-    for (const action of ALL_ACTIONS) {
+-      const value = this.lookup(state, action);
+-      values.set(action, value);
+-      if (value > bestValue) {
+-        bestValue = value;
+-        bestAction = action;
+-      }
+-    }
++    // Weighted random selection based on domain preferences
++    const rand = Math.random();
++    let cumulative = 0;
+ 
+-    // If all values are equal (all 0 for unvisited states),
+-    // prefer actions with lower base cost (DIRECT_ANSWER has cost 0)
+-    if (bestValue === 0) {
+-      let lowestCost = Number.POSITIVE_INFINITY;
+-      for (const action of ALL_ACTIONS) {
+-        const metadata = ACTION_METADATA.get(action);
+-        if (metadata && metadata.baseCost < lowestCost) {
+-          lowestCost = metadata.baseCost;
+-          bestAction = action;
+-        }
++    for (const [action, weight] of domainPreferences.entries()) {
++      cumulative += weight;
++      if (rand <= cumulative) {
++        return action;
+       }
+     }
+ 
+-    return bestAction;
++    // Fallback to random action
++    return ALL_ACTIONS[Math.floor(Math.random() * ALL_ACTIONS.length)];
+   }
+ 
+   /**
+-   * Get maximum Q-value for a state across all actions
++   * Get domain-specific action preferences
+    */
+-  getMaxQ(state: State): number {
+-    let maxQ = Number.NEGATIVE_INFINITY;
++  private getDomainActionPreferences(domain?: RANFeatureDomain): Map<Action, number> {
++    const preferences = new Map<Action, number>();
+ 
++    // Default equal weights
+     for (const action of ALL_ACTIONS) {
+-      const q = this.lookup(state, action);
+-      if (q > maxQ) {
+-        maxQ = q;
+-      }
++      preferences.set(action, 1 / ALL_ACTIONS.length);
+     }
+ 
+-    return maxQ === Number.NEGATIVE_INFINITY ? 0 : maxQ;
++    // Domain-specific adjustments
++    switch (domain) {
++      case RANFeatureDomain.CARRIER_AGGREGATION:
++      case RANFeatureDomain.MIMO_ANTENNA:
++        // Complex features prefer context answers
++        preferences.set(Action.CONTEXT_ANSWER, 0.4);
++        preferences.set(Action.DIRECT_ANSWER, 0.3);
++        preferences.set(Action.CONSULT_PEER, 0.2);
++        preferences.set(Action.REQUEST_CLARIFICATION, 0.1);
++        break;
++
++      case RANFeatureDomain.MOBILITY:
++      case RANFeatureDomain.INTERFERENCE:
++        // Troubleshooting-heavy domains prefer peer consultation
++        preferences.set(Action.CONSULT_PEER, 0.35);
++        preferences.set(Action.CONTEXT_ANSWER, 0.3);
++        preferences.set(Action.DIRECT_ANSWER, 0.25);
++        preferences.set(Action.REQUEST_CLARIFICATION, 0.1);
++        break;
++
++      case RANFeatureDomain.ENERGY_SAVING:
++      case RANFeatureDomain.COVERAGE_CAPACITY:
++        // Optimization domains prefer direct answers
++        preferences.set(Action.DIRECT_ANSWER, 0.4);
++        preferences.set(Action.CONTEXT_ANSWER, 0.3);
++        preferences.set(Action.CONSULT_PEER, 0.2);
++        preferences.set(Action.REQUEST_CLARIFICATION, 0.1);
++        break;
++
++      case RANFeatureDomain.SECURITY:
++        // Security domains prefer peer consultation for validation
++        preferences.set(Action.CONSULT_PEER, 0.4);
++        preferences.set(Action.DIRECT_ANSWER, 0.3);
++        preferences.set(Action.CONTEXT_ANSWER, 0.2);
++        preferences.set(Action.REQUEST_CLARIFICATION, 0.1);
++        break;
++
++      default:
++        // Default equal weights
++        break;
++    }
++
++    return preferences;
+   }
+ 
+   /**
+-   * Merge with another Q-table (for federated learning)
++   * Get battle test statistics
+    */
+-  merge(peerQTable: QTable): void {
+-    let mergedCount = 0;
++  getBattleTestStats(): {
++    totalEntries: number;
++    highConfidenceEntries: number;
++    averageQValue: number;
++    bestAction: Action;
++  } {
++    const entries = this.entries;
++    const highConfidenceEntries = entries.filter(e => e.entry.confidence > 0.7).length;
++    const totalQ = entries.reduce((sum, e) => sum + e.entry.qValue, 0);
++    const averageQValue = entries.length > 0 ? totalQ / entries.length : 0;
+ 
+-    for (const [key, peerEntry] of peerQTable._entries) {
+-      const localEntry = this._entries.get(key);
++    // Find overall best action
++    const actionScores = new Map<Action, number>();
++    for (const { key, entry } of entries) {
++      const action = key.split(':').pop() as Action;
++      const current = actionScores.get(action) || 0;
++      actionScores.set(action, current + entry.qValue);
++    }
+ 
+-      if (localEntry) {
+-        // Merge existing entries
+-        const mergedEntry = localEntry.merge(peerEntry);
+-        this._entries.set(key, mergedEntry);
+-      } else {
+-        // Add new entries from peer
+-        this._entries.set(key, new QEntry(
+-          peerEntry.qValue,
+-          peerEntry.visits,
+-          peerEntry.confidence,
+-          [...peerEntry.outcomes],
+-          peerEntry.lastUpdated
+-        ));
++    let bestAction = Action.DIRECT_ANSWER;
++    let bestScore = Number.NEGATIVE_INFINITY;
++    for (const [action, score] of actionScores.entries()) {
++      if (score > bestScore) {
++        bestScore = score;
++        bestAction = action;
+       }
+-      mergedCount++;
+     }
+ 
+-    this.raise({
+-      type: 'QTableMerged',
+-      qTableId: this.id,
+-      peerId: peerQTable.agentId,
+-      mergedEntries: mergedCount,
+-      timestamp: new Date()
+-    });
++    return {
++      totalEntries: entries.length,
++      highConfidenceEntries,
++      averageQValue,
++      bestAction
++    };
+   }
+ 
+   /**
+-   * Decay epsilon over time (for annealing exploration)
++   * Get convergence status for battle testing
+    */
+-  decayEpsilon(factor: number = 0.995, minEpsilon: number = 0.01): void {
+-    this._epsilon = Math.max(minEpsilon, this._epsilon * factor);
+-  }
++  getConvergenceStatus(): {
++    converged: boolean;
++    confidence: number;
++    reason: string;
++  } {
++    const stats = this.getBattleTestStats();
+ 
+-  /**
+-   * Get entry for state-action pair
+-   */
+-  private getEntry(state: State, action: Action): QEntry | undefined {
+-    return this._entries.get(this.makeKey(state, action));
+-  }
++    // Convergence criteria
++    const hasEnoughEntries = stats.totalEntries >= 10;
++    const hasHighConfidence = stats.highConfidenceEntries >= stats.totalEntries * 0.5;
++    const hasPositiveLearning = stats.averageQValue > 0.3;
+ 
+-  /**
+-   * Create map key from state and action
+-   */
+-  private makeKey(state: State, action: Action): string {
+-    return `${state.toKey()}:${action}`;
+-  }
++    if (hasEnoughEntries && hasHighConfidence && hasPositiveLearning) {
++      return {
++        converged: true,
++        confidence: Math.min(1, stats.averageQValue + 0.5),
++        reason: `Sufficient entries (${stats.totalEntries}), high confidence (${stats.highConfidenceEntries}), positive learning (${stats.averageQValue.toFixed(2)})`
++      };
++    }
+ 
+-  private raise(event: QTableEvent): void {
+-    this._events.push(event);
++    const reasons = [];
++    if (!hasEnoughEntries) reasons.push(`insufficient entries (${stats.totalEntries}/10)`);
++    if (!hasHighConfidence) reasons.push(`low confidence (${stats.highConfidenceEntries}/${stats.totalEntries})`);
++    if (!hasPositiveLearning) reasons.push(`negative learning (${stats.averageQValue.toFixed(2)})`);
++
++    return {
++      converged: false,
++      confidence: Math.max(0, stats.averageQValue),
++      reason: reasons.join(', ')
++    };
+   }
+ 
+-  // Getters
+-  get gamma(): number { return this._gamma; }
+-  get alpha(): number { return this._alpha; }
+-  get epsilon(): number { return this._epsilon; }
+-  get entryCount(): number { return this._entries.size; }
+-
+   /**
+-   * Get all entries as array
++   * Raise RAN-specific event
+    */
+-  get entries(): Array<{ key: string; entry: QEntry }> {
+-    return Array.from(this._entries.entries()).map(([key, entry]) => ({ key, entry }));
++  private raiseRANEvent(event: RANQTableEvent): void {
++    this._ranEvents.push(event);
+   }
+ 
+   /**
+-   * Get and clear uncommitted domain events
++   * Get and clear uncommitted RAN events
+    */
+-  getUncommittedEvents(): QTableEvent[] {
+-    const events = [...this._events];
+-    this._events = [];
++  getUncommittedRANEvents(): RANQTableEvent[] {
++    const events = [...this._ranEvents];
++    this._ranEvents.length = 0;
+     return events;
+   }
+ 
+   /**
+-   * Identity equality
++   * Merge with peer RAN Q-table
+    */
+-  equals(other: QTable): boolean {
+-    return this.id === other.id;
++  mergeRANQTable(peer: RANQTable): void {
++    // Only merge with same domain
++    if (peer.featureDomain !== this.featureDomain) {
++      return;
++    }
++
++    // Merge base Q-table
++    this.merge(peer);
++
++    // Raise merge event
++    this.raiseRANEvent({
++      type: 'RANQTableUpdated',
++      qTableId: this.id,
++      featureAcronym: this.featureAcronym,
++      domain: this.featureDomain,
++      stateKey: 'merge',
++      action: Action.DIRECT_ANSWER,
++      newQValue: 0,
++      timestamp: new Date()
++    });
+   }
+ 
++  /**
++   * String representation
++   */
+   toString(): string {
+-    return `QTable(${this.id}, entries=${this._entries.size}, eps=${this._epsilon.toFixed(3)})`;
++    return `RANQTable(${this.id}, domain=${this.featureDomain}, feature=${this.featureAcronym}, entries=${this.entryCount})`;
+   }
+ 
++  /**
++   * JSON representation
++   */
+   toJSON(): object {
+     return {
+-      id: this.id,
+-      agentId: this.agentId,
+-      gamma: this._gamma,
+-      alpha: this._alpha,
+-      epsilon: this._epsilon,
+-      entryCount: this._entries.size
++      ...super.toJSON(),
++      featureDomain: this.featureDomain,
++      featureAcronym: this.featureAcronym,
++      battleTestStats: this.getBattleTestStats(),
++      convergence: this.getConvergenceStatus()
+     };
+   }
+ }
++
++export default RANQTable;
