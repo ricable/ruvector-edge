@@ -1,6 +1,6 @@
 # ELEX Edge AI Agent Swarm - Product Requirements Document
 
-**Version:** 3.1.0 | **Status:** Architecture Finalized | **Platform:** @ruvector/edge + claude-flow v3
+**Version:** 4.0.0 | **Status:** Production Ready | **Platform:** @ruvector/edge + claude-flow v3 + GNN
 
 ---
 
@@ -305,6 +305,10 @@ Deploy self-learning agents directly to edge infrastructure for real-time, auton
 │  │ Q-Learning  │  │  Trajectory │  │  Federated  │  │   HNSW      │    │
 │  │  Engine     │  │   Replay    │  │  Learning   │  │   Memory    │    │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘    │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │
+│  │   GNN       │  │   SONA      │  │  Min-Cut    │  │ Tiny Dancer │    │
+│  │  Layer      │  │  Self-Learn │  │  Integrity  │  │  Router     │    │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘    │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                           KNOWLEDGE LAYER                               │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
@@ -375,6 +379,21 @@ Deploy self-learning agents directly to edge infrastructure for real-time, auton
 | **ADR-SR-003** | Hardcoded parameter constraints with no operator overrides |
 | **ADR-SR-004** | Blocking conditions during critical events (HW failure, site down) |
 | **ADR-SR-005** | Cold-start read-only mode until >100 interactions per feature |
+
+#### AI Agent Routing (Tiny Dancer)
+
+| Decision | Description |
+|----------|-------------|
+| **ADR-TD-001** | FastGRNN neural inference for <1ms routing decisions |
+| **ADR-TD-002** | Multi-model orchestration across 593 agents |
+| **ADR-TD-003** | Cost-optimized routing based on query complexity |
+| **ADR-TD-004** | Load balancing with intelligent request distribution |
+
+**Routing Performance:**
+- Decision Latency: <1ms
+- Model Size: ~5KB per router
+- Accuracy: >95% optimal routing
+- Throughput: 100K+ decisions/sec
 
 ---
 
@@ -545,6 +564,39 @@ merged_q = (local_q × local_visits + peer_q × peer_visits) / (local_visits + p
 | efSearch | 50 | Query-time latency vs accuracy |
 | maxElements | 10,000 | Per-agent vector capacity |
 | distance | Cosine | Semantic similarity for embeddings |
+
+### 11.4 Graph Query Capabilities
+
+RuVector enables hybrid vector-graph queries with Cypher/SPARQL:
+
+**Cypher Query Example:**
+```cypher
+// Find related features by parameter dependency
+MATCH (f1:Feature)-[:DEPENDS_ON]->(f2:Feature)
+WHERE f1.category = 'MIMO' 
+  AND vector_similarity(f1.embedding, $query_embedding) > 0.8
+RETURN f1, f2 ORDER BY f1.priority DESC
+```
+
+**Use Cases:**
+- Parameter dependency traversal
+- Counter correlation analysis  
+- KPI impact chain discovery
+- Feature relationship mapping
+
+### 11.5 Dynamic Min-Cut Integrity
+
+Breakthrough subpolynomial algorithm for RAN topology analysis:
+
+- First deterministic exact fully-dynamic min-cut algorithm
+- n^0.12 subpolynomial update scaling
+- Detects RAN topology fragility before symptoms appear
+- Real-time network partition risk assessment
+
+**Applications:**
+- Network resilience prediction
+- Agent coordination bottleneck detection
+- Cell handover path analysis
 
 ---
 
@@ -2414,6 +2466,7 @@ npx @claude-flow/cli@latest performance profile --target "query-pipeline"
 | 2.0.0 | 2026-01-10 | ELEX Team | Added 8-phase Rust/WASM |
 | 3.0.0 | 2026-01-10 | ELEX Team | Merged all PRDs into single comprehensive document |
 | 3.1.0 | 2026-01-10 | ELEX Team | **Enhanced integration with full Claude-Flow V3 hooks, detailed task specifications, and comprehensive technical appendices** |
+| 4.0.0 | 2026-01-11 | ELEX Team | **Added GNN self-learning, SONA architecture, Tiny Dancer routing, dynamic Min-Cut, and graph query capabilities from RuVector spec** |
 
 ---
 
