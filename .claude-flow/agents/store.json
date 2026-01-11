@@ -1,0 +1,27 @@
+{
+  "agents": {
+    "agent-1768156119402-viqhzl": {
+      "agentId": "agent-1768156119402-viqhzl",
+      "agentType": "coder",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "openrouter"
+      },
+      "createdAt": "2026-01-11T18:28:39.402Z"
+    },
+    "agent-1768156138547-qfq82f": {
+      "agentId": "agent-1768156138547-qfq82f",
+      "agentType": "researcher",
+      "status": "idle",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "provider": "openrouter"
+      },
+      "createdAt": "2026-01-11T18:28:58.547Z"
+    }
+  },
+  "version": "3.0.0"
+}

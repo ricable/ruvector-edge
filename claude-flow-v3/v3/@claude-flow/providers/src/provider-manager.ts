@@ -264,15 +264,22 @@ export class ProviderManager extends EventEmitter {
     request: LLMRequest
   ): Promise<ILLMProvider> {
     const estimates = await Promise.all(
-      providers.map(async (p) => ({
-        provider: p,
-        cost: (await p.estimateCost(request)).estimatedCost.total,
-      }))
+      providers.map(async (p) => {
+        const estimate = await p.estimateCost(request);
+        console.log(`💰 Provider ${p.name} cost estimate: ${estimate.estimatedCost.total}`);
+        return {
+          provider: p,
+          cost: estimate.estimatedCost.total,
+        };
+      })
     );
 
-    return estimates.reduce((best, current) =>
+    const best = estimates.reduce((best, current) =>
       current.cost < best.cost ? current : best
     ).provider;
+
+    console.log(`🎯 Selection: chosen ${best.name} as cheapest`);
+    return best;
   }
 
   /**

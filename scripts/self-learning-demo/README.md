@@ -56,6 +56,15 @@ bun run scripts/self-learning-demo/battle-arena.ts --rounds=3
 - Visit-weighted Q-table merging
 - Automatic periodic synchronization
 
+### 6. Multi-Provider LLM Routing (NEW!)
+- **Anthropic Claude**: High-quality reasoning (claude-3-haiku)
+- **OpenAI GPT**: Fast general purpose (gpt-4o-mini)
+- **OpenRouter**: Cost-optimized access to 100+ models (85-99% savings)
+- **Ollama**: Local models for privacy/offline (llama3.2)
+- Automatic fallback and circuit breaker
+- Response caching (5-minute TTL)
+
+
 ## 🖥️ Interactive CLI Commands
 
 | Option | Description |
@@ -107,6 +116,7 @@ scripts/self-learning-demo/
 ├── README.md                  # This file
 ├── agentdb-bridge.ts         # AgentDB memory operations
 ├── self-learning-agent.ts    # Q-Learning + Reasoning agent
+├── multi-provider-router.ts  # LLM provider routing (NEW!)
 ├── document-selector.ts      # Random document selection
 ├── swarm-manager.ts          # Agent swarm coordination
 ├── interactive-cli.ts        # Main interactive demo
@@ -131,6 +141,47 @@ EPSILON_START = 0.9
 EPSILON_MIN = 0.1
 EPSILON_DECAY = 0.995
 ```
+
+### LLM Provider Configuration
+
+Set environment variables to enable LLM-enhanced responses:
+
+```bash
+# Anthropic Claude (recommended for quality)
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# OpenAI GPT
+export OPENAI_API_KEY="sk-..."
+
+# OpenRouter (recommended for cost savings)
+export OPENROUTER_API_KEY="sk-or-v1-..."
+
+# Ollama (local, no key needed)
+export OLLAMA_BASE_URL="http://localhost:11434"
+```
+
+To enable LLM in agents, set `useLLM: true` in agent config:
+
+```typescript
+const agent = new SelfLearningAgent({
+    agentId: 'agent-1',
+    featureName: 'Carrier Aggregation',
+    domain: 'Radio Resource Management',
+    // Enable LLM routing
+    useLLM: true,
+    preferredProvider: 'openrouter',  // 'anthropic' | 'openai' | 'openrouter' | 'ollama'
+    routingMode: 'cost-optimized',    // 'cost-optimized' | 'quality-optimized' | 'performance-optimized'
+});
+```
+
+### Routing Modes
+| Mode | Description | Best For |
+|------|-------------|----------|
+| `cost-optimized` | Minimize cost (default) | Production, high volume |
+| `quality-optimized` | Maximize quality | Critical tasks |
+| `performance-optimized` | Minimize latency | Real-time apps |
+| `local-first` | Prefer Ollama | Privacy, offline |
+
 
 ## 📚 Related Documentation
 

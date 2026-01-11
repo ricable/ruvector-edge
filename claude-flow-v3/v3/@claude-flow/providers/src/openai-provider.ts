@@ -196,8 +196,9 @@ export class OpenAIProvider extends BaseProvider {
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), this.config.timeout || 60000);
-
     try {
+      console.log(`🌐 Fetching: ${this.baseUrl}/chat/completions`);
+      console.log(`🔑 Auth Prefix: ${this.headers['Authorization']?.substring(0, 15)}...`);
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: this.headers,

@@ -8,6 +8,7 @@
  * - ReasoningBank for 4-step reasoning pipeline
  * - Federated learning for knowledge sharing
  * - AgentDB memory persistence
+ * - Multi-Provider LLM routing (Anthropic, OpenAI, OpenRouter, Ollama)
  * 
  * Part of the Advanced Multi-Agent Self-Learning Demo
  */
@@ -18,6 +19,13 @@ import AgentDBBridge, {
     Verdict,
     LearningState,
 } from './agentdb-bridge.js';
+
+import {
+    MultiProviderRouter,
+    getRouter,
+    ProviderType,
+    RoutingMode,
+} from './multi-provider-router.js';
 
 // ============================================================================
 // Types
@@ -30,6 +38,10 @@ export interface AgentConfig {
     featureAcronym: string;
     domain: string;
     description: string;
+    // LLM routing options
+    useLLM?: boolean;                    // Enable LLM-enhanced responses
+    preferredProvider?: ProviderType;    // Preferred LLM provider
+    routingMode?: RoutingMode;           // Routing strategy
 }
 
 export interface AgentState {
@@ -47,6 +59,10 @@ export interface QueryResult {
     qValue: number;
     reasoning?: string[];
     sources?: string[];
+    // LLM routing info
+    provider?: ProviderType;             // Provider used for response
+    llmCost?: number;                    // Cost in USD
+    llmTokens?: number;                  // Tokens used
 }
 
 export interface AgentStatistics {
@@ -56,6 +72,12 @@ export interface AgentStatistics {
     averageConfidence: number;
     learningProgress: number;
     currentState: AgentState;
+    // LLM metrics
+    llmEnabled: boolean;
+    llmRequestCount: number;
+    llmTotalCost: number;
+    llmTotalTokens: number;
+    preferredProvider?: ProviderType;
 }
 
 // ============================================================================
@@ -98,6 +120,11 @@ export class SelfLearningAgent {
     private totalLatency: number;
     private totalConfidence: number;
     private featureKnowledge: any;
+    // LLM routing
+    private router: MultiProviderRouter | null = null;
+    private llmRequestCount: number = 0;
+    private llmTotalCost: number = 0;
+    private llmTotalTokens: number = 0;
 
     constructor(config: AgentConfig) {
         this.config = config;
@@ -110,6 +137,13 @@ export class SelfLearningAgent {
         this.totalLatency = 0;
         this.totalConfidence = 0;
         this.featureKnowledge = null;
+
+        // Initialize LLM router if enabled
+        if (config.useLLM) {
+            this.router = getRouter({
+                mode: config.routingMode || 'cost-optimized',
+            });
+        }
     }
 
     /**
@@ -263,10 +297,20 @@ export class SelfLearningAgent {
     private async executeAction(
         action: AgentAction,
         query: string
-    ): Promise<{ response: string; confidence: number; reasoning: string[] }> {
+    ): Promise<{
+        response: string;
+        confidence: number;
+        reasoning: string[];
+        provider?: ProviderType;
+        llmCost?: number;
+        llmTokens?: number;
+    }> {
         const reasoning: string[] = [];
         let response = '';
         let confidence = 0;
+        let provider: ProviderType | undefined;
+        let llmCost: number | undefined;
+        let llmTokens: number | undefined;
 
         switch (action) {
             case AgentAction.RETRIEVE_KNOWLEDGE:
@@ -278,6 +322,27 @@ export class SelfLearningAgent {
 
             case AgentAction.REASON_STEP_BY_STEP:
                 reasoning.push(`[REASON] Applying 4-step reasoning pipeline`);
+
+                // Try LLM-enhanced reasoning if enabled
+                if (this.config.useLLM) {
+                    reasoning.push(`[REASON] Using LLM for enhanced reasoning`);
+                    const llmResult = await this.generateLLMResponse(
+                        `Using 4-step reasoning (RETRIEVE → JUDGE → DISTILL → CONSOLIDATE), answer this question about ${this.config.featureName}:\n\n${query}`,
+                        `Provide a structured response with your reasoning steps.`
+                    );
+
+                    if (llmResult) {
+                        response = llmResult.response;
+                        provider = llmResult.provider;
+                        llmCost = llmResult.cost;
+                        llmTokens = llmResult.tokens;
+                        confidence = 0.9; // Higher confidence with LLM
+                        reasoning.push(`[REASON] LLM response via ${provider} (${llmTokens} tokens, $${llmCost.toFixed(5)})`);
+                        break;
+                    }
+                }
+
+                // Fallback to local reasoning
                 const reasoningResult = await this.reasonStepByStep(query);
                 response = reasoningResult.response;
                 confidence = reasoningResult.confidence;
@@ -286,6 +351,27 @@ export class SelfLearningAgent {
 
             case AgentAction.SYNTHESIZE_RESPONSE:
                 reasoning.push(`[SYNTHESIZE] Combining knowledge from multiple sources`);
+
+                // Try LLM-enhanced synthesis if enabled
+                if (this.config.useLLM) {
+                    reasoning.push(`[SYNTHESIZE] Using LLM for enhanced synthesis`);
+                    const llmResult = await this.generateLLMResponse(
+                        `Synthesize a comprehensive answer about ${this.config.featureName} for this query:\n\n${query}`,
+                        `Cross-reference with domain knowledge and provide actionable insights.`
+                    );
+
+                    if (llmResult) {
+                        response = llmResult.response;
+                        provider = llmResult.provider;
+                        llmCost = llmResult.cost;
+                        llmTokens = llmResult.tokens;
+                        confidence = 0.85 + (this.successRate() * 0.1);
+                        reasoning.push(`[SYNTHESIZE] LLM synthesis via ${provider} (${llmTokens} tokens, $${llmCost.toFixed(5)})`);
+                        break;
+                    }
+                }
+
+                // Fallback to local synthesis
                 response = await this.synthesizeResponse(query);
                 confidence = 0.8 + (this.successRate() * 0.1);
                 reasoning.push(`[SYNTHESIZE] Response generated with confidence ${(confidence * 100).toFixed(1)}%`);
@@ -304,7 +390,60 @@ export class SelfLearningAgent {
                 break;
         }
 
-        return { response, confidence: Math.min(1, confidence), reasoning };
+        return {
+            response,
+            confidence: Math.min(1, confidence),
+            reasoning,
+            provider,
+            llmCost,
+            llmTokens,
+        };
+    }
+
+
+    /**
+     * Generate response using LLM provider (if enabled)
+     */
+    private async generateLLMResponse(
+        query: string,
+        context?: string
+    ): Promise<{ response: string; provider: ProviderType; cost: number; tokens: number } | null> {
+        if (!this.router || !this.config.useLLM) {
+            return null;
+        }
+
+        try {
+            const featureContext = `
+Feature: ${this.config.featureName} (${this.config.featureAcronym})
+Domain: ${this.config.domain}
+Description: ${this.config.description}
+${context || ''}
+${this.featureKnowledge?.content ? `\nDocumentation:\n${this.featureKnowledge.content.substring(0, 2000)}` : ''}
+`.trim();
+
+            const result = await this.router.route({
+                query,
+                context: featureContext,
+                maxTokens: 1024,
+                temperature: 0.7,
+                preferredProvider: this.config.preferredProvider,
+            });
+
+            // Update LLM metrics
+            this.llmRequestCount++;
+            this.llmTotalCost += result.cost;
+            this.llmTotalTokens += result.tokens.input + result.tokens.output;
+
+            return {
+                response: result.response,
+                provider: result.provider,
+                cost: result.cost,
+                tokens: result.tokens.input + result.tokens.output,
+            };
+        } catch (error) {
+            console.error(`[LLM] Error calling provider:`, error);
+            return null;
+        }
     }
 
     /**
@@ -575,8 +714,8 @@ In a full swarm deployment, this would be routed to a more appropriate agent thr
         const action = this.selectAction(stateHash);
         const actionName = AgentAction[action];
 
-        // Execute action
-        const { response, confidence, reasoning } = await this.executeAction(action, query);
+        // Execute action (may use LLM if enabled)
+        const { response, confidence, reasoning, provider, llmCost, llmTokens } = await this.executeAction(action, query);
 
         // Calculate latency
         const latency = performance.now() - startTime;
@@ -630,8 +769,13 @@ In a full swarm deployment, this would be routed to a more appropriate agent thr
             qValue: qEntry?.qValue || 0,
             reasoning,
             sources: [this.config.featureId, this.config.domain],
+            // LLM info (if used)
+            provider,
+            llmCost,
+            llmTokens,
         };
     }
+
 
     /**
      * Provide feedback to improve learning
@@ -694,6 +838,12 @@ In a full swarm deployment, this would be routed to a more appropriate agent thr
                 : 0,
             learningProgress: Math.min(1, this.totalInteractions / CONFIDENT_THRESHOLD),
             currentState: this.currentState,
+            // LLM metrics
+            llmEnabled: this.config.useLLM || false,
+            llmRequestCount: this.llmRequestCount,
+            llmTotalCost: this.llmTotalCost,
+            llmTotalTokens: this.llmTotalTokens,
+            preferredProvider: this.config.preferredProvider,
         };
     }
 

@@ -1,535 +1,379 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env bun
 /**
- * AgentDB Memory Loader for Ericsson RAN Features
- *
- * Loads all markdown files from docs/elex_features into AgentDB memory
- * with 768-dim vector embeddings for self-learning multi-agent training.
+ * AgentDB Feature Loader for Ericsson RAN Features
+ * 
+ * Enhanced version that loads markdown files with full content extraction
+ * and stores them in the elex-features namespace for agent training.
  *
  * Usage:
- *   npx tsx scripts/load-elex-features-to-agentdb.ts
+ *   bun run scripts/load-elex-features-to-agentdb.ts [--limit N] [--namespace NAME] [--dry-run] [--verbose]
  */
 
-import { readFileSync, readdirSync, statSync, existsSync } from 'fs';
-import { join, relative, dirname } from 'path';
-import { execSync } from 'child_process';
+import { readFileSync, readdirSync, existsSync } from 'fs';
+import { join, relative, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
+import { spawnSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Configuration
+// Parse CLI arguments
+const args = process.argv.slice(2);
+const getArg = (name: string, defaultVal: string): string => {
+  const idx = args.indexOf(`--${name}`);
+  return idx >= 0 && args[idx + 1] ? args[idx + 1] : defaultVal;
+};
+const hasFlag = (name: string): boolean => args.includes(`--${name}`);
+
 const CONFIG = {
   sourceDir: join(process.cwd(), 'docs', 'elex_features'),
-  embeddingDimensions: 768,
-  batchSize: 50,
-  namespace: 'elex-ran-features',
-  ttl: 365 * 24 * 60 * 60 * 1000, // 1 year in milliseconds
-  memoryThreshold: 0.85, // Similarity threshold for duplicate detection
+  namespace: getArg('namespace', 'elex-features'),
+  batchSize: 10,
+  limit: parseInt(getArg('limit', '0')) || 0,
+  dryRun: hasFlag('dry-run'),
+  verbose: hasFlag('verbose'),
 };
 
-interface FeatureMetadata {
-  featureName?: string;
-  featureIdentity?: string;
-  valuePackage?: string;
-  accessType?: string;
-  nodeType?: string;
-  sourceFile: string;
-  category?: string;
-  fajCode?: string;
-  complexityScore?: number;
-  qualityScore?: number;
-  tags: string[];
-}
-
-interface MarkdownFile {
-  path: string;
-  relativePath: string;
+interface FeatureDocument {
+  key: string;
   content: string;
-  metadata: FeatureMetadata;
+  title: string;
+  summary: string;
+  fajCode?: string;
+  category: string;
+  accessType?: string;
+  relativePath: string;
+  sections: string[];
 }
 
 /**
- * Recursively find all markdown files in a directory
+ * Recursively find all markdown files
  */
-function findMarkdownFiles(dir: string, basePath: string = dir): string[] {
+function findMarkdownFiles(dir: string): string[] {
   const files: string[] = [];
-
-  if (!existsSync(dir)) {
-    console.error(`Directory not found: ${dir}`);
-    return files;
-  }
+  if (!existsSync(dir)) return files;
 
   const entries = readdirSync(dir, { withFileTypes: true });
-
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      // Skip specific directories
-      if (!entry.name.startsWith('.') && entry.name !== 'images') {
-        files.push(...findMarkdownFiles(fullPath, basePath));
-      }
+    if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'images') {
+      files.push(...findMarkdownFiles(fullPath));
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       files.push(fullPath);
     }
   }
-
   return files;
 }
 
 /**
- * Extract metadata from markdown file content
+ * Extract sections from markdown content
  */
-function extractMetadata(content: string, sourcePath: string): FeatureMetadata {
-  const metadata: FeatureMetadata = {
-    sourceFile: sourcePath,
-    tags: [],
-  };
+function extractSections(content: string): string[] {
+  const sections: string[] = [];
+  const headingPattern = /^#{1,3}\s+(.+)$/gm;
+  let match;
+  while ((match = headingPattern.exec(content)) !== null) {
+    sections.push(match[1].trim());
+  }
+  return sections;
+}
 
-  const lines = content.split('\n');
+/**
+ * Clean content by removing images and excessive whitespace
+ */
+function cleanContent(content: string): string {
+  return content
+    .replace(/!\[Image\]\([^)]+\)/g, '') // Remove image references
+    .replace(/\n{3,}/g, '\n\n') // Reduce multiple newlines
+    .replace(/\|[-|:\s]+\|/g, '') // Remove table separators
+    .trim();
+}
 
-  // Parse YAML frontmatter
-  let inFrontmatter = false;
-  let frontmatterEnd = 0;
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line === '---') {
-      if (!inFrontmatter) {
-        inFrontmatter = true;
-      } else {
-        frontmatterEnd = i + 1;
-        break;
-      }
-    } else if (inFrontmatter) {
-      const colonIndex = line.indexOf(':');
-      if (colonIndex > 0) {
-        const key = line.substring(0, colonIndex).trim();
-        let value = line.substring(colonIndex + 1).trim();
+/**
+ * Categorize feature based on content
+ */
+function categorizeFeature(content: string): string {
+  const lowerContent = content.toLowerCase();
 
-        switch (key) {
-          case 'complexity_score':
-            metadata.complexityScore = parseFloat(value);
-            break;
-          case 'quality_score':
-            metadata.qualityScore = parseFloat(value);
-            break;
-          case 'source_file':
-          case 'source_zip':
-            // Already have source path
-            break;
+  const categories: [string, string[]][] = [
+    ['Carrier Aggregation', ['carrier aggregation', '2cc', '3cc', '4cc', '5cc', 'scell', 'pcell']],
+    ['NR/5G', [' nr ', '5g-nr', 'new radio', 'standalone', 'nsa']],
+    ['MIMO & Antenna', ['mimo', 'beamforming', 'antenna', 'massive mimo', '8t8r', '64t64r']],
+    ['Mobility', ['handover', 'anr', 'mobility', 'cell selection', 'reselection']],
+    ['Energy Saving', ['energy saving', 'cell sleep', 'power saving', 'lean carrier']],
+    ['Voice & IMS', ['volte', 'vonr', 'voice', 'ims', 'voip', 'tti bundling']],
+    ['Radio Resource Management', ['scheduler', 'qos', 'admission', 'congestion', 'load balancing']],
+    ['Transport', ['fronthaul', 'backhaul', 'transport', 'cpri', 'ecpri']],
+    ['Security', ['security', 'encryption', 'integrity', 'authentication']],
+    ['SON', ['son', 'self-organizing', 'self-healing', 'self-configuring']],
+  ];
+
+  for (const [category, keywords] of categories) {
+    if (keywords.some(kw => lowerContent.includes(kw))) {
+      return category;
+    }
+  }
+  return 'Other';
+}
+
+/**
+ * Parse a markdown file into a feature document
+ */
+function parseFeatureDocument(filePath: string): FeatureDocument | null {
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const relativePath = relative(CONFIG.sourceDir, filePath);
+
+    // Skip frontmatter
+    const lines = content.split('\n');
+    let bodyStart = 0;
+    if (lines[0]?.trim() === '---') {
+      for (let i = 1; i < lines.length; i++) {
+        if (lines[i].trim() === '---') {
+          bodyStart = i + 1;
+          break;
         }
       }
     }
+    const bodyContent = lines.slice(bodyStart).join('\n');
+
+    // Extract title
+    const titleMatch = bodyContent.match(/^#\s+(.+)$/m);
+    const title = titleMatch ? titleMatch[1].trim() : basename(filePath, '.md');
+
+    // Extract FAJ code
+    const fajMatch = bodyContent.match(/FAJ\s+(\d+)\s+(\d+)/);
+    const fajCode = fajMatch ? `${fajMatch[1]}-${fajMatch[2]}` : undefined;
+
+    // Extract access type
+    const accessMatch = bodyContent.match(/\|\s*Access Type\s*\|\s*([^|]+)\s*\|/);
+    const accessType = accessMatch ? accessMatch[1].trim() : undefined;
+
+    // Extract summary from Overview section
+    const overviewMatch = bodyContent.match(/#.*Overview\s+(.+?)(?=\n#|\n##|$)/s);
+    const summary = overviewMatch
+      ? cleanContent(overviewMatch[1]).substring(0, 500)
+      : cleanContent(bodyContent.substring(0, 500));
+
+    // Extract sections
+    const sections = extractSections(bodyContent);
+
+    // Categorize
+    const category = categorizeFeature(bodyContent);
+
+    // Generate key
+    const keyParts = [fajCode, title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 30)].filter(Boolean);
+    const hash = Buffer.from(relativePath).toString('base64').substring(0, 6);
+    const key = [...keyParts, hash].join(':') || basename(filePath, '.md');
+
+    return {
+      key,
+      content: cleanContent(bodyContent).substring(0, 4000), // Limit content size
+      title,
+      summary,
+      fajCode,
+      category,
+      accessType,
+      relativePath,
+      sections,
+    };
+  } catch (error: any) {
+    console.error(`❌ Failed to parse ${filePath}: ${error.message}`);
+    return null;
   }
-
-  // Extract feature information from content body
-  const bodyContent = lines.slice(frontmatterEnd).join('\n');
-
-  // Extract feature name from first heading
-  const headingMatch = bodyContent.match(/^#\s+(.+)$/m);
-  if (headingMatch) {
-    metadata.featureName = headingMatch[1].trim();
-  }
-
-  // Extract FAJ code and feature identity
-  const fajPattern = /FAJ\s+(\d+)\s+(\d+)/g;
-  const fajMatches = [...bodyContent.matchAll(fajPattern)];
-  if (fajMatches.length > 0) {
-    const match = fajMatches[0];
-    metadata.featureIdentity = `FAJ ${match[1]} ${match[2]}`;
-    metadata.fajCode = `${match[1]}-${match[2]}`;
-  }
-
-  // Extract value package
-  const valuePackageMatch = bodyContent.match(/\|\s*Value Package Name\s*\|\s*([^|]+)\s*\|/);
-  if (valuePackageMatch) {
-    metadata.valuePackage = valuePackageMatch[1].trim();
-  }
-
-  // Extract access type
-  const accessTypeMatch = bodyContent.match(/\|\s*Access Type\s*\|\s*([^|]+)\s*\|/);
-  if (accessTypeMatch) {
-    metadata.accessType = accessTypeMatch[1].trim();
-  }
-
-  // Extract node type
-  const nodeTypeMatch = bodyContent.match(/\|\s*Node Type\s*\|\s*([^|]+)\s*\|/);
-  if (nodeTypeMatch) {
-    metadata.nodeType = nodeTypeMatch[1].trim();
-  }
-
-  // Generate tags from content
-  const tags = new Set<string>();
-
-  // Add FAJ code as tag
-  if (metadata.fajCode) {
-    tags.add(`faj:${metadata.fajCode}`);
-  }
-
-  // Add access type as tag
-  if (metadata.accessType) {
-    tags.add(metadata.accessType.toLowerCase());
-  }
-
-  // Add value package as tag
-  if (metadata.valuePackage) {
-    tags.add(metadata.valuePackage.toLowerCase().replace(/\s+/g, '-'));
-  }
-
-  // Extract feature category from filename/path
-  const pathParts = sourcePath.split(/[/\\]/);
-  for (const part of pathParts) {
-    if (part.includes('batch') || part.includes('lzn')) {
-      tags.add(part);
-    }
-  }
-
-  // Extract technical terms for tagging
-  const technicalTerms = [
-    'carrier aggregation', 'ca', 'mimo', 'beamforming', 'handover', 'anr',
-    'load balancing', 'drx', 'energy saving', 'cell sleep', 'voip', 'volte',
-    'vonr', 'nr', 'lte', '5g', '4g', '3g', 'tdd', 'fdd', 'scell', 'pcell',
-    'throughput', 'latency', 'kpi', 'counter', 'parameter', 'activation',
-    'deactivation', 'license', 'hardware', 'interface', 'protocol'
-  ];
-
-  const lowerContent = bodyContent.toLowerCase();
-  for (const term of technicalTerms) {
-    if (lowerContent.includes(term)) {
-      tags.add(term);
-    }
-  }
-
-  metadata.tags = Array.from(tags);
-
-  // Determine category based on content analysis
-  if (lowerContent.includes('carrier aggregation') || lowerContent.includes('ca ')) {
-    metadata.category = 'Carrier Aggregation';
-  } else if (lowerContent.includes('nr ') && (lowerContent.includes('5g') || lowerContent.includes('standalone'))) {
-    metadata.category = 'NR/5G';
-  } else if (lowerContent.includes('mimo') || lowerContent.includes('antenna') || lowerContent.includes('beamforming')) {
-    metadata.category = 'MIMO & Antenna';
-  } else if (lowerContent.includes('handover') || lowerContent.includes('mobility') || lowerContent.includes('anr')) {
-    metadata.category = 'Mobility';
-  } else if (lowerContent.includes('energy') || lowerContent.includes('sleep') || lowerContent.includes('power')) {
-    metadata.category = 'Energy Saving';
-  } else if (lowerContent.includes('volte') || lowerContent.includes('vonr') || lowerContent.includes('voice')) {
-    metadata.category = 'Voice & IMS';
-  } else if (lowerContent.includes('scheduler') || lowerContent.includes('admission') || lowerContent.includes('qos')) {
-    metadata.category = 'Radio Resource Management';
-  } else if (lowerContent.includes('fronthaul') || lowerContent.includes('backhaul') || lowerContent.includes('transport')) {
-    metadata.category = 'Transport';
-  } else {
-    metadata.category = 'Other';
-  }
-
-  return metadata;
 }
 
 /**
- * Store data in AgentDB memory
+ * Store a feature document in AgentDB
  */
-function storeMemory(key: string, value: string, metadata: Record<string, any>): boolean {
+function storeDocument(doc: FeatureDocument): boolean {
   try {
-    const metadataJson = JSON.stringify(metadata)
-      .replace(/"/g, '\\"')
-      .replace(/'/g, "\\'");
+    // Create a rich embedding text
+    const embeddingText = [
+      `# ${doc.title}`,
+      doc.fajCode ? `Feature Identity: FAJ ${doc.fajCode}` : '',
+      `Category: ${doc.category}`,
+      doc.accessType ? `Access Type: ${doc.accessType}` : '',
+      '',
+      '## Summary',
+      doc.summary,
+      '',
+      '## Sections',
+      doc.sections.join(', '),
+      '',
+      '## Content',
+      doc.content,
+    ].filter(Boolean).join('\n');
 
-    const command = `npx @claude-flow/cli@latest memory store -k "${key}" -v '${value}' --metadata '${metadataJson}' --namespace ${CONFIG.namespace} --ttl ${CONFIG.ttl}`;
-
-    execSync(command, {
-      stdio: 'inherit',
-      maxBuffer: 50 * 1024 * 1024 // 50MB buffer for large content
+    const result = spawnSync('npx', [
+      '@claude-flow/cli@latest',
+      'memory', 'store',
+      '--key', doc.key,
+      '--value', embeddingText,
+      '--namespace', CONFIG.namespace,
+    ], {
+      cwd: process.cwd(),
+      encoding: 'utf-8',
+      maxBuffer: 50 * 1024 * 1024,
+      timeout: 30000,
     });
 
+    if (result.error) throw result.error;
+    if (result.status !== 0) {
+      if (CONFIG.verbose) {
+        console.error(`\n  Error: ${result.stderr}`);
+      }
+      return false;
+    }
+
     return true;
-  } catch (error) {
-    console.error(`Failed to store memory for key ${key}:`, error.message);
+  } catch (error: any) {
+    if (CONFIG.verbose) {
+      console.error(`\n❌ Store failed for ${doc.key}: ${error.message}`);
+    }
     return false;
   }
-}
-
-/**
- * Generate a unique memory key from file metadata
- */
-function generateMemoryKey(metadata: FeatureMetadata, relativePath: string): string {
-  const parts: string[] = [];
-
-  if (metadata.fajCode) {
-    parts.push(metadata.fajCode);
-  }
-
-  if (metadata.featureName) {
-    const sanitizedName = metadata.featureName
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
-    parts.push(sanitizedName);
-  }
-
-  if (parts.length === 0) {
-    // Fallback to filename-based key
-    const filename = relativePath.split(/[/\\]/).pop() || 'unknown';
-    parts.push(filename.replace('.md', ''));
-  }
-
-  // Add hash of relative path to ensure uniqueness
-  const pathHash = Buffer.from(relativePath).toString('base64').substring(0, 8);
-  parts.push(pathHash);
-
-  return parts.join(':');
-}
-
-/**
- * Create a rich text representation for embedding
- */
-function createEmbeddingText(file: MarkdownFile): string {
-  const { content, metadata } = file;
-
-  const sections: string[] = [];
-
-  // Add feature identification
-  if (metadata.featureName) {
-    sections.push(`Feature: ${metadata.featureName}`);
-  }
-
-  if (metadata.featureIdentity) {
-    sections.push(`Identity: ${metadata.featureIdentity}`);
-  }
-
-  if (metadata.category) {
-    sections.push(`Category: ${metadata.category}`);
-  }
-
-  // Add value package info
-  if (metadata.valuePackage) {
-    sections.push(`Value Package: ${metadata.valuePackage}`);
-  }
-
-  // Add access type
-  if (metadata.accessType) {
-    sections.push(`Access Type: ${metadata.accessType}`);
-  }
-
-  // Add tags
-  if (metadata.tags.length > 0) {
-    sections.push(`Tags: ${metadata.tags.join(', ')}`);
-  }
-
-  // Add summary/overview section
-  const overviewMatch = content.match(/#.*Overview\s+(.+?)(?=\n#|\n##|\Z)/s);
-  if (overviewMatch) {
-    const summary = overviewMatch[1]
-      .replace(/!\[Image\]\([^)]+\)/g, '') // Remove image references
-      .replace(/\n\s*\n/g, '\n')
-      .trim()
-      .substring(0, 500);
-    sections.push(`Summary: ${summary}`);
-  }
-
-  // Add key parameters section
-  const paramsMatch = content.match(/#.*Parameters?\s+(.+?)(?=\n#|\n##|\Z)/s);
-  if (paramsMatch) {
-    const params = paramsMatch[1]
-      .replace(/!\[Image\]\([^)]+\)/g, '')
-      .replace(/\|[-|\s]+\|/g, '') // Remove table separators
-      .replace(/\n\s*\n/g, '\n')
-      .trim()
-      .substring(0, 500);
-    sections.push(`Parameters: ${params}`);
-  }
-
-  // Add key performance indicators
-  const kpiMatch = content.match(/#.*Performance?\s+(.+?)(?=\n#|\n##|\Z)/s);
-  if (kpiMatch) {
-    const kpis = kpiMatch[1]
-      .replace(/!\[Image\]\([^)]+\)/g, '')
-      .replace(/\n\s*\n/g, '\n')
-      .trim()
-      .substring(0, 300);
-    sections.push(`Performance: ${kpis}`);
-  }
-
-  // Add dependencies
-  const depsMatch = content.match(/#.*Dependencies?\s+(.+?)(?=\n#|\n##|\Z)/s);
-  if (depsMatch) {
-    const deps = depsMatch[1]
-      .replace(/!\[Image\]\([^)]+\)/g, '')
-      .replace(/\n\s*\n/g, '\n')
-      .trim()
-      .substring(0, 300);
-    sections.push(`Dependencies: ${deps}`);
-  }
-
-  // Add source reference
-  sections.push(`Source: ${metadata.sourceFile}`);
-
-  return sections.join('\n\n');
-}
-
-/**
- * Process a batch of markdown files
- */
-async function processBatch(files: MarkdownFile[], batchNumber: number, totalBatches: number): Promise<{ success: number; failed: number }> {
-  console.log(`\nProcessing batch ${batchNumber}/${totalBatches} (${files.length} files)`);
-
-  let success = 0;
-  let failed = 0;
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const progress = `[${batchNumber}/${totalBatches}] ${i + 1}/${files.length}`;
-
-    try {
-      // Generate unique key
-      const key = generateMemoryKey(file.metadata, file.relativePath);
-
-      // Create rich embedding text
-      const embeddingText = createEmbeddingText(file);
-
-      // Prepare metadata for storage
-      const memoryMetadata = {
-        ...file.metadata,
-        embeddingText,
-        relativePath: file.relativePath,
-        embeddingDimensions: CONFIG.embeddingDimensions,
-        loadedAt: new Date().toISOString(),
-        batchNumber,
-      };
-
-      // Store in AgentDB
-      if (storeMemory(key, embeddingText, memoryMetadata)) {
-        success++;
-        process.stdout.write(`\r${progress} ✓ ${key.substring(0, 60)}...`);
-      } else {
-        failed++;
-        process.stdout.write(`\r${progress} ✗ ${key.substring(0, 60)}... [FAILED]`);
-      }
-    } catch (error) {
-      failed++;
-      console.error(`\n✗ Error processing ${file.relativePath}:`, error.message);
-    }
-  }
-
-  console.log(`\nBatch complete: ${success} succeeded, ${failed} failed`);
-  return { success, failed };
 }
 
 /**
  * Main execution
  */
 async function main() {
-  console.log('╔════════════════════════════════════════════════════════════╗');
-  console.log('║  Ericsson RAN Features - AgentDB Memory Loader             ║');
-  console.log('║  768-dim Vector Embeddings for Self-Learning Agents        ║');
-  console.log('╚════════════════════════════════════════════════════════════╝\n');
+  console.log('╔════════════════════════════════════════════════════════════════╗');
+  console.log('║  Ericsson RAN Features → AgentDB Feature Loader               ║');
+  console.log('║  Full content extraction for agent training                   ║');
+  console.log('╚════════════════════════════════════════════════════════════════╝\n');
 
-  // Find all markdown files
-  console.log(`Scanning directory: ${CONFIG.sourceDir}`);
-  const markdownPaths = findMarkdownFiles(CONFIG.sourceDir);
-  console.log(`Found ${markdownPaths.length} markdown files\n`);
+  console.log(`📁 Source:    ${CONFIG.sourceDir}`);
+  console.log(`📦 Namespace: ${CONFIG.namespace}`);
+  if (CONFIG.limit) console.log(`🔢 Limit:     ${CONFIG.limit} files`);
+  if (CONFIG.dryRun) console.log(`🧪 Mode:      DRY RUN`);
+  console.log('');
 
-  if (markdownPaths.length === 0) {
-    console.error('No markdown files found to process');
+  // Find files
+  console.log('🔍 Scanning for markdown files...');
+  let filePaths = findMarkdownFiles(CONFIG.sourceDir);
+  console.log(`   Found ${filePaths.length} files\n`);
+
+  if (filePaths.length === 0) {
+    console.error('❌ No markdown files found');
     process.exit(1);
   }
 
-  // Load and parse all files
-  console.log('Loading and parsing markdown files...');
-  const files: MarkdownFile[] = [];
+  // Apply limit
+  if (CONFIG.limit > 0) {
+    filePaths = filePaths.slice(0, CONFIG.limit);
+  }
 
-  for (const path of markdownPaths) {
-    try {
-      const content = readFileSync(path, 'utf-8');
-      const relativePath = relative(CONFIG.sourceDir, path);
-      const metadata = extractMetadata(content, path);
+  // Parse all documents
+  console.log('📝 Parsing documents...');
+  const documents: FeatureDocument[] = [];
+  const categoryCount: Record<string, number> = {};
 
-      files.push({
-        path,
-        relativePath,
-        content,
-        metadata,
-      });
-    } catch (error) {
-      console.error(`Failed to read file ${path}:`, error.message);
+  for (const path of filePaths) {
+    const doc = parseFeatureDocument(path);
+    if (doc) {
+      documents.push(doc);
+      categoryCount[doc.category] = (categoryCount[doc.category] || 0) + 1;
     }
   }
 
-  console.log(`Successfully loaded ${files.length} files\n`);
+  console.log(`   Parsed ${documents.length} documents\n`);
 
-  // Display category breakdown
-  const categoryCounts = files.reduce((acc, file) => {
-    const cat = file.metadata.category || 'Unknown';
-    acc[cat] = (acc[cat] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-
-  console.log('Feature Categories:');
-  Object.entries(categoryCounts)
+  // Category breakdown
+  console.log('📊 Category Breakdown:');
+  Object.entries(categoryCount)
     .sort(([, a], [, b]) => b - a)
-    .forEach(([category, count]) => {
-      console.log(`  ${category}: ${count}`);
+    .forEach(([cat, count]) => console.log(`   ${cat}: ${count}`));
+  console.log('');
+
+  // Dry run
+  if (CONFIG.dryRun) {
+    console.log('🧪 DRY RUN - Sample documents:\n');
+    documents.slice(0, 3).forEach((doc, i) => {
+      console.log(`--- Document ${i + 1} ---`);
+      console.log(`Key: ${doc.key}`);
+      console.log(`Title: ${doc.title}`);
+      console.log(`Category: ${doc.category}`);
+      console.log(`Summary: ${doc.summary.substring(0, 150)}...`);
+      console.log(`Sections: ${doc.sections.slice(0, 5).join(', ')}`);
+      console.log('');
     });
-
-  // Process in batches
-  const totalBatches = Math.ceil(files.length / CONFIG.batchSize);
-  let totalSuccess = 0;
-  let totalFailed = 0;
-
-  for (let i = 0; i < files.length; i += CONFIG.batchSize) {
-    const batch = files.slice(i, i + CONFIG.batchSize);
-    const batchNumber = Math.floor(i / CONFIG.batchSize) + 1;
-
-    const result = await processBatch(batch, batchNumber, totalBatches);
-    totalSuccess += result.success;
-    totalFailed += result.failed;
+    return;
   }
 
-  // Final summary
-  console.log('\n╔════════════════════════════════════════════════════════════╗');
-  console.log('║  Loading Complete                                          ║');
-  console.log('╚════════════════════════════════════════════════════════════╝\n');
-  console.log(`Total files processed: ${files.length}`);
-  console.log(`Successfully stored: ${totalSuccess}`);
-  console.log(`Failed: ${totalFailed}`);
-  console.log(`Namespace: ${CONFIG.namespace}`);
-  console.log(`Embedding dimensions: ${CONFIG.embeddingDimensions}\n`);
+  // Store documents
+  console.log('💾 Storing documents in AgentDB...\n');
+  let success = 0;
+  let failed = 0;
 
-  // Test semantic search
-  console.log('Testing semantic search capabilities...');
-  try {
-    const testQueries = [
-      'carrier aggregation',
-      'handover optimization',
-      'MIMO beamforming',
-      'energy saving',
-    ];
+  for (let i = 0; i < documents.length; i += CONFIG.batchSize) {
+    const batch = documents.slice(i, i + CONFIG.batchSize);
+    const batchNum = Math.floor(i / CONFIG.batchSize) + 1;
+    const totalBatches = Math.ceil(documents.length / CONFIG.batchSize);
 
-    for (const query of testQueries) {
-      console.log(`\nQuery: "${query}"`);
-      try {
-        const result = execSync(
-          `npx @claude-flow/cli@latest memory search -q "${query}" --namespace ${CONFIG.namespace} --limit 3`,
-          { encoding: 'utf-8' }
-        );
-        console.log(result.substring(0, 200));
-      } catch (error) {
-        console.log('  Search completed (results may be empty initially)');
+    process.stdout.write(`Batch ${batchNum}/${totalBatches}: `);
+
+    for (const doc of batch) {
+      if (storeDocument(doc)) {
+        success++;
+        process.stdout.write('✓');
+      } else {
+        failed++;
+        process.stdout.write('✗');
       }
     }
-  } catch (error) {
-    console.log('Search test completed');
+    console.log(` [${success}/${i + batch.length}]`);
   }
 
-  console.log('\n✓ AgentDB memory training complete!');
-  console.log('\nUsage Examples:');
-  console.log(`  npx @claude-flow/cli@latest memory search -q "4CC CA" --namespace ${CONFIG.namespace}`);
-  console.log(`  npx @claude-flow/cli@latest memory list --namespace ${CONFIG.namespace}`);
-  console.log(`  npx @claude-flow/cli@latest memory stats --namespace ${CONFIG.namespace}`);
+  // Summary
+  console.log('\n╔════════════════════════════════════════════════════════════════╗');
+  console.log('║  Loading Complete                                              ║');
+  console.log('╚════════════════════════════════════════════════════════════════╝');
+  console.log(`📊 Total:     ${documents.length}`);
+  console.log(`✅ Success:   ${success}`);
+  console.log(`❌ Failed:    ${failed}`);
+  console.log(`📦 Namespace: ${CONFIG.namespace}\n`);
+
+  // Test search
+  if (success > 0) {
+    console.log('🔍 Testing search...\n');
+    const testQueries = ['TTI bundling', 'carrier aggregation', 'handover'];
+
+    for (const query of testQueries) {
+      try {
+        const result = spawnSync('npx', [
+          '@claude-flow/cli@latest',
+          'memory', 'search',
+          '--query', query,
+          '--namespace', CONFIG.namespace,
+          '--limit', '2',
+        ], {
+          cwd: process.cwd(),
+          encoding: 'utf-8',
+          timeout: 15000,
+        });
+
+        if (result.status === 0) {
+          console.log(`Query: "${query}"`);
+          // Print first few lines of output
+          const lines = result.stdout.split('\n').slice(0, 8);
+          console.log(lines.join('\n'));
+          console.log('');
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+  }
+
+  console.log('✨ Usage:');
+  console.log(`   npx @claude-flow/cli memory search --query "VoLTE" --namespace ${CONFIG.namespace}`);
+  console.log(`   npx @claude-flow/cli memory list --namespace ${CONFIG.namespace}`);
+  console.log(`   npx @claude-flow/cli memory stats\n`);
 }
 
-// Run the loader
 main().catch((error) => {
-  console.error('Fatal error:', error);
+  console.error('💥 Fatal error:', error);
   process.exit(1);
 });
