@@ -28,8 +28,3 @@ export {
   KnowledgeUpdatedEvent,
   FeatureKnowledgeEvent
 } from './feature-knowledge';
-
-export {
-  KnowledgeBase,
-  KnowledgeBaseStats
-} from './knowledge-base';

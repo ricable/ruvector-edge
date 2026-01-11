@@ -34,19 +34,33 @@ coverage/
 .claude-flow/daemon.pid
 .claude-flow/daemon-state.json
 .claude-flow/memory/
+.claude-flow/metrics/
+
+# Claude memory and state
+.claude/memory/
+.claude/memory.db
+.swarm/memory.db
+.swarm/schema.sql
 
 # Temporary files
 *.tmp
 *.temp
 .cache/
 
-# Rust/WASM build artifacts
+# Runtime databases
+**/*.db
+*.sqlite
+*.sqlite3
+
+# Rust/WASM build artifacts (comprehensive)
+**/target/
+**/*.rlib
+**/*.rmeta
 src/wasm/target/
 src/wasm/agent/target/
 src/wasm/hnsw/target/
 src/wasm/crates/*/target/
 Cargo.lock
-*.rlib
 
 # Lock files (optional - uncomment if you want to track them)
 # package-lock.json
