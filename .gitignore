@@ -67,5 +67,3 @@ Cargo.lock
 
 # Claude Skills
 .claude/skills/ericsson-ran-features
-.claude/skills.ericsson-ran-features
-
