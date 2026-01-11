@@ -29,12 +29,13 @@
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
-      "@elex/core/*": ["src/core/*"],
-      "@elex/knowledge/*": ["src/layers/knowledge/*"],
-      "@elex/intelligence/*": ["src/layers/intelligence/*"],
-      "@elex/optimization/*": ["src/layers/optimization/*"],
-      "@elex/coordination/*": ["src/layers/coordination/*"],
-      "@elex/runtime/*": ["src/layers/runtime/*"],
+      "@/*": ["src/*"],
+      "@core/*": ["src/core/*"],
+      "@domains/*": ["src/domains/*"],
+      "@layers/*": ["src/layers/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@security/*": ["src/security/*"],
+      "@wasm/*": ["src/wasm/*"],
       "@agentdb/core": ["src/@agentdb/core/index.ts"],
       "@agentdb/hnsw": ["src/@agentdb/hnsw/index.ts"]
     }

@@ -14,3 +14,15 @@ root = "./tests"
 [run]
 # Silent mode for cleaner output
 silent = false
+
+[resolver]
+# Enable path aliases for cleaner imports
+alias = {
+  "@": "./src",
+  "@core": "./src/core",
+  "@domains": "./src/domains",
+  "@layers": "./src/layers",
+  "@infrastructure": "./src/infrastructure",
+  "@security": "./src/security",
+  "@wasm": "./src/wasm"
+}

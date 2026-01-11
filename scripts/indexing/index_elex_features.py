@@ -2,7 +2,7 @@
 """
 Elex Features - AgentDB Memory Indexer
 Indexes 1,153 Ericsson LTE/4G network feature markdown files (45MB) into AgentDB
-with 768-dimensional vector embeddings for fast autonomous agent access.
+with vector embeddings for fast autonomous agent access.
 """
 
 import json
@@ -195,8 +195,6 @@ def main():
     print("=" * 80)
     print(f" Features Directory: {FEATURES_DIR}")
     print(f" Namespace: {NAMESPACE}")
-    print(f" Embedding Dimension: 768")
-    print(f" Model: Xenova/bge-base-en-v1.5")
 
     if not FEATURES_DIR.exists():
         print(f"\n ERROR: Features directory not found: {FEATURES_DIR}")
@@ -217,18 +215,22 @@ def main():
 
     # Process files
     print("\n Indexing files...")
-    batch_size = 50
+    batch_size = 10
+
     for i, md_file in enumerate(md_files):
         relative_path = md_file.relative_to(FEATURES_DIR)
 
         # Progress indicator
         if (i + 1) % batch_size == 0 or i == 0:
             progress = ((i + 1) / len(md_files)) * 100
-            print(f"  Progress: {i + 1}/{len(md_files)} ({progress:.1f}%) - Stored: {stats['files_stored']}")
+            elapsed = time.time() - stats["start_time"]
+            rate = (i + 1) / elapsed if elapsed > 0 else 0
+            eta = (len(md_files) - i - 1) / rate if rate > 0 else 0
+            print(f"  Progress: {i + 1}/{len(md_files)} ({progress:.1f}%) | Stored: {stats['files_stored']} | Rate: {rate:.2f} files/sec | ETA: {eta:.0f}s")
+            sys.stdout.flush()
 
         if process_markdown_file(md_file, relative_path):
-            # Show progress per file
-            print(f"    ✓ {relative_path}", end='\r')
+            pass  # Success tracked in stats
 
     # Print statistics
     elapsed = time.time() - stats["start_time"]
