@@ -1,0 +1,45 @@
+{
+  "agentId": "agent-cc-001",
+  "fajCode": "FAJ 140 0101",
+  "cxcCode": "CC_001",
+  "featureName": "Cell Configuration",
+  "acronym": "CELLCFG",
+  "category": "Coverage & Capacity",
+  "subcategory": "Cell Config",
+  "accessTechnology": "LTE",
+  "specialization": "Cell configuration for optimal coverage and capacity",
+  "description": "Manages cell parameters for coverage and capacity optimization",
+  "qLearning": {
+    "alpha": 0.17,
+    "gamma": 0.83,
+    "epsilon": 0.23,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "cellRadius", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Cell radius"},
+    {"name": "maxUesPerCell", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Maximum UEs per cell"}
+  ],
+  "counters": [
+    {"name": "pmCellCoverage", "type": "gauge", "description": "Cell coverage area"},
+    {"name": "pmCellCapacity", "type": "gauge", "description": "Cell capacity utilization"}
+  ],
+  "kpis": [
+    {"name": "Cell Coverage", "formula": "pmCellCoverage / theoreticalMaxCoverage", "targetValue": "> 90%", "thresholdWarning": "< 80%", "thresholdCritical": "< 70%"},
+    {"name": "Cell Capacity Utilization", "formula": "pmCellCapacity", "targetValue": "60-80%", "thresholdWarning": "> 90%", "thresholdCritical": "> 95%"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

@@ -1,0 +1,109 @@
+{
+  "agentId": "agent-nr-006",
+  "fajCode": "FAJ 151 0201",
+  "cxcCode": "NR5G_006",
+  "featureName": "NR Carrier Aggregation",
+  "acronym": "NRCA",
+  "category": "NR/5G",
+  "subcategory": "Carrier Aggregation",
+  "accessTechnology": "NR",
+  "specialization": "Carrier aggregation in 5G NR for increased bandwidth",
+  "description": "Enables aggregation of multiple NR carriers for ultra-high bandwidth 5G services",
+  "qLearning": {
+    "alpha": 0.12,
+    "gamma": 0.88,
+    "epsilon": 0.28,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "nrCaBandwidth",
+      "moClass": "NRCellDU",
+      "dataType": "enumeration",
+      "description": "NR CA bandwidth combination"
+    },
+    {
+      "name": "nrCcCount",
+      "moClass": "NRCellDU",
+      "dataType": "integer",
+      "description": "Number of NR component carriers"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmNrCaSetupRate",
+      "type": "gauge",
+      "description": "NR CA setup rate"
+    },
+    {
+      "name": "pmNrCaThroughput",
+      "type": "gauge",
+      "description": "NR CA throughput"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "NR CA Setup Success Rate",
+      "formula": "pmNrCaSetupRate",
+      "targetValue": "> 95%",
+      "thresholdWarning": "< 90%",
+      "thresholdCritical": "< 85%"
+    },
+    {
+      "name": "NR CA Bandwidth Utilization",
+      "formula": "pmNrCaThroughput / theoreticalMaxNrCaThroughput",
+      "targetValue": "> 70%",
+      "thresholdWarning": "< 55%",
+      "thresholdCritical": "< 40%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 150 0102"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 151 0301",
+    "FAJ 121 0301"
+  ],
+  "releases": {
+    "introduced": "21B",
+    "deprecated": null,
+    "supportedIn": ["21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "NRCellDU",
+    "CarrierAggregation"
+  ],
+  "documents": [
+    "NR CA Configuration Guide",
+    "5G Carrier Aggregation Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

@@ -18,7 +18,33 @@ export enum Action {
   REQUEST_CLARIFICATION = 'request_clarification',
 
   /** Escalate to human operator */
-  ESCALATE = 'escalate'
+  ESCALATE = 'escalate',
+
+  // ========== HANDOVER OPTIMIZATION ACTIONS (GOAL-006) ==========
+
+  /** Increase time to trigger (for too-early HO) */
+  INCREASE_TTT = 'increase_ttt',
+
+  /** Decrease time to trigger (for too-late HO) */
+  DECREASE_TTT = 'decrease_ttt',
+
+  /** Increase hysteresis (for ping-pong or too-early HO) */
+  INCREASE_HYSTERESIS = 'increase_hysteresis',
+
+  /** Decrease hysteresis (for too-late HO) */
+  DECREASE_HYSTERESIS = 'decrease_hysteresis',
+
+  /** Increase ping-pong timer (for ping-pong detection) */
+  INCREASE_PING_PONG_TIMER = 'increase_ping_pong_timer',
+
+  /** Increase cell individual offset (for coverage holes) */
+  INCREASE_CIO = 'increase_cio',
+
+  /** Adjust A3 offset (for interference) */
+  ADJUST_A3_OFFSET = 'adjust_a3_offset',
+
+  /** Conservative adjustment (unknown root cause) */
+  CONSERVATIVE = 'conservative'
 }
 
 export const ALL_ACTIONS: Action[] = [
@@ -26,7 +52,15 @@ export const ALL_ACTIONS: Action[] = [
   Action.CONTEXT_ANSWER,
   Action.CONSULT_PEER,
   Action.REQUEST_CLARIFICATION,
-  Action.ESCALATE
+  Action.ESCALATE,
+  Action.INCREASE_TTT,
+  Action.DECREASE_TTT,
+  Action.INCREASE_HYSTERESIS,
+  Action.DECREASE_HYSTERESIS,
+  Action.INCREASE_PING_PONG_TIMER,
+  Action.INCREASE_CIO,
+  Action.ADJUST_A3_OFFSET,
+  Action.CONSERVATIVE
 ];
 
 export interface ActionMetadata {
@@ -78,6 +112,71 @@ export const ACTION_METADATA: Map<Action, ActionMetadata> = new Map([
     requiresPeer: false,
     requiresUser: true,
     avgLatencyMs: 30000
+  }],
+  // Handover optimization actions (GOAL-006)
+  [Action.INCREASE_TTT, {
+    action: Action.INCREASE_TTT,
+    description: 'Increase time to trigger (for too-early HO)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.DECREASE_TTT, {
+    action: Action.DECREASE_TTT,
+    description: 'Decrease time to trigger (for too-late HO)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.INCREASE_HYSTERESIS, {
+    action: Action.INCREASE_HYSTERESIS,
+    description: 'Increase hysteresis (for ping-pong or too-early HO)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.DECREASE_HYSTERESIS, {
+    action: Action.DECREASE_HYSTERESIS,
+    description: 'Decrease hysteresis (for too-late HO)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.INCREASE_PING_PONG_TIMER, {
+    action: Action.INCREASE_PING_PONG_TIMER,
+    description: 'Increase ping-pong timer (for ping-pong detection)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.INCREASE_CIO, {
+    action: Action.INCREASE_CIO,
+    description: 'Increase cell individual offset (for coverage holes)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.ADJUST_A3_OFFSET, {
+    action: Action.ADJUST_A3_OFFSET,
+    description: 'Adjust A3 offset (for interference)',
+    baseCost: 0.2,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
+  }],
+  [Action.CONSERVATIVE, {
+    action: Action.CONSERVATIVE,
+    description: 'Conservative adjustment (unknown root cause)',
+    baseCost: 0.1,
+    requiresPeer: false,
+    requiresUser: false,
+    avgLatencyMs: 100
   }]
 ]);
 

@@ -1,0 +1,1025 @@
+{
+  "timestamp": "2026-01-11T00:37:55.174Z",
+  "totalAgents": 50,
+  "totalQuestions": 50,
+  "results": [
+    {
+      "questionId": 1,
+      "acronym": "11CS",
+      "question": "How do I configure an eNodeB to support 18 cells?",
+      "responseTime": 1,
+      "confidence": 0.1,
+      "action": "consult_peer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 2,
+      "acronym": "12CS",
+      "question": "What is the procedure to enable 24 cell support?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 3,
+      "acronym": "6CS",
+      "question": "What are the hardware requirements for 6 cell support?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 4,
+      "acronym": "71CS",
+      "question": "How does 7-12 cell support differ from 6 cell support?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 5,
+      "acronym": "5MSC",
+      "question": "What are the bandwidth implications of 5+5 MHz?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 6,
+      "acronym": "2QD",
+      "question": "When should 256-QAM downlink be enabled?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "decrease_ttt",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 7,
+      "acronym": "2QU",
+      "question": "What are the SINR requirements for 256-QAM uplink?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 8,
+      "acronym": "6QD",
+      "question": "When to fallback from 256-QAM to 64-QAM?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 9,
+      "acronym": "6QU",
+      "question": "What parameters control 64-QAM uplink activation?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 10,
+      "acronym": "1QU",
+      "question": "What is the fallback mechanism for 64-QAM uplink?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 11,
+      "acronym": "3DCAE",
+      "question": "What CA combinations are supported for 3CC?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 12,
+      "acronym": "4DCAE",
+      "question": "How does 4CC CA impact baseband processing?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 13,
+      "acronym": "5DCAE",
+      "question": "What is the max throughput with 5CC CA?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 14,
+      "acronym": "6DCAE",
+      "question": "What are the power constraints for 6CC CA?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 15,
+      "acronym": "7DCAE",
+      "question": "What is the procedure to activate 7CC CA?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 16,
+      "acronym": "4QADPP",
+      "question": "How does 4x2 MIMO differ from 4x4?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 17,
+      "acronym": "4QADPP2",
+      "question": "What are the CSI requirements for 4x4 MIMO?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 18,
+      "acronym": "4FIRC",
+      "question": "What scenarios benefit most from 4x4 IRC?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 19,
+      "acronym": "ASM",
+      "question": "What alarms does ASM generate?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 20,
+      "acronym": "ACP",
+      "question": "What is the impact of CRS power adjustments?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 21,
+      "acronym": "ATO",
+      "question": "What KPIs trigger ATO?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 22,
+      "acronym": "AIFLB",
+      "question": "What is the acceleration factor in AIFLB?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 23,
+      "acronym": "BLM",
+      "question": "What are the thresholds for BLM activation?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 24,
+      "acronym": "BNRILLM",
+      "question": "How does BNRILLM select target cells?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 25,
+      "acronym": "BRCP",
+      "question": "How does BRCP prioritize cells?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 26,
+      "acronym": "APACS",
+      "question": "What ML algorithms does APACS use?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 27,
+      "acronym": "APDLA",
+      "question": "How does APDLA improve over traditional link adaptation?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 28,
+      "acronym": "APP",
+      "question": "What performance improvements does APP provide?",
+      "responseTime": 1,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 29,
+      "acronym": "ABATF",
+      "question": "How do I configure A/B testing framework?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 30,
+      "acronym": "ABP",
+      "question": "What are the prescheduling criteria in ABP?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 31,
+      "acronym": "BAC",
+      "question": "What are the default admission thresholds?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "decrease_hysteresis",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 32,
+      "acronym": "ATO",
+      "question": "What scenarios trigger DUAC?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 33,
+      "acronym": "ADRFS",
+      "question": "How does ADRFS differentiate QCI classes?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "increase_cio",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 34,
+      "acronym": "ASAPAU",
+      "question": "How do I configure privileged user groups?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 35,
+      "acronym": "ACCE",
+      "question": "What metrics does ACCE use?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 36,
+      "acronym": "ANR",
+      "question": "What are the ANR discovery mechanisms?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 37,
+      "acronym": "ARRSA",
+      "question": "How does ARRSA allocate RACH sequences?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "adjust_a3_offset",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 38,
+      "acronym": "ASM2",
+      "question": "What are the SCell activation timers?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 39,
+      "acronym": "CFDRU",
+      "question": "What is the procedure for CS fallback?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 40,
+      "acronym": "GUPLS",
+      "question": "What are the positioning accuracy requirements?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 41,
+      "acronym": "APACS",
+      "question": "How does AI-powered ACS differ from traditional?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 42,
+      "acronym": "AQRE",
+      "question": "What QCIs are supported in AQRE?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 43,
+      "acronym": "ABSEP",
+      "question": "What improvements does ABSEP provide?",
+      "responseTime": 1,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 44,
+      "acronym": "ARPR",
+      "question": "What conditions trigger RLC poll adaptation?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 45,
+      "acronym": "ADIR",
+      "question": "What conditions cause ducting interference?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 46,
+      "acronym": "AILG",
+      "question": "How is AILG used for testing?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 47,
+      "acronym": "ALBS",
+      "question": "How does ALBS configure broadcast subframes?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 48,
+      "acronym": "ARD",
+      "question": "What security threats does ARD address?",
+      "responseTime": 0,
+      "confidence": 0.1,
+      "action": "consult_peer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 49,
+      "acronym": "AF",
+      "question": "What is the ASGH framework architecture?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "increase_cio",
+      "state": "cold_start",
+      "oodaExecuted": true
+    },
+    {
+      "questionId": 50,
+      "acronym": "CLO",
+      "question": "What metrics does CLO provide?",
+      "responseTime": 0,
+      "confidence": 0,
+      "action": "direct_answer",
+      "state": "cold_start",
+      "oodaExecuted": true
+    }
+  ],
+  "agentStats": [
+    {
+      "acronym": "11CS",
+      "name": "13-18 Cell Support",
+      "queries": 1,
+      "avgResponseTime": 1,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "1QU",
+      "name": "16-QAM Uplink",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "12CS",
+      "name": "19-24 Cell Support",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "2QD",
+      "name": "256-QAM Downlink",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "2QU",
+      "name": "256-QAM Uplink",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "3DCAE",
+      "name": "3CC DL Carrier Aggregation Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "4DCAE",
+      "name": "4CC DL Carrier Aggregation Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "4QADPP",
+      "name": "4x2 Quad Antenna DL Performance Package",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "4FIRC",
+      "name": "4x4 Full Interference Rejection Combining",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "4QADPP2",
+      "name": "4x4 Quad Antenna DL Performance Package",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "5MSC",
+      "name": "5+5 MHz Sector Carrier",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "5DCAE",
+      "name": "5CC DL Carrier Aggregation Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "6CS",
+      "name": "6 Cell Support",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "6QD",
+      "name": "64-QAM Downlink",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "6QU",
+      "name": "64-QAM Uplink",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "6DCAE",
+      "name": "6CC DL Carrier Aggregation Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "71CS",
+      "name": "7-12 Cell Support",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "7DCAE",
+      "name": "7CC DL Carrier Aggregation Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "GUPLS",
+      "name": "A-GPS User Plane Location Support",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "APACS",
+      "name": "AI Powered Advanced Cell Supervision",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.9512499999999999,
+      "finalState": "cold_start",
+      "health": 0.9512499999999999,
+      "interactions": 2
+    },
+    {
+      "acronym": "APDLA",
+      "name": "AI Powered DL Link Adaptation",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "AF",
+      "name": "ASGH Framework",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "APP",
+      "name": "ASGH Performance Package",
+      "queries": 1,
+      "avgResponseTime": 1,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "AQRE",
+      "name": "ASGH QCI Range Extension",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ABATF",
+      "name": "ASGH-Based A/B Testing Framework",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ABP",
+      "name": "ASGH-Based Prescheduling",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ABSEP",
+      "name": "ASGH-Based Spectral Efficiency Package",
+      "queries": 1,
+      "avgResponseTime": 1,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "AIFLB",
+      "name": "Accelerated Inter-Frequency Load Balancing",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ARPR",
+      "name": "Adaptive RLC Poll-Retransmission",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ACP",
+      "name": "Adjustable CRS Power",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ATO",
+      "name": "Admission-Triggered Offload",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.9512499999999999,
+      "finalState": "cold_start",
+      "health": 0.9512499999999999,
+      "interactions": 2
+    },
+    {
+      "acronym": "ACS",
+      "name": "Advanced Cell Supervision",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 1,
+      "finalState": "cold_start",
+      "health": 1,
+      "interactions": 0
+    },
+    {
+      "acronym": "ADRFS",
+      "name": "Advanced Differentiation for Resource Fair Scheduling",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ARD",
+      "name": "Advanced RAN Defense",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ASAPAU",
+      "name": "Advanced SR Allocation for Privileged Access Users",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "AILG",
+      "name": "Air Interface Load Generator",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ASM",
+      "name": "Antenna System Monitoring",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ADIR",
+      "name": "Atmospheric Duct Interference Reduction",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ALBS",
+      "name": "Autoconfiguration of LTE Broadcast Subframes",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ACCE",
+      "name": "Automated Cell Capacity Estimation",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ANR",
+      "name": "Automated Neighbor Relations",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ARRSA",
+      "name": "Automated RACH Root Sequence Allocation",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "ASM2",
+      "name": "Automatic SCell Management",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "BRCP",
+      "name": "Baseband Resource Cell Prioritization",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "BAC",
+      "name": "Basic Admission Control",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "BLM",
+      "name": "Basic Load Management",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "BT",
+      "name": "Battery Test",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 1,
+      "finalState": "cold_start",
+      "health": 1,
+      "interactions": 0
+    },
+    {
+      "acronym": "BNRILLM",
+      "name": "Best Neighbor Relations for Intra-LTE Load Management",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "CLO",
+      "name": "CPRI Link Observability",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    },
+    {
+      "acronym": "CFDRU",
+      "name": "CS Fallback for Dual-Radio UEs",
+      "queries": 1,
+      "avgResponseTime": 0,
+      "avgConfidence": 0.975,
+      "finalState": "cold_start",
+      "health": 0.975,
+      "interactions": 1
+    }
+  ],
+  "summary": {
+    "totalTests": 50,
+    "avgResponseTime": 0.06,
+    "avgConfidence": 0.004,
+    "stateDistribution": {
+      "cold_start": 50
+    },
+    "actionDistribution": {
+      "consult_peer": 2,
+      "direct_answer": 43,
+      "decrease_ttt": 1,
+      "decrease_hysteresis": 1,
+      "increase_cio": 2,
+      "adjust_a3_offset": 1
+    }
+  }
+}

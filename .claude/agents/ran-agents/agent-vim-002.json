@@ -1,0 +1,44 @@
+{
+  "agentId": "agent-vim-002",
+  "fajCode": "FAJ 210 0102",
+  "cxcCode": "VIM_002",
+  "featureName": "VoNR",
+  "acronym": "VONR",
+  "category": "Voice & IMS",
+  "subcategory": "VoNR",
+  "accessTechnology": "NR",
+  "specialization": "Voice over NR services",
+  "description": "Enables voice calls over 5G NR with IMS",
+  "qLearning": {
+    "alpha": 0.19,
+    "gamma": 0.81,
+    "epsilon": 0.21,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "vonrEnabled", "moClass": "NRCellDU", "dataType": "boolean", "description": "Enable VoNR"}
+  ],
+  "counters": [
+    {"name": "pmVonrSetupSuccessRate", "type": "gauge", "description": "VoNR setup success rate"},
+    {"name": "pmVonrMos", "type": "gauge", "description": "VoNR Mean Opinion Score"}
+  ],
+  "kpis": [
+    {"name": "VoNR Setup Success Rate", "formula": "pmVonrSetupSuccessRate", "targetValue": "> 98%", "thresholdWarning": "< 95%", "thresholdCritical": "< 90%"},
+    {"name": "VoNR MOS", "formula": "pmVonrMos", "targetValue": "> 4.2", "thresholdWarning": "< 3.7", "thresholdCritical": "< 3.2"}
+  ],
+  "dependencies": ["FAJ 150 0102", "FAJ 801 0101"],
+  "releases": {"introduced": "21A", "supportedIn": ["21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["NRCellDU", "IMSFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

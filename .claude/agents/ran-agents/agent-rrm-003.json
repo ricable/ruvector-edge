@@ -1,0 +1,112 @@
+{
+  "agentId": "agent-rrm-003",
+  "fajCode": "FAJ 120 0103",
+  "cxcCode": "RRM_003",
+  "featureName": "Packet Scheduler",
+  "acronym": "PS",
+  "category": "Radio Resource Management",
+  "subcategory": "Scheduling",
+  "accessTechnology": "LTE",
+  "specialization": "Time-frequency domain packet scheduling for downlink and uplink",
+  "description": "Manages resource allocation in time and frequency domains for optimal throughput and fairness",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "schedulerAlgorithm",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Scheduling algorithm (PF, RR, MAX C/I, etc.)"
+    },
+    {
+      "name": "pfAlpha",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Alpha parameter for Proportional Fair scheduler"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmDlThroughput",
+      "type": "gauge",
+      "description": "Average downlink throughput"
+    },
+    {
+      "name": "pmUlThroughput",
+      "type": "gauge",
+      "description": "Average uplink throughput"
+    },
+    {
+      "name": "pmSchedFairnessIndex",
+      "type": "gauge",
+      "description": "Jain's fairness index for scheduling"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "DL Throughput",
+      "formula": "pmDlThroughput",
+      "targetValue": "> 20Mbps",
+      "thresholdWarning": "< 15Mbps",
+      "thresholdCritical": "< 10Mbps"
+    },
+    {
+      "name": "Scheduling Fairness Index",
+      "formula": "pmSchedFairnessIndex",
+      "targetValue": "> 0.95",
+      "thresholdWarning": "< 0.85",
+      "thresholdCritical": "< 0.75"
+    }
+  ],
+  "dependencies": [],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 120 0104",
+    "FAJ 120 0201"
+  ],
+  "releases": {
+    "introduced": "15B",
+    "deprecated": null,
+    "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "PacketScheduler"
+  ],
+  "documents": [
+    "Packet Scheduler Configuration Guide",
+    "QoS-Based Scheduling Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

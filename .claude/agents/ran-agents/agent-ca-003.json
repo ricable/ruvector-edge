@@ -1,0 +1,110 @@
+{
+  "agentId": "agent-ca-003",
+  "fajCode": "FAJ 121 0103",
+  "cxcCode": "CAE_003",
+  "featureName": "Intra-Band Non-Contiguous Carrier Aggregation",
+  "acronym": "IBNCCA",
+  "category": "Carrier Aggregation",
+  "subcategory": "Intra-Band Non-Contiguous",
+  "accessTechnology": "LTE",
+  "specialization": "Aggregation of non-contiguous carriers within the same frequency band with frequency gap",
+  "description": "Enables aggregation of carriers in the same band that are not adjacent, allowing flexible spectrum utilization",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "nonContiguousCcGap",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Frequency gap between non-contiguous carriers in MHz"
+    },
+    {
+      "name": "nonContiguousCcConfig",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Configuration for non-contiguous CA setup"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmNonContiguousCaSuccessRate",
+      "type": "gauge",
+      "description": "Success rate of non-contiguous CA activation"
+    },
+    {
+      "name": "pmNonContiguousCaUsers",
+      "type": "gauge",
+      "description": "Number of users using non-contiguous CA"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Non-Contiguous CA Success Rate",
+      "formula": "pmNonContiguousCaSuccessRate",
+      "targetValue": "> 95%",
+      "thresholdWarning": "< 90%",
+      "thresholdCritical": "< 85%"
+    },
+    {
+      "name": "Non-Contiguous CA Utilization",
+      "formula": "pmNonContiguousCaUsers / totalCaUsers",
+      "targetValue": "> 20%",
+      "thresholdWarning": "< 10%",
+      "thresholdCritical": "< 5%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0101",
+    "FAJ 121 0102"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0201",
+    "FAJ 121 0301"
+  ],
+  "releases": {
+    "introduced": "16A",
+    "deprecated": null,
+    "supportedIn": ["16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "CarrierAggregation"
+  ],
+  "documents": [
+    "Non-Contiguous CA Configuration Guide",
+    "Spectrum Fragmentation Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "agentId": "agent-rrm-001",
+  "fajCode": "FAJ 120 0101",
+  "cxcCode": "RRM_001",
+  "featureName": "Admission Control",
+  "acronym": "AC",
+  "category": "Radio Resource Management",
+  "subcategory": "Admission",
+  "accessTechnology": "LTE",
+  "specialization": "Intelligent admission control for new and handover connections based on resource availability",
+  "description": "Manages admission of new UEs and handover requests by evaluating available resources and QoS requirements",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "admissionThreshold",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Utilization threshold for admitting new connections"
+    },
+    {
+      "name": "hoAdmissionPriority",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Priority for handover vs new connections"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmAdmissionRejectRate",
+      "type": "gauge",
+      "description": "Rate of admission rejections"
+    },
+    {
+      "name": "pmHoAdmissionSuccessRate",
+      "type": "gauge",
+      "description": "Success rate of handover admissions"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Admission Rejection Rate",
+      "formula": "pmAdmissionRejectRate",
+      "targetValue": "< 5%",
+      "thresholdWarning": "> 10%",
+      "thresholdCritical": "> 15%"
+    },
+    {
+      "name": "HO Admission Success Rate",
+      "formula": "pmHoAdmissionSuccessRate",
+      "targetValue": "> 98%",
+      "thresholdWarning": "< 95%",
+      "thresholdCritical": "< 90%"
+    }
+  ],
+  "dependencies": [],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 120 0102",
+    "FAJ 120 0201"
+  ],
+  "releases": {
+    "introduced": "15B",
+    "deprecated": null,
+    "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "AdmissionControl"
+  ],
+  "documents": [
+    "Admission Control Configuration Guide",
+    "RAN Resource Management Best Practices"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

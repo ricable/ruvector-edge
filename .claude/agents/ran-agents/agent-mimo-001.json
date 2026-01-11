@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-mimo-001",
+  "fajCode": "FAJ 130 0101",
+  "cxcCode": "MIMO_001",
+  "featureName": "2x2 MIMO",
+  "acronym": "MIMO2X2",
+  "category": "MIMO & Antenna",
+  "subcategory": "2x2",
+  "accessTechnology": "LTE",
+  "specialization": "2x2 MIMO configuration for spatial multiplexing",
+  "description": "Enables 2x2 MIMO for improved throughput with spatial multiplexing",
+  "qLearning": {
+    "alpha": 0.14,
+    "gamma": 0.86,
+    "epsilon": 0.26,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "mimo2x2Enabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable 2x2 MIMO"}],
+  "counters": [{"name": "pmMimo2x2Throughput", "type": "gauge", "description": "2x2 MIMO throughput"}],
+  "kpis": [{"name": "2x2 MIMO Throughput Gain", "formula": "pmMimo2x2Throughput / singleAntennaThroughput", "targetValue": "> 1.6x", "thresholdWarning": "< 1.3x", "thresholdCritical": "< 1.1x"}],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "AntennaGroup"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

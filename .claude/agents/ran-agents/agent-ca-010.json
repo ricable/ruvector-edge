@@ -1,0 +1,111 @@
+{
+  "agentId": "agent-ca-010",
+  "fajCode": "FAJ 121 0801",
+  "cxcCode": "CAE_010",
+  "featureName": "CA-Based Load Balancing",
+  "acronym": "CALB",
+  "category": "Carrier Aggregation",
+  "subcategory": "Load Balancing",
+  "accessTechnology": "LTE",
+  "specialization": "Load balancing across carriers using CA capabilities for optimal resource utilization",
+  "description": "Intelligent load balancing that redistributes users across carriers based on CA capabilities and carrier load",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "caLoadBalancingEnabled",
+      "moClass": "CarrierAggregation",
+      "dataType": "boolean",
+      "description": "Enable CA-based load balancing"
+    },
+    {
+      "name": "caLbThreshold",
+      "moClass": "CarrierAggregation",
+      "dataType": "integer",
+      "description": "Load difference threshold for triggering rebalancing"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmCaLbRebalanceCount",
+      "type": "counter",
+      "description": "Number of CA load balancing rebalances"
+    },
+    {
+      "name": "pmCaLoadBalanceIndex",
+      "type": "gauge",
+      "description": "Load balance index across CA carriers"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "CA Load Balance Efficiency",
+      "formula": "pmCaLoadBalanceIndex",
+      "targetValue": "> 0.9",
+      "thresholdWarning": "< 0.8",
+      "thresholdCritical": "< 0.7"
+    },
+    {
+      "name": "CA LB Rebalance Rate",
+      "formula": "pmCaLbRebalanceCount / totalConnectionTime",
+      "targetValue": "< 10/hour",
+      "thresholdWarning": "> 20/hour",
+      "thresholdCritical": "> 30/hour"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0101",
+    "FAJ 120 0105"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0501",
+    "FAJ 120 0201"
+  ],
+  "releases": {
+    "introduced": "20A",
+    "deprecated": null,
+    "supportedIn": ["20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "CarrierAggregation",
+    "LoadBalancing"
+  ],
+  "documents": [
+    "CA Load Balancing Guide",
+    "Multi-Carrier Resource Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

@@ -6,6 +6,10 @@
 
 export { FAJCode, InvalidFAJCodeError } from './faj-code';
 export {
+  FeatureCategory,
+  FeatureCategoryVO
+} from './feature-category';
+export {
   Parameter,
   DataType,
   ParameterConstraints,

@@ -1,0 +1,45 @@
+{
+  "agentId": "agent-eng-003",
+  "fajCode": "FAJ 122 0103",
+  "cxcCode": "ENG_003",
+  "featureName": "Micro Sleep TX",
+  "acronym": "MSTX",
+  "category": "Energy Saving",
+  "subcategory": "Micro Sleep",
+  "accessTechnology": "LTE",
+  "specialization": "Micro sleep for transmitter during idle symbols",
+  "description": "Briefly powers down transmitter during idle symbols for energy saving",
+  "qLearning": {
+    "alpha": 0.18,
+    "gamma": 0.82,
+    "epsilon": 0.22,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "microSleepEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable micro sleep TX"},
+    {"name": "microSleepDuration", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Micro sleep duration"}
+  ],
+  "counters": [
+    {"name": "pmMicroSleepCount", "type": "counter", "description": "Number of micro sleep events"},
+    {"name": "pmMicroSleepEnergySaved", "type": "counter", "description": "Energy saved through micro sleep"}
+  ],
+  "kpis": [
+    {"name": "Micro Sleep Efficiency", "formula": "pmMicroSleepEnergySaved / totalTxEnergy", "targetValue": "> 8%", "thresholdWarning": "< 5%", "thresholdCritical": "< 3%"},
+    {"name": "Micro Sleep Rate", "formula": "pmMicroSleepCount / totalSymbols", "targetValue": "10-25%", "thresholdWarning": "< 5%", "thresholdCritical": "< 2%"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "20A", "supportedIn": ["20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "EnergySavingFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

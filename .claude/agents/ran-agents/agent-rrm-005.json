@@ -1,0 +1,116 @@
+{
+  "agentId": "agent-rrm-005",
+  "fajCode": "FAJ 120 0105",
+  "cxcCode": "RRM_005",
+  "featureName": "Inter-Frequency Load Balancing",
+  "acronym": "IFLB",
+  "category": "Radio Resource Management",
+  "subcategory": "Load Balancing",
+  "accessTechnology": "LTE",
+  "specialization": "Load balancing across different frequency layers",
+  "description": "Redistributes UEs from heavily loaded frequencies to less loaded ones based on measurements",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "ifLbEnabled",
+      "moClass": "EUtranCellFDD",
+      "dataType": "boolean",
+      "description": "Enable inter-frequency load balancing"
+    },
+    {
+      "name": "ifLbThreshold",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Load threshold for inter-frequency load balancing"
+    },
+    {
+      "name": "ifLbOffset",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Measurement offset for target frequency"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmIfLbRedirections",
+      "type": "counter",
+      "description": "Number of inter-frequency load balancing redirections"
+    },
+    {
+      "name": "pmIfLoadBalanceIndex",
+      "type": "gauge",
+      "description": "Load balance index across frequencies"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Inter-Frequency Load Balance Index",
+      "formula": "pmIfLoadBalanceIndex",
+      "targetValue": "> 0.88",
+      "thresholdWarning": "< 0.78",
+      "thresholdCritical": "< 0.68"
+    },
+    {
+      "name": "IFLB Ping-Pong Rate",
+      "formula": "pingPongRedirections / totalRedirections",
+      "targetValue": "< 5%",
+      "thresholdWarning": "> 10%",
+      "thresholdCritical": "> 15%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 120 0102"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 120 0101",
+    "FAJ 121 0801"
+  ],
+  "releases": {
+    "introduced": "16B",
+    "deprecated": null,
+    "supportedIn": ["16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "LoadBalancing",
+    "Mobility"
+  ],
+  "documents": [
+    "Inter-Frequency LB Configuration Guide",
+    "Multi-Layer Load Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

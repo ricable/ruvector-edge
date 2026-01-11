@@ -1,0 +1,111 @@
+{
+  "agentId": "agent-ca-009",
+  "fajCode": "FAJ 121 0701",
+  "cxcCode": "CAE_009",
+  "featureName": "Primary Cell Change for CA",
+  "acronym": "PCC",
+  "category": "Carrier Aggregation",
+  "subcategory": "Mobility",
+  "accessTechnology": "LTE",
+  "specialization": "Primary cell (PCell) change procedures for CA users during mobility",
+  "description": "Manages PCell change for CA users, ensuring seamless connectivity during handover and reconfiguration",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "pccChangeEnabled",
+      "moClass": "CarrierAggregation",
+      "dataType": "boolean",
+      "description": "Enable PCell change for CA users"
+    },
+    {
+      "name": "pccChangeHysteresis",
+      "moClass": "CarrierAggregation",
+      "dataType": "integer",
+      "description": "Hysteresis for PCell change trigger"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmPccChangeSuccessRate",
+      "type": "gauge",
+      "description": "Success rate of PCell change attempts"
+    },
+    {
+      "name": "pmPccChangeLatency",
+      "type": "gauge",
+      "description": "Average latency for PCell change"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "PCC Change Success Rate",
+      "formula": "pmPccChangeSuccessRate",
+      "targetValue": "> 96%",
+      "thresholdWarning": "< 92%",
+      "thresholdCritical": "< 88%"
+    },
+    {
+      "name": "PCC Change Latency",
+      "formula": "pmPccChangeLatency",
+      "targetValue": "< 50ms",
+      "thresholdWarning": "> 75ms",
+      "thresholdCritical": "> 100ms"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0101",
+    "FAJ 300 0101"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0201",
+    "FAJ 300 0201"
+  ],
+  "releases": {
+    "introduced": "19B",
+    "deprecated": null,
+    "supportedIn": ["19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "CarrierAggregation",
+    "Handover"
+  ],
+  "documents": [
+    "PCell Change Configuration Guide",
+    "CA Mobility Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

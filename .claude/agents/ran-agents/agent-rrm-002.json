@@ -1,0 +1,109 @@
+{
+  "agentId": "agent-rrm-002",
+  "fajCode": "FAJ 120 0102",
+  "cxcCode": "RRM_002",
+  "featureName": "Load Balancing",
+  "acronym": "LB",
+  "category": "Radio Resource Management",
+  "subcategory": "Load Balancing",
+  "accessTechnology": "LTE",
+  "specialization": "Inter-frequency and inter-layer load balancing for optimal resource utilization",
+  "description": "Redistributes traffic across frequencies and layers based on load measurements and UE capabilities",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "lbThreshold",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Load threshold for triggering load balancing"
+    },
+    {
+      "name": "lbOffset",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Offset applied to target frequency for load balancing"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmLbRedirectionCount",
+      "type": "counter",
+      "description": "Number of load balancing redirections"
+    },
+    {
+      "name": "pmLoadBalanceIndex",
+      "type": "gauge",
+      "description": "Index measuring load balance across frequencies"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Load Balance Index",
+      "formula": "pmLoadBalanceIndex",
+      "targetValue": "> 0.85",
+      "thresholdWarning": "< 0.75",
+      "thresholdCritical": "< 0.65"
+    },
+    {
+      "name": "LB Redirection Rate",
+      "formula": "pmLbRedirectionCount / totalConnections",
+      "targetValue": "5-15%",
+      "thresholdWarning": "< 3%",
+      "thresholdCritical": "< 1%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 120 0101"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 120 0105",
+    "FAJ 121 0801"
+  ],
+  "releases": {
+    "introduced": "15B",
+    "deprecated": null,
+    "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "LoadBalancing"
+  ],
+  "documents": [
+    "Load Balancing Configuration Guide",
+    "Inter-Frequency Load Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

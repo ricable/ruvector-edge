@@ -1,0 +1,107 @@
+{
+  "agentId": "agent-rrm-008",
+  "fajCode": "FAJ 120 0401",
+  "cxcCode": "RRM_008",
+  "featureName": "Uplink Power Control",
+  "acronym": "ULPC",
+  "category": "Radio Resource Management",
+  "subcategory": "Power Control",
+  "accessTechnology": "LTE",
+  "specialization": "Open and closed loop uplink power control for interference management",
+  "description": "Controls UE transmit power to maintain link quality while minimizing interference",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "p0NominalPusch",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Nominal UE transmit power for PUSCH"
+    },
+    {
+      "name": "alphaUplink",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Pathloss compensation factor"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmUlPowerHeadroom",
+      "type": "gauge",
+      "description": "Average uplink power headroom"
+    },
+    {
+      "name": "pmUlInterference",
+      "type": "gauge",
+      "description": "Uplink interference level"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "UL Power Headroom",
+      "formula": "pmUlPowerHeadroom",
+      "targetValue": "> 10dB",
+      "thresholdWarning": "< 5dB",
+      "thresholdCritical": "< 0dB"
+    },
+    {
+      "name": "UL Interference Level",
+      "formula": "pmUlInterference",
+      "targetValue": "< -110dBm",
+      "thresholdWarning": "> -105dBm",
+      "thresholdCritical": "> -100dBm"
+    }
+  ],
+  "dependencies": [],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 501 0101",
+    "FAJ 120 0103"
+  ],
+  "releases": {
+    "introduced": "18A",
+    "deprecated": null,
+    "supportedIn": ["18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "PowerControl"
+  ],
+  "documents": [
+    "UL Power Control Configuration Guide",
+    "Interference Management Best Practices"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

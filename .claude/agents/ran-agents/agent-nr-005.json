@@ -1,0 +1,109 @@
+{
+  "agentId": "agent-nr-005",
+  "fajCode": "FAJ 151 0101",
+  "cxcCode": "NR5G_005",
+  "featureName": "NR mmWave",
+  "acronym": "MMWAVE",
+  "category": "NR/5G",
+  "subcategory": "mmWave",
+  "accessTechnology": "NR",
+  "specialization": "5G operation in millimeter wave frequency bands (FR2)",
+  "description": "Enables 5G NR operation in mmWave bands (24-100GHz) for ultra-high bandwidth",
+  "qLearning": {
+    "alpha": 0.12,
+    "gamma": 0.88,
+    "epsilon": 0.28,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "mmWaveBand",
+      "moClass": "NRCellDU",
+      "dataType": "enumeration",
+      "description": "mmWave band configuration (n258, n260, n261)"
+    },
+    {
+      "name": "mmWaveBeamManagement",
+      "moClass": "NRCellDU",
+      "dataType": "boolean",
+      "description": "Enable mmWave beam management"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmMmWaveCoverage",
+      "type": "gauge",
+      "description": "mmWave coverage area"
+    },
+    {
+      "name": "pmMmWaveThroughput",
+      "type": "gauge",
+      "description": "mmWave throughput"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "mmWave Coverage",
+      "formula": "pmMmWaveCoverage / totalCellArea",
+      "targetValue": "> 60%",
+      "thresholdWarning": "< 40%",
+      "thresholdCritical": "< 20%"
+    },
+    {
+      "name": "mmWave Throughput",
+      "formula": "pmMmWaveThroughput",
+      "targetValue": "> 1Gbps",
+      "thresholdWarning": "< 500Mbps",
+      "thresholdCritical": "< 200Mbps"
+    }
+  ],
+  "dependencies": [
+    "FAJ 151 0201"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 151 0301",
+    "FAJ 150 0102"
+  ],
+  "releases": {
+    "introduced": "21A",
+    "deprecated": null,
+    "supportedIn": ["21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "NRCellDU",
+    "BeamManagement"
+  ],
+  "documents": [
+    "mmWave Configuration Guide",
+    "High-Frequency 5G Deployment"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

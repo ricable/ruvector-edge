@@ -1,0 +1,109 @@
+{
+  "agentId": "agent-ca-002",
+  "fajCode": "FAJ 121 0102",
+  "cxcCode": "CAE_002",
+  "featureName": "Intra-Band Contiguous Carrier Aggregation",
+  "acronym": "IBCCA",
+  "category": "Carrier Aggregation",
+  "subcategory": "Intra-Band Contiguous",
+  "accessTechnology": "LTE",
+  "specialization": "Aggregation of contiguous carriers within the same frequency band for doubled bandwidth",
+  "description": "Enables aggregation of adjacent carriers within the same band, typically combining two 10MHz or 20MHz carriers into a single larger carrier",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "contiguousCcNumber",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Number of contiguous component carriers"
+    },
+    {
+      "name": "contiguousBandwidth",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Combined bandwidth for contiguous CA"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmContiguousCaSetupTime",
+      "type": "gauge",
+      "description": "Average time to setup contiguous CA"
+    },
+    {
+      "name": "pmContiguousCaThroughput",
+      "type": "gauge",
+      "description": "Average throughput for contiguous CA users"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Contiguous CA Setup Success Rate",
+      "formula": "successfulContiguousCaSetups / totalContiguousCaAttempts",
+      "targetValue": "> 98%",
+      "thresholdWarning": "< 95%",
+      "thresholdCritical": "< 90%"
+    },
+    {
+      "name": "Contiguous CA Throughput Gain",
+      "formula": "contiguousCaThroughput / singleCarrierThroughput",
+      "targetValue": "> 1.8x",
+      "thresholdWarning": "< 1.5x",
+      "thresholdCritical": "< 1.2x"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0101"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0103",
+    "FAJ 121 0201"
+  ],
+  "releases": {
+    "introduced": "15B",
+    "deprecated": null,
+    "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "CarrierAggregation"
+  ],
+  "documents": [
+    "Intra-Band Contiguous CA Configuration Guide",
+    "Contiguous CA Performance Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

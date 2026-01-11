@@ -1,0 +1,110 @@
+{
+  "agentId": "agent-ca-005",
+  "fajCode": "FAJ 121 0301",
+  "cxcCode": "CAE_005",
+  "featureName": "Downlink Carrier Aggregation with 4CC",
+  "acronym": "DL4CC",
+  "category": "Carrier Aggregation",
+  "subcategory": "Downlink 4CC",
+  "accessTechnology": "LTE",
+  "specialization": "Aggregation of up to 4 downlink component carriers for maximum bandwidth",
+  "description": "Enables UE to receive on up to 4 downlink carriers simultaneously, providing peak theoretical throughput of 300Mbps in LTE",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "maxCcDl",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Maximum number of downlink component carriers (up to 4)"
+    },
+    {
+      "name": "cc4ConfigMode",
+      "moClass": "CarrierAggregation",
+      "dataType": "enumeration",
+      "description": "Configuration mode for 4CC operation"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pm4CcActivationRate",
+      "type": "gauge",
+      "description": "Rate of 4CC CA activation"
+    },
+    {
+      "name": "pm4CcThroughput",
+      "type": "gauge",
+      "description": "Average throughput for 4CC users"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "4CC Activation Success Rate",
+      "formula": "successful4CcActivations / total4CcAttempts",
+      "targetValue": "> 93%",
+      "thresholdWarning": "< 88%",
+      "thresholdCritical": "< 83%"
+    },
+    {
+      "name": "4CC Throughput Achievement",
+      "formula": "pm4CcThroughput / theoreticalMax4CcThroughput",
+      "targetValue": "> 70%",
+      "thresholdWarning": "< 55%",
+      "thresholdCritical": "< 40%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0101",
+    "FAJ 121 0102"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0201",
+    "FAJ 121 0401"
+  ],
+  "releases": {
+    "introduced": "18A",
+    "deprecated": null,
+    "supportedIn": ["18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "CarrierAggregation"
+  ],
+  "documents": [
+    "4CC CA Configuration Guide",
+    "High-Throughput CA Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

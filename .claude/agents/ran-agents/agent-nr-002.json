@@ -1,0 +1,113 @@
+{
+  "agentId": "agent-nr-002",
+  "fajCode": "FAJ 150 0102",
+  "cxcCode": "NR5G_002",
+  "featureName": "NR SA (Standalone)",
+  "acronym": "SA",
+  "category": "NR/5G",
+  "subcategory": "SA",
+  "accessTechnology": "NR",
+  "specialization": "5G NR standalone deployment with independent 5G core",
+  "description": "Full 5G standalone deployment with 5G Core, enabling all 5G capabilities independently",
+  "qLearning": {
+    "alpha": 0.12,
+    "gamma": 0.88,
+    "epsilon": 0.28,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "saModeEnabled",
+      "moClass": "NRCellDU",
+      "dataType": "boolean",
+      "description": "Enable standalone mode"
+    },
+    {
+      "name": "fiveGCConnectivity",
+      "moClass": "NRCellDU",
+      "dataType": "boolean",
+      "description": "5G Core connectivity status"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmSaSetupSuccessRate",
+      "type": "gauge",
+      "description": "SA setup success rate"
+    },
+    {
+      "name": "pmSaCoverage",
+      "type": "gauge",
+      "description": "SA coverage area"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "SA Setup Success Rate",
+      "formula": "pmSaSetupSuccessRate",
+      "targetValue": "> 96%",
+      "thresholdWarning": "< 92%",
+      "thresholdCritical": "< 88%"
+    },
+    {
+      "name": "SA Availability",
+      "formula": "saUptime / totalTime",
+      "targetValue": "> 99.9%",
+      "thresholdWarning": "< 99.5%",
+      "thresholdCritical": "< 99.0%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 200 0101"
+  ],
+  "conflicts": [
+    "FAJ 150 0101"
+  ],
+  "relatedFeatures": [
+    "FAJ 150 0301",
+    "FAJ 151 0101"
+  ],
+  "releases": {
+    "introduced": "20A",
+    "deprecated": null,
+    "supportedIn": ["20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "NRCellDU",
+    "GNBCUCPFunction",
+    "GNBCUUPFunction",
+    "GNBDUFunction"
+  ],
+  "documents": [
+    "NR SA Configuration Guide",
+    "5G SA Deployment Architecture"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

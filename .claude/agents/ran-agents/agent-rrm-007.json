@@ -1,0 +1,110 @@
+{
+  "agentId": "agent-rrm-007",
+  "fajCode": "FAJ 120 0301",
+  "cxcCode": "RRM_007",
+  "featureName": "QoS-Based Scheduling",
+  "acronym": "QOSSCHED",
+  "category": "Radio Resource Management",
+  "subcategory": "QoS",
+  "accessTechnology": "LTE",
+  "specialization": "Differentiated scheduling based on QoS class and bearer priority",
+  "description": "Implements QoS-aware scheduling to meet latency and throughput requirements for different services",
+  "qLearning": {
+    "alpha": 0.15,
+    "gamma": 0.85,
+    "epsilon": 0.25,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "qosSchedulingEnabled",
+      "moClass": "EUtranCellFDD",
+      "dataType": "boolean",
+      "description": "Enable QoS-based scheduling"
+    },
+    {
+      "name": "qosWeightGbR",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Scheduling weight for GBR bearers"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmQoSatisfactionRate",
+      "type": "gauge",
+      "description": "Rate of QoS requirements satisfaction"
+    },
+    {
+      "name": "pmGbRThroughput",
+      "type": "gauge",
+      "description": "Average throughput for GBR bearers"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "QoS Satisfaction Rate",
+      "formula": "pmQoSatisfactionRate",
+      "targetValue": "> 95%",
+      "thresholdWarning": "< 90%",
+      "thresholdCritical": "< 85%"
+    },
+    {
+      "name": "GBR Throughput Achievement",
+      "formula": "pmGbRThroughput / gbrTarget",
+      "targetValue": "> 98%",
+      "thresholdWarning": "< 95%",
+      "thresholdCritical": "< 90%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 120 0103"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 801 0101",
+    "FAJ 210 0101"
+  ],
+  "releases": {
+    "introduced": "17B",
+    "deprecated": null,
+    "supportedIn": ["17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "PacketScheduler",
+    "QoS"
+  ],
+  "documents": [
+    "QoS Scheduling Configuration Guide",
+    "Bearer-Based Resource Allocation"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-tr-003",
+  "fajCode": "FAJ 200 0103",
+  "cxcCode": "TR_003",
+  "featureName": "F1 Interface (5G)",
+  "acronym": "F1",
+  "category": "Transport",
+  "subcategory": "F1",
+  "accessTechnology": "NR",
+  "specialization": "F1 interface between gNB-CU and gNB-DU",
+  "description": "Manages F1 interface for 5G split architecture",
+  "qLearning": {
+    "alpha": 0.13,
+    "gamma": 0.87,
+    "epsilon": 0.27,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "f1Bandwidth", "moClass": "F1Interface", "dataType": "integer", "description": "F1 interface bandwidth"}],
+  "counters": [{"name": "pmF1Delay", "type": "gauge", "description": "F1 interface delay"}],
+  "kpis": [{"name": "F1 Delay", "formula": "pmF1Delay", "targetValue": "< 5ms", "thresholdWarning": "> 10ms", "thresholdCritical": "> 20ms"}],
+  "dependencies": ["FAJ 150 0102"],
+  "releases": {"introduced": "20A", "supportedIn": ["20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["F1Interface", "GNBCUCPFunction", "GNBCUUPFunction", "GNBDUFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

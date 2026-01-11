@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-tr-006",
+  "fajCode": "FAJ 200 0106",
+  "cxcCode": "TR_006",
+  "featureName": "SCTP Transport",
+  "acronym": "SCTP",
+  "category": "Transport",
+  "subcategory": "SCTP",
+  "accessTechnology": "LTE",
+  "specialization": "SCTP protocol for signaling transport",
+  "description": "Manages SCTP associations for signaling transport",
+  "qLearning": {
+    "alpha": 0.13,
+    "gamma": 0.87,
+    "epsilon": 0.27,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "sctpMaxRetrans", "moClass": "SctpAssociation", "dataType": "integer", "description": "SCTP max retransmissions"}],
+  "counters": [{"name": "pmSctpAssocFailures", "type": "counter", "description": "SCTP association failures"}],
+  "kpis": [{"name": "SCTP Association Failure Rate", "formula": "pmSctpAssocFailures / totalAttempts", "targetValue": "< 0.1%", "thresholdWarning": "> 1%", "thresholdCritical": "> 5%"}],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["SctpAssociation"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

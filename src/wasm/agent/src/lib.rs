@@ -14,6 +14,7 @@ pub mod feature_agent;
 pub mod q_learning;
 pub mod crypto;
 pub mod agent_registry;
+pub mod security_hardening;
 
 // Include test modules (only compiled when testing)
 #[cfg(test)]
@@ -410,4 +411,270 @@ struct QueryData {
 #[derive(serde::Deserialize)]
 struct FeedbackData {
     reward: f32,
+}
+
+// ============================================================================
+// Security Hardening WASM Exports (GOAL-012)
+// ============================================================================
+
+use security_hardening::{
+    SecurityHardeningManager, ComplianceStatus, SecurityConfig,
+    SafeZoneConstraints, Checkpoint
+};
+
+/// Security Hardening Manager for all 593 agents
+#[wasm_bindgen]
+pub struct SecurityManager {
+    manager: SecurityHardeningManager,
+}
+
+#[wasm_bindgen]
+impl SecurityManager {
+    /// Create a new security manager for an agent
+    #[wasm_bindgen(constructor)]
+    pub fn new(agent_id: String, total_agents: usize) -> SecurityManager {
+        let manager = SecurityHardeningManager::new(agent_id, total_agents);
+        Self { manager }
+    }
+
+    /// Get agent identity (public keys)
+    pub fn get_identity(&self) -> Result<JsValue, JsValue> {
+        let identity = serde_json::json!({
+            "agent_id": self.manager.identity.current_identity.agent_id,
+            "public_key": base64::encode(&self.manager.identity.current_identity.public_key),
+            "x_public_key": base64::encode(&self.manager.identity.current_identity.x_public_key),
+            "key_version": self.manager.identity.current_identity.key_version,
+            "created_at": self.manager.identity.current_identity.key_created_at,
+            "expires_at": self.manager.identity.current_identity.key_expires_at,
+        });
+        Ok(serde_wasm_bindgen::to_value(&identity)?)
+    }
+
+    /// Sign data with Ed25519
+    pub fn sign(&self, data: &str) -> Result<String, JsValue> {
+        let data_bytes = data.as_bytes();
+        let signature = self.manager.identity.sign(data_bytes);
+        Ok(base64::encode(&signature))
+    }
+
+    /// Verify signature with Ed25519
+    pub fn verify(&self, data: &str, signature_b64: &str, public_key_b64: &str) -> Result<bool, JsValue> {
+        let data_bytes = data.as_bytes();
+        let signature = base64::decode(signature_b64)
+            .map_err(|e| JsValue::from_str(&format!("Invalid signature: {}", e)))?;
+        let public_key = base64::decode(public_key_b64)
+            .map_err(|e| JsValue::from_str(&format!("Invalid public key: {}", e)))?;
+
+        Ok(self.manager.identity.verify(data_bytes, &signature, &public_key))
+    }
+
+    /// Encrypt data with AES-256-GCM
+    pub fn encrypt(&self, plaintext: &str, recipient: String) -> Result<JsValue, JsValue> {
+        let encrypted = self.manager.encryption.encrypt(
+            plaintext.as_bytes(),
+            recipient
+        );
+        let result = serde_json::json!({
+            "ciphertext": base64::encode(&encrypted.ciphertext),
+            "nonce": base64::encode(&encrypted.nonce),
+            "sender": encrypted.sender,
+            "recipient": encrypted.recipient,
+            "timestamp": encrypted.timestamp,
+            "key_id": encrypted.key_id,
+        });
+        Ok(serde_wasm_bindgen::to_value(&result)?)
+    }
+
+    /// Decrypt data with AES-256-GCM
+    pub fn decrypt(&self, ciphertext_b64: &str, nonce_b64: &str, sender: String, recipient: String, timestamp: u64, key_id: String) -> Result<String, JsValue> {
+        use security_hardening::EncryptedMessage;
+
+        let ciphertext = base64::decode(ciphertext_b64)
+            .map_err(|e| JsValue::from_str(&format!("Invalid ciphertext: {}", e)))?;
+        let nonce = base64::decode(nonce_b64)
+            .map_err(|e| JsValue::from_str(&format!("Invalid nonce: {}", e)))?;
+
+        let encrypted = EncryptedMessage {
+            ciphertext,
+            nonce,
+            sender,
+            recipient,
+            timestamp,
+            key_id,
+        };
+
+        let decrypted = self.manager.encryption.decrypt(&encrypted)
+            .map_err(|e| JsValue::from_str(&format!("Decryption failed: {}", e)))?;
+
+        String::from_utf8(decrypted)
+            .map_err(|e| JsValue::from_str(&format!("Invalid UTF-8: {}", e)))
+    }
+
+    /// Check for replay attack
+    pub fn is_replay(&mut self, sender: String, nonce: u64, timestamp: u64) -> bool {
+        self.manager.replay_protection.is_replay(&sender, nonce, timestamp)
+    }
+
+    /// Validate safe zone constraint (transmit power: 5-46 dBm)
+    pub fn validate_transmit_power(&mut self, value_dbm: f64) -> bool {
+        self.manager.safe_zone.validate_transmit_power(value_dbm)
+    }
+
+    /// Validate safe zone constraint (handover margin: 0-10 dB)
+    pub fn validate_handover_margin(&mut self, value_db: f64) -> bool {
+        self.manager.safe_zone.validate_handover_margin(value_db)
+    }
+
+    /// Validate safe zone constraint (admission threshold: 0-100%)
+    pub fn validate_admission_threshold(&mut self, value: f64) -> bool {
+        self.manager.safe_zone.validate_admission_threshold(value)
+    }
+
+    /// Get safe zone violation count
+    pub fn get_safe_zone_violations(&self) -> usize {
+        self.manager.safe_zone.get_violation_count()
+    }
+
+    /// Check if BFT quorum is achieved
+    pub fn has_quorum(&self, votes: usize) -> bool {
+        self.manager.bft.has_quorum(votes)
+    }
+
+    /// Get required votes for BFT consensus
+    pub fn get_required_votes(&self) -> usize {
+        self.manager.bft.required_votes()
+    }
+
+    /// Get BFT fault tolerance
+    pub fn get_fault_tolerance(&self) -> usize {
+        self.manager.bft.fault_tolerance()
+    }
+
+    /// Create rollback checkpoint
+    pub fn create_checkpoint(&mut self, state_data: &str) -> Result<String, JsValue> {
+        let state_bytes = state_data.as_bytes().to_vec();
+        let checkpoint_id = self.manager.rollback.create_checkpoint(
+            &self.manager.identity.current_identity.agent_id,
+            state_bytes
+        );
+        Ok(checkpoint_id)
+    }
+
+    /// Rollback to checkpoint
+    pub fn rollback(&mut self, checkpoint_id: String) -> Result<String, JsValue> {
+        let state_data = self.manager.rollback.rollback(&checkpoint_id)
+            .map_err(|e| JsValue::from_str(&e))?;
+
+        String::from_utf8(state_data)
+            .map_err(|e| JsValue::from_str(&format!("Invalid UTF-8: {}", e)))
+    }
+
+    /// Get rollback success rate
+    pub fn get_rollback_success_rate(&self) -> f64 {
+        self.manager.rollback.success_rate()
+    }
+
+    /// Check if rollback meets success target (99.9%)
+    pub fn meets_rollback_success_target(&self) -> bool {
+        self.manager.rollback.meets_success_target()
+    }
+
+    /// Record cold-start interaction
+    pub fn record_interaction(&mut self) {
+        self.manager.cold_start.record_interaction();
+    }
+
+    /// Check if agent can modify network (cold-start protection)
+    pub fn can_modify(&self) -> bool {
+        self.manager.cold_start.can_modify()
+    }
+
+    /// Get cold-start progress percentage
+    pub fn get_cold_start_progress(&self) -> f64 {
+        self.manager.cold_start.progress_percentage()
+    }
+
+    /// Check if key rotation is needed (30-day window)
+    pub fn needs_key_rotation(&self) -> bool {
+        self.manager.identity.needs_rotation()
+    }
+
+    /// Rotate Ed25519 keys
+    pub fn rotate_keys(&mut self) -> Result<String, JsValue> {
+        self.manager.identity.rotate_keys()
+            .map_err(|e| JsValue::from_str(&e))?;
+        Ok(format!("Keys rotated to version {}", self.manager.identity.current_identity.key_version))
+    }
+
+    /// Get compliance status
+    pub fn get_compliance_status(&self) -> Result<JsValue, JsValue> {
+        let status = self.manager.get_compliance_status();
+        let result = serde_json::json!({
+            "valid_signatures": status.valid_signatures,
+            "encryption_enabled": status.encryption_enabled,
+            "replay_prevention_active": status.replay_prevention_active,
+            "safe_zone_violations": status.safe_zone_violations,
+            "rollback_success_rate": status.rollback_success_rate,
+            "meets_success_target": status.meets_success_target,
+            "cold_start_complete": status.cold_start_complete,
+            "key_rotation_needed": status.key_rotation_needed,
+            "compliant": status.safe_zone_violations == 0 &&
+                       status.meets_success_target &&
+                       status.valid_signatures &&
+                       status.encryption_enabled,
+        });
+        Ok(serde_wasm_bindgen::to_value(&result)?)
+    }
+
+    /// Process secure message (full pipeline)
+    pub fn process_secure_message(
+        &mut self,
+        sender: String,
+        nonce: u64,
+        timestamp: u64,
+        data: &str
+    ) -> Result<String, JsValue> {
+        let data_bytes = data.as_bytes();
+        let result = self.manager.process_secure_message(&sender, nonce, timestamp, data_bytes)
+            .map_err(|e| JsValue::from_str(&e))?;
+
+        String::from_utf8(result)
+            .map_err(|e| JsValue::from_str(&format!("Invalid UTF-8: {}", e)))
+    }
+
+    /// Record a query and update cold-start
+    pub fn record_query(&mut self, latency_ms: f32, reward: f32) {
+        // Record cold-start interaction
+        self.manager.cold_start.record_interaction();
+    }
+
+    /// Get security statistics
+    pub fn get_stats(&self) -> Result<JsValue, JsValue> {
+        let stats = serde_json::json!({
+            "identity": {
+                "agent_id": self.manager.identity.current_identity.agent_id,
+                "key_version": self.manager.identity.current_identity.key_version,
+                "needs_rotation": self.manager.identity.needs_rotation(),
+            },
+            "safe_zone": {
+                "violations": self.manager.safe_zone.get_violation_count(),
+                "is_safe": self.manager.safe_zone.is_safe(),
+            },
+            "bft": {
+                "fault_tolerance": self.manager.bft.fault_tolerance(),
+                "required_votes": self.manager.bft.required_votes(),
+            },
+            "rollback": {
+                "success_rate": self.manager.rollback.success_rate(),
+                "meets_target": self.manager.rollback.meets_success_target(),
+            },
+            "cold_start": {
+                "interactions": self.manager.cold_start.interaction_count,
+                "threshold": self.manager.cold_start.threshold,
+                "progress_percent": self.manager.cold_start.progress_percentage(),
+                "can_modify": self.manager.cold_start.can_modify(),
+            },
+        });
+        Ok(serde_wasm_bindgen::to_value(&stats)?)
+    }
 }

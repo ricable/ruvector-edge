@@ -1,0 +1,42 @@
+{
+  "agentId": "agent-cc-002",
+  "fajCode": "FAJ 140 0102",
+  "cxcCode": "CC_002",
+  "featureName": "Extended Range",
+  "acronym": "ER",
+  "category": "Coverage & Capacity",
+  "subcategory": "Extended Range",
+  "accessTechnology": "LTE",
+  "specialization": "Extended cell range for rural coverage",
+  "description": "Extends cell range for improved rural coverage",
+  "qLearning": {
+    "alpha": 0.17,
+    "gamma": 0.83,
+    "epsilon": 0.23,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "extendedRangeEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable extended range"}
+  ],
+  "counters": [
+    {"name": "pmExtendedRangeRadius", "type": "gauge", "description": "Extended range radius"}
+  ],
+  "kpis": [
+    {"name": "Extended Range Gain", "formula": "pmExtendedRangeRadius / standardRadius", "targetValue": "> 1.5x", "thresholdWarning": "< 1.3x", "thresholdCritical": "< 1.1x"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "18B", "supportedIn": ["18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

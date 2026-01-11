@@ -1,0 +1,110 @@
+{
+  "agentId": "agent-nr-007",
+  "fajCode": "FAJ 151 0301",
+  "cxcCode": "NR5G_007",
+  "featureName": "NR Massive MIMO",
+  "acronym": "NRMIMO",
+  "category": "NR/5G",
+  "subcategory": "MIMO",
+  "accessTechnology": "NR",
+  "specialization": "Massive MIMO for 5G with advanced beamforming",
+  "description": "Enables massive MIMO operation in 5G with 64T64R and advanced beamforming capabilities",
+  "qLearning": {
+    "alpha": 0.12,
+    "gamma": 0.88,
+    "epsilon": 0.28,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "massiveMimoEnabled",
+      "moClass": "NRCellDU",
+      "dataType": "boolean",
+      "description": "Enable Massive MIMO"
+    },
+    {
+      "name": "mimoLayers",
+      "moClass": "NRCellDU",
+      "dataType": "integer",
+      "description": "Number of MIMO layers (up to 8)"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmMassiveMimoThroughput",
+      "type": "gauge",
+      "description": "Throughput with Massive MIMO"
+    },
+    {
+      "name": "pmBeamFormingGain",
+      "type": "gauge",
+      "description": "Beamforming gain"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Massive MIMO Throughput Gain",
+      "formula": "pmMassiveMimoThroughput / conventionalMimoThroughput",
+      "targetValue": "> 3x",
+      "thresholdWarning": "< 2x",
+      "thresholdCritical": "< 1.5x"
+    },
+    {
+      "name": "Beamforming Efficiency",
+      "formula": "pmBeamFormingGain / theoreticalMaxGain",
+      "targetValue": "> 80%",
+      "thresholdWarning": "< 65%",
+      "thresholdCritical": "< 50%"
+    }
+  ],
+  "dependencies": [
+    "FAJ 151 0201"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 151 0101",
+    "FAJ 131 0101"
+  ],
+  "releases": {
+    "introduced": "22A",
+    "deprecated": null,
+    "supportedIn": ["22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "NRCellDU",
+    "AntennaGroup",
+    "BeamManagement"
+  ],
+  "documents": [
+    "Massive MIMO Configuration Guide",
+    "5G Beamforming Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

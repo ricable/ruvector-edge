@@ -1,0 +1,44 @@
+{
+  "agentId": "agent-vim-001",
+  "fajCode": "FAJ 210 0101",
+  "cxcCode": "VIM_001",
+  "featureName": "VoLTE",
+  "acronym": "VOLTE",
+  "category": "Voice & IMS",
+  "subcategory": "VoLTE",
+  "accessTechnology": "LTE",
+  "specialization": "Voice over LTE services",
+  "description": "Enables voice calls over LTE with IMS",
+  "qLearning": {
+    "alpha": 0.19,
+    "gamma": 0.81,
+    "epsilon": 0.21,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "volteEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable VoLTE"}
+  ],
+  "counters": [
+    {"name": "pmVolteSetupSuccessRate", "type": "gauge", "description": "VoLTE setup success rate"},
+    {"name": "pmVolteMos", "type": "gauge", "description": "VoLTE Mean Opinion Score"}
+  ],
+  "kpis": [
+    {"name": "VoLTE Setup Success Rate", "formula": "pmVolteSetupSuccessRate", "targetValue": "> 98%", "thresholdWarning": "< 95%", "thresholdCritical": "< 90%"},
+    {"name": "VoLTE MOS", "formula": "pmVolteMos", "targetValue": "> 4.0", "thresholdWarning": "< 3.5", "thresholdCritical": "< 3.0"}
+  ],
+  "dependencies": ["FAJ 801 0101"],
+  "releases": {"introduced": "16B", "supportedIn": ["16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "IMSFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

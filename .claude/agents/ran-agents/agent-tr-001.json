@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-tr-001",
+  "fajCode": "FAJ 200 0101",
+  "cxcCode": "TR_001",
+  "featureName": "Fronthaul (CPRI)",
+  "acronym": "CPRI",
+  "category": "Transport",
+  "subcategory": "Fronthaul",
+  "accessTechnology": "LTE",
+  "specialization": "CPRI fronthaul interface between DU and RU",
+  "description": "Manages CPRI fronthaul connectivity and performance monitoring",
+  "qLearning": {
+    "alpha": 0.13,
+    "gamma": 0.87,
+    "epsilon": 0.27,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "cpriLineRate", "moClass": "NetworkPort", "dataType": "enumeration", "description": "CPRI line rate"}],
+  "counters": [{"name": "pmCpriDelay", "type": "gauge", "description": "CPRI delay"}],
+  "kpis": [{"name": "CPRI Delay", "formula": "pmCpriDelay", "targetValue": "< 100us", "thresholdWarning": "> 150us", "thresholdCritical": "> 200us"}],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["NetworkPort", "CpriPort"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

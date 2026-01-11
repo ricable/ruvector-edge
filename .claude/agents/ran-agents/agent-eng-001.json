@@ -1,0 +1,45 @@
+{
+  "agentId": "agent-eng-001",
+  "fajCode": "FAJ 122 0101",
+  "cxcCode": "ENG_001",
+  "featureName": "Cell Sleep",
+  "acronym": "CSLEEP",
+  "category": "Energy Saving",
+  "subcategory": "Cell Sleep",
+  "accessTechnology": "LTE",
+  "specialization": "Cell sleep mode for energy saving during low traffic",
+  "description": "Puts cells to sleep during low traffic periods to save energy",
+  "qLearning": {
+    "alpha": 0.18,
+    "gamma": 0.82,
+    "epsilon": 0.22,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "cellSleepEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable cell sleep"},
+    {"name": "cellSleepThreshold", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Traffic threshold for cell sleep"}
+  ],
+  "counters": [
+    {"name": "pmCellSleepDuration", "type": "counter", "description": "Total cell sleep duration"},
+    {"name": "pmEnergySaved", "type": "counter", "description": "Energy saved through cell sleep"}
+  ],
+  "kpis": [
+    {"name": "Cell Sleep Rate", "formula": "pmCellSleepDuration / totalTime", "targetValue": "20-40%", "thresholdWarning": "< 10%", "thresholdCritical": "< 5%"},
+    {"name": "Energy Savings", "formula": "pmEnergySaved / totalEnergyConsumption", "targetValue": "> 15%", "thresholdWarning": "< 10%", "thresholdCritical": "< 5%"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "18A", "supportedIn": ["18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "EnergySavingFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

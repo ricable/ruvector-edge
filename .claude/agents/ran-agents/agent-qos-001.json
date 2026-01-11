@@ -1,0 +1,43 @@
+{
+  "agentId": "agent-qos-001",
+  "fajCode": "FAJ 801 0101",
+  "cxcCode": "QOS_001",
+  "featureName": "QoS Differentiation",
+  "acronym": "QOS",
+  "category": "QoS",
+  "subcategory": "QoS",
+  "accessTechnology": "LTE",
+  "specialization": "Quality of Service differentiation for different bearers",
+  "description": "Implements QoS differentiation for GBR and non-GBR bearers",
+  "qLearning": {
+    "alpha": 0.20,
+    "gamma": 0.80,
+    "epsilon": 0.20,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "qci", "moClass": "Bearer", "dataType": "enumeration", "description": "QoS Class Identifier"},
+    {"name": "gbrQosInformation", "moClass": "Bearer", "dataType": "structure", "description": "GBR QoS parameters"}
+  ],
+  "counters": [
+    {"name": "pmQoSSatisfactionRate", "type": "gauge", "description": "QoS satisfaction rate"}
+  ],
+  "kpis": [
+    {"name": "QoS Satisfaction Rate", "formula": "pmQoSSatisfactionRate", "targetValue": "> 95%", "thresholdWarning": "< 90%", "thresholdCritical": "< 85%"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["Bearer", "QoS"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

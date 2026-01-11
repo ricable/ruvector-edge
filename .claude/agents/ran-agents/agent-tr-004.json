@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-tr-004",
+  "fajCode": "FAJ 200 0104",
+  "cxcCode": "TR_004",
+  "featureName": "Xn Interface (5G)",
+  "acronym": "XN",
+  "category": "Transport",
+  "subcategory": "Xn",
+  "accessTechnology": "NR",
+  "specialization": "Xn interface between gNBs for handover and dual connectivity",
+  "description": "Manages Xn interface for 5G inter-gNB communication",
+  "qLearning": {
+    "alpha": 0.13,
+    "gamma": 0.87,
+    "epsilon": 0.27,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "xnEnabled", "moClass": "XnInterface", "dataType": "boolean", "description": "Enable Xn interface"}],
+  "counters": [{"name": "pmXnSetupSuccessRate", "type": "gauge", "description": "Xn setup success rate"}],
+  "kpis": [{"name": "Xn Setup Success Rate", "formula": "pmXnSetupSuccessRate", "targetValue": "> 98%", "thresholdWarning": "< 95%", "thresholdCritical": "< 90%"}],
+  "dependencies": ["FAJ 150 0102"],
+  "releases": {"introduced": "20B", "supportedIn": ["20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["XnInterface", "GNBCUFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

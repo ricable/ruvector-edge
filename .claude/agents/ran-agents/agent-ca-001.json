@@ -1,0 +1,137 @@
+{
+  "agentId": "agent-ca-001",
+  "fajCode": "FAJ 121 0101",
+  "cxcCode": "CAE_001",
+  "featureName": "Inter-Band Carrier Aggregation",
+  "acronym": "IBCA",
+  "category": "Carrier Aggregation",
+  "subcategory": "Inter-Band",
+  "accessTechnology": "LTE",
+  "specialization": "Primary Component Carrier (PCC) and Secondary Component Carrier (SCC) configuration across different frequency bands",
+  "description": "Manages inter-band carrier aggregation for LTE-Advanced, combining carriers from different frequency bands to increase bandwidth and user throughput",
+  "qLearning": {
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "epsilon": 0.3,
+    "epsilonDecay": 0.995,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "queryTypes": {
+    "ParameterConfiguration": {
+      "priority": "high",
+      "complexity": "complex",
+      "examples": [
+        "Configure PCC and SCC carriers",
+        "Set CA bandwidth combination",
+        "Configure CA timing parameters"
+      ]
+    },
+    "Troubleshooting": {
+      "priority": "high",
+      "complexity": "expert",
+      "examples": [
+        "Diagnose CA setup failures",
+        "Resolve SCC activation issues",
+        "Troubleshoot CA throughput degradation"
+      ]
+    },
+    "Optimization": {
+      "priority": "medium",
+      "complexity": "complex",
+      "examples": [
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "caBandwidthCombination",
+      "moClass": "EUtranCellFDD",
+      "dataType": "enumeration",
+      "description": "Defines which bandwidth combinations are supported for CA"
+    },
+    {
+      "name": "pccScgOffset",
+      "moClass": "EUtranCellFDD",
+      "dataType": "integer",
+      "description": "Offset between PCC and SCG frequencies"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmCaActivationSuccessRate",
+      "type": "gauge",
+      "description": "Success rate of CA activation attempts"
+    },
+    {
+      "name": "pmScgAdditionSuccessRate",
+      "type": "gauge",
+      "description": "Success rate of SCG (SCC) addition attempts"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "CA Activation Success Rate",
+      "formula": "pmCaActivationSuccessRate",
+      "targetValue": "> 95%",
+      "thresholdWarning": "< 90%",
+      "thresholdCritical": "< 85%"
+    },
+    {
+      "name": "CA Throughput Gain",
+      "formula": "caThroughput / nonCaThroughput",
+      "targetValue": "> 1.5x",
+      "thresholdWarning": "< 1.2x",
+      "thresholdCritical": "< 1.0x"
+    }
+  ],
+  "dependencies": [
+    "FAJ 121 0102",
+    "FAJ 120 0105"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 121 0103",
+    "FAJ 121 0201"
+  ],
+  "releases": {
+    "introduced": "15B",
+    "deprecated": null,
+    "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "EUtranCellFDD",
+    "EUtranCellTDD",
+    "CarrierAggregation"
+  ],
+  "documents": [
+    "Carrier Aggregation Configuration Guide",
+    "Inter-Band CA Troubleshooting Handbook"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

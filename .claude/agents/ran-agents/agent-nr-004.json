@@ -1,0 +1,111 @@
+{
+  "agentId": "agent-nr-004",
+  "fajCode": "FAJ 150 0301",
+  "cxcCode": "NR5G_004",
+  "featureName": "Dynamic Spectrum Sharing (DSS)",
+  "acronym": "DSS",
+  "category": "NR/5G",
+  "subcategory": "Spectrum Sharing",
+  "accessTechnology": "NR",
+  "specialization": "Dynamic sharing of spectrum between LTE and NR based on traffic demand",
+  "description": "Enables flexible spectrum sharing between LTE and 5G NR in the same frequency band",
+  "qLearning": {
+    "alpha": 0.12,
+    "gamma": 0.88,
+    "epsilon": 0.28,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive",
+    "rewardDiscounting": "temporal"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000,
+    "degradedActions": ["prune_q_table", "increase_exploration", "federated_sync"]
+  },
+  "capabilities": [
+    "ParameterConfiguration",
+    "Troubleshooting",
+    "Optimization",
+    "Activation",
+    "Deactivation",
+    "Comparison",
+    "GeneralInfo"
+  ],
+  "parameters": [
+    {
+      "name": "dssEnabled",
+      "moClass": "NRCellDU",
+      "dataType": "boolean",
+      "description": "Enable Dynamic Spectrum Sharing"
+    },
+    {
+      "name": "dssPattern",
+      "moClass": "NRCellDU",
+      "dataType": "enumeration",
+      "description": "DSS pattern for LTE/NR sharing"
+    }
+  ],
+  "counters": [
+    {
+      "name": "pmDssNrUtilization",
+      "type": "gauge",
+      "description": "NR utilization in DSS mode"
+    },
+    {
+      "name": "pmDssLteUtilization",
+      "type": "gauge",
+      "description": "LTE utilization in DSS mode"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "DSS Spectrum Efficiency",
+      "formula": "(pmDssNrUtilization + pmDssLteUtilization) / totalBandwidth",
+      "targetValue": "> 85%",
+      "thresholdWarning": "< 75%",
+      "thresholdCritical": "< 65%"
+    },
+    {
+      "name": "DSS Switching Rate",
+      "formula": "dssSwitches / hour",
+      "targetValue": "< 10/hour",
+      "thresholdWarning": "> 20/hour",
+      "thresholdCritical": "> 30/hour"
+    }
+  ],
+  "dependencies": [
+    "FAJ 150 0101",
+    "FAJ 100 0101"
+  ],
+  "conflicts": [],
+  "relatedFeatures": [
+    "FAJ 150 0102",
+    "FAJ 120 0103"
+  ],
+  "releases": {
+    "introduced": "20B",
+    "deprecated": null,
+    "supportedIn": ["20B", "21A", "21B", "22A", "22B", "23A", "23B"]
+  },
+  "moClasses": [
+    "NRCellDU",
+    "EUtranCellFDD",
+    "SpectrumManager"
+  ],
+  "documents": [
+    "DSS Configuration Guide",
+    "Spectrum Sharing Optimization"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "createdAt": "2026-01-11T00:00:00Z",
+    "updatedAt": "2026-01-11T00:00:00Z",
+    "author": "RANOps Swarm",
+    "ontologyVersion": "ADR-108-v1.0"
+  }
+}

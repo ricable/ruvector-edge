@@ -41,6 +41,10 @@
 export * as knowledge from './knowledge';
 export * as intelligence from './intelligence';
 export * as optimization from './optimization';
+export * as agentLifecycle from './agent-lifecycle';
+export * as energy from './energy';
+export * as ranBattleTest from './ran-battle-test';
+export * as ranKnowledge from './ran-knowledge';
 
 // Supporting Domain
 export * as coordination from './coordination';
@@ -77,6 +81,18 @@ export {
   SafeZone,
   MinCutAnalyzer
 } from './optimization';
+
+export {
+  EnergyState,
+  MIMOSleepState,
+  CellSleepState,
+  EnergyAction,
+  EnergyReward,
+  MIMOSleepReward,
+  CellSleepReward,
+  EnergyOptimizer,
+  EnergyOptimizationCycle
+} from './energy';
 
 export {
   Query,

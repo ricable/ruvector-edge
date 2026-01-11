@@ -118,12 +118,18 @@ export class QEntry {
     // Confidence increases with visits and consistency
     const visitFactor = Math.min(1, this._visits / 50);
     const consistencyFactor = this.calculateConsistency();
-    this._confidence = visitFactor * 0.5 + consistencyFactor * 0.5;
+
+    // Minimum baseline confidence of 0.1 for agents with knowledge
+    // This ensures new agents have some confidence rather than starting at 0
+    const baselineConfidence = this._visits === 0 ? 0.1 : 0;
+    this._confidence = baselineConfidence + (visitFactor * 0.45 + consistencyFactor * 0.45);
   }
 
   private calculateConsistency(): number {
     if (this._outcomes.length < 2) {
-      return 0;
+      // Return 0.5 as baseline consistency for single/no outcomes
+      // This provides partial confidence even with limited experience
+      return this._outcomes.length === 1 ? 0.3 : 0.5;
     }
     // Calculate variance in outcomes
     const rewards = this._outcomes.map(o => o.reward);

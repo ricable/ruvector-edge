@@ -1,0 +1,45 @@
+{
+  "agentId": "agent-ue-001",
+  "fajCode": "FAJ 400 0101",
+  "cxcCode": "UE_001",
+  "featureName": "DRX Configuration",
+  "acronym": "DRX",
+  "category": "UE Handling",
+  "subcategory": "DRX",
+  "accessTechnology": "LTE",
+  "specialization": "Discontinuous Reception for UE power saving",
+  "description": "Configures DRX parameters for UE battery optimization",
+  "qLearning": {
+    "alpha": 0.20,
+    "gamma": 0.80,
+    "epsilon": 0.20,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "drxCycle", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "DRX cycle length"},
+    {"name": "drxInactivityTimer", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "DRX inactivity timer"}
+  ],
+  "counters": [
+    {"name": "pmDrxActivationRate", "type": "gauge", "description": "DRX activation rate"},
+    {"name": "pmDrxPowerSaving", "type": "gauge", "description": "UE power saving with DRX"}
+  ],
+  "kpis": [
+    {"name": "DRX Activation Rate", "formula": "pmDrxActivationRate", "targetValue": "> 80%", "thresholdWarning": "< 70%", "thresholdCritical": "< 60%"},
+    {"name": "UE Power Saving", "formula": "pmDrxPowerSaving", "targetValue": "> 30%", "thresholdWarning": "< 20%", "thresholdCritical": "< 10%"}
+  ],
+  "dependencies": [],
+  "releases": {"introduced": "15B", "supportedIn": ["15B", "16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

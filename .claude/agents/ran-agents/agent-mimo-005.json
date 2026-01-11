@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-mimo-005",
+  "fajCode": "FAJ 130 0202",
+  "cxcCode": "MIMO_005",
+  "featureName": "Antenna Port Configuration",
+  "acronym": "APC",
+  "category": "MIMO & Antenna",
+  "subcategory": "Antenna Port",
+  "accessTechnology": "LTE",
+  "specialization": "Antenna port configuration for reference signals",
+  "description": "Manages antenna port configuration for CSI-RS and DM-RS",
+  "qLearning": {
+    "alpha": 0.14,
+    "gamma": 0.86,
+    "epsilon": 0.26,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "antennaPorts", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Number of antenna ports"}],
+  "counters": [{"name": "pmCsiRsrp", "type": "gauge", "description": "CSI-RSRP measurements"}],
+  "kpis": [{"name": "CSI-RSRP", "formula": "pmCsiRsrp", "targetValue": "> -80dBm", "thresholdWarning": "< -90dBm", "thresholdCritical": "< -100dBm"}],
+  "dependencies": ["FAJ 130 0101"],
+  "releases": {"introduced": "16B", "supportedIn": ["16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "AntennaGroup"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-01-11T00:37:32+01:00",
+  "progress": 6,
+  "domains": {
+    "agent-lifecycle": 0, "task-execution": 0, "memory-management": 0, "coordination": 30, "shared-kernel": 0
+  },
+  "completed": 0,
+  "total": 5,
+  "artifacts": {
+    "entities":        0
+0,
+    "valueObjects":        0
+0,
+    "aggregates":        0
+0,
+    "repositories":        0
+0,
+    "services":        0
+0,
+    "domainEvents":        0
+0
+  }
+}

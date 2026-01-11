@@ -22,6 +22,23 @@ export class State {
   }
 
   /**
+   * Create a state from a string key (for reverse lookup)
+   */
+  static create(key: string): State {
+    const parts = key.split(':');
+    if (parts.length < 2) {
+      return new State('general', 'medium', key, 0.5);
+    }
+
+    const queryType = (parts[0] as QueryType) || 'general';
+    const complexity = (parts[1] as ComplexityLevel) || 'medium';
+    const contextHash = parts[2] || 'default';
+    const confidence = parts[3] ? parseInt(parts[3]) / 10 : 0.5;
+
+    return new State(queryType, complexity, contextHash, confidence);
+  }
+
+  /**
    * Encode state for Q-table lookup
    */
   encode(): StateVector {

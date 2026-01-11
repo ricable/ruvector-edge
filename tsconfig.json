@@ -34,7 +34,9 @@
       "@elex/intelligence/*": ["src/layers/intelligence/*"],
       "@elex/optimization/*": ["src/layers/optimization/*"],
       "@elex/coordination/*": ["src/layers/coordination/*"],
-      "@elex/runtime/*": ["src/layers/runtime/*"]
+      "@elex/runtime/*": ["src/layers/runtime/*"],
+      "@agentdb/core": ["src/@agentdb/core/index.ts"],
+      "@agentdb/hnsw": ["src/@agentdb/hnsw/index.ts"]
     }
   },
   "include": ["src/**/*.ts"],

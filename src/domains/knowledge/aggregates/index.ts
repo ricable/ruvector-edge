@@ -17,3 +17,19 @@ export {
   PeerConsulted,
   FeatureAgentEvent
 } from './feature-agent';
+
+export {
+  FeatureKnowledge,
+  FeatureKnowledgeConfig,
+  KnowledgeStats,
+  KnowledgeLoadedEvent,
+  ParameterAddedEvent,
+  CounterAddedEvent,
+  KnowledgeUpdatedEvent,
+  FeatureKnowledgeEvent
+} from './feature-knowledge';
+
+export {
+  KnowledgeBase,
+  KnowledgeBaseStats
+} from './knowledge-base';

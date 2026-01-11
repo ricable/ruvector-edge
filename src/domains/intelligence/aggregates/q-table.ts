@@ -6,7 +6,7 @@
  */
 
 import { State } from '../value-objects/state';
-import { Action, ALL_ACTIONS } from '../value-objects/action';
+import { Action, ALL_ACTIONS, ACTION_METADATA } from '../value-objects/action';
 import { Reward } from '../value-objects/reward';
 import { QEntry } from '../entities/q-entry';
 
@@ -132,12 +132,27 @@ export class QTable {
   getBestAction(state: State): Action {
     let bestAction = ALL_ACTIONS[0];
     let bestValue = Number.NEGATIVE_INFINITY;
+    const values = new Map<Action, number>();
 
     for (const action of ALL_ACTIONS) {
       const value = this.lookup(state, action);
+      values.set(action, value);
       if (value > bestValue) {
         bestValue = value;
         bestAction = action;
+      }
+    }
+
+    // If all values are equal (all 0 for unvisited states),
+    // prefer actions with lower base cost (DIRECT_ANSWER has cost 0)
+    if (bestValue === 0) {
+      let lowestCost = Number.POSITIVE_INFINITY;
+      for (const action of ALL_ACTIONS) {
+        const metadata = ACTION_METADATA.get(action);
+        if (metadata && metadata.baseCost < lowestCost) {
+          lowestCost = metadata.baseCost;
+          bestAction = action;
+        }
       }
     }
 

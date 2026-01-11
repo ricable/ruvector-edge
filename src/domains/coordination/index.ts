@@ -25,3 +25,6 @@ export * from './entities';
 
 // Aggregates
 export * from './aggregates';
+
+// Domain Events
+export * from './domain-events';

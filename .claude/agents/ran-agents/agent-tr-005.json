@@ -1,0 +1,36 @@
+{
+  "agentId": "agent-tr-005",
+  "fajCode": "FAJ 200 0105",
+  "cxcCode": "TR_005",
+  "featureName": "Ethernet Transport",
+  "acronym": "ETH",
+  "category": "Transport",
+  "subcategory": "Ethernet",
+  "accessTechnology": "LTE",
+  "specialization": "Ethernet-based transport for fronthaul and backhaul",
+  "description": "Manages Ethernet transport interfaces and VLAN configuration",
+  "qLearning": {
+    "alpha": 0.13,
+    "gamma": 0.87,
+    "epsilon": 0.27,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [{"name": "ethernetSpeed", "moClass": "EthernetPort", "dataType": "enumeration", "description": "Ethernet port speed"}],
+  "counters": [{"name": "pmEthErrorRate", "type": "gauge", "description": "Ethernet error rate"}],
+  "kpis": [{"name": "Ethernet Error Rate", "formula": "pmEthErrorRate", "targetValue": "< 0.01%", "thresholdWarning": "> 0.1%", "thresholdCritical": "> 1%"}],
+  "dependencies": [],
+  "releases": {"introduced": "16A", "supportedIn": ["16A", "16B", "17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EthernetPort", "Vlan"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

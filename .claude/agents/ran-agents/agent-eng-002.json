@@ -1,0 +1,45 @@
+{
+  "agentId": "agent-eng-002",
+  "fajCode": "FAJ 122 0102",
+  "cxcCode": "ENG_002",
+  "featureName": "MIMO Sleep",
+  "acronym": "MIMOSLEEP",
+  "category": "Energy Saving",
+  "subcategory": "MIMO Sleep",
+  "accessTechnology": "LTE",
+  "specialization": "MIMO layer deactivation for energy saving",
+  "description": "Deactivates MIMO layers during low traffic to reduce power consumption",
+  "qLearning": {
+    "alpha": 0.18,
+    "gamma": 0.82,
+    "epsilon": 0.22,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "mimoSleepEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable MIMO sleep"},
+    {"name": "mimoSleepThreshold", "moClass": "EUtranCellFDD", "dataType": "integer", "description": "Traffic threshold for MIMO sleep"}
+  ],
+  "counters": [
+    {"name": "pmMimoSleepDuration", "type": "counter", "description": "MIMO sleep duration"},
+    {"name": "pmMimoPowerSaving", "type": "counter", "description": "Power saved through MIMO sleep"}
+  ],
+  "kpis": [
+    {"name": "MIMO Sleep Rate", "formula": "pmMimoSleepDuration / totalTime", "targetValue": "30-50%", "thresholdWarning": "< 20%", "thresholdCritical": "< 10%"},
+    {"name": "MIMO Power Savings", "formula": "pmMimoPowerSaving / totalMimoPower", "targetValue": "> 20%", "thresholdWarning": "< 15%", "thresholdCritical": "< 10%"}
+  ],
+  "dependencies": ["FAJ 130 0102"],
+  "releases": {"introduced": "19A", "supportedIn": ["19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "EnergySavingFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

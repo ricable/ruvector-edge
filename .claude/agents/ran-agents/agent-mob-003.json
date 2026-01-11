@@ -1,0 +1,44 @@
+{
+  "agentId": "agent-mob-003",
+  "fajCode": "FAJ 300 0103",
+  "cxcCode": "MOB_003",
+  "featureName": "Mobility Load Balancing",
+  "acronym": "MLB",
+  "category": "Mobility",
+  "subcategory": "Load Balancing",
+  "accessTechnology": "LTE",
+  "specialization": "Load balancing through handover parameter optimization",
+  "description": "Balances load across cells by adjusting handover parameters",
+  "qLearning": {
+    "alpha": 0.16,
+    "gamma": 0.84,
+    "epsilon": 0.24,
+    "epsilonDecay": 0.994,
+    "epsilonMin": 0.05,
+    "learningRateStrategy": "adaptive"
+  },
+  "stateMachine": {
+    "coldStartThreshold": 100,
+    "healthWarningThreshold": 0.7,
+    "healthCriticalThreshold": 0.5,
+    "recoveryThreshold": 0.8,
+    "maxConsecutiveFailures": 5,
+    "observationWindowMs": 5000
+  },
+  "capabilities": ["ParameterConfiguration", "Troubleshooting", "Optimization", "Activation", "GeneralInfo"],
+  "parameters": [
+    {"name": "mlbEnabled", "moClass": "EUtranCellFDD", "dataType": "boolean", "description": "Enable MLB"}
+  ],
+  "counters": [
+    {"name": "pmMlbHandoverRate", "type": "gauge", "description": "MLB-triggered handover rate"},
+    {"name": "pmLoadBalanceIndex", "type": "gauge", "description": "Load balance index after MLB"}
+  ],
+  "kpis": [
+    {"name": "MLB Effectiveness", "formula": "pmLoadBalanceIndex", "targetValue": "> 0.88", "thresholdWarning": "< 0.78", "thresholdCritical": "< 0.68"},
+    {"name": "MLB HO Rate", "formula": "pmMlbHandoverRate / totalHoRate", "targetValue": "5-15%", "thresholdWarning": "< 3%", "thresholdCritical": "< 1%"}
+  ],
+  "dependencies": ["FAJ 300 0101", "FAJ 120 0102"],
+  "releases": {"introduced": "17A", "supportedIn": ["17A", "17B", "18A", "18B", "19A", "19B", "20A", "20B", "21A", "21B", "22A", "22B", "23A", "23B"]},
+  "moClasses": ["EUtranCellFDD", "MLBFunction"],
+  "metadata": {"version": "1.0.0", "createdAt": "2026-01-11T00:00:00Z", "author": "RANOps Swarm", "ontologyVersion": "ADR-108-v1.0"}
+}

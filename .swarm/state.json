@@ -1,7 +1,8 @@
 {
-  "id": "swarm-mock-123",
-  "maxAgents": 20,
+  "id": "swarm-1768093140012",
+  "topology": "hybrid",
+  "maxAgents": 15,
   "strategy": "development",
-  "initializedAt": "2026-01-10T21:16:30.327Z",
+  "initializedAt": "2026-01-11T00:59:00.012Z",
   "status": "ready"
 }
