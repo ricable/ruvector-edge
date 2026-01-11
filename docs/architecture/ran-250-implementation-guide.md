@@ -975,10 +975,10 @@ interface TroubleshootingScenario {
 ### Step 4.1: Battle Test Execution
 
 **File to Create:**
-- `/scripts/run-250-ran-agent-battle-tests.ts`
+- `/scripts/run-ran-battle-test.ts`
 
 ```typescript
-// scripts/run-250-ran-agent-battle-tests.ts
+// scripts/run-ran-battle-test.ts
 
 import { AgentRegistry } from '../src/domains/knowledge/aggregates/agent-registry';
 import { QuestionTemplateEngine } from '../src/domains/ran-battle-test/services/question-template-engine';

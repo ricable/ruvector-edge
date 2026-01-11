@@ -594,7 +594,7 @@ describe('250-Question Battle Test', () => {
 
 ```bash
 # Run 250-question battle test
-bun run scripts/run-250-ran-agent-battle-tests.ts
+bun run scripts/run-ran-battle-test.ts
 
 # Run with coverage
 bun test tests/knowledge/50-ran-agents-battle-test.spec.ts

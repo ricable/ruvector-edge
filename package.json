@@ -59,6 +59,10 @@
     "clean": "rm -rf dist",
     "demo:node": "bun run src/wasm/demo-node.ts",
     "demo:benchmark": "bun run src/wasm/demo-node.ts --benchmark --json",
+    "scripts:battle": "bun run scripts/battle-test/run-ran-battle-test.ts",
+    "scripts:index": "bun run scripts/indexing/index-ran-features.ts",
+    "scripts:optimize": "bun run scripts/optimization/execute-energy-optimization.ts",
+    "scripts:security": "bun run scripts/security/validate-security-hardening.ts",
     "prepublishOnly": "bun run build"
   },
   "keywords": [

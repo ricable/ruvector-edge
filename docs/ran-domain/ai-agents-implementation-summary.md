@@ -68,11 +68,11 @@ Bun test suite covering:
 - DDD invariant enforcement
 - Performance benchmarks
 
-### 6. Integration Script (`scripts/run-ran-agent-battle-tests.ts`)
+### 6. Integration Script (`scripts/battle-test/run-ran-battle-test.ts`)
 
 Executable battle test runner:
 ```bash
-bun run scripts/run-ran-agent-battle-tests.ts
+bun run scripts/battle-test/run-ran-battle-test.ts
 ```
 
 ## DDD Architecture
@@ -152,7 +152,7 @@ bun test tests/knowledge/50-ran-agents-battle-test.spec.ts
 
 ### Battle Arena
 ```bash
-bun run scripts/run-ran-agent-battle-tests.ts
+bun run scripts/battle-test/run-ran-battle-test.ts
 ```
 
 ### Expected Output
@@ -221,7 +221,7 @@ test-cfv3/
 │   └── knowledge/
 │       └── 50-ran-agents-battle-test.spec.ts  # Test suite
 └── scripts/
-    └── run-ran-agent-battle-tests.ts  # Integration script
+    └── run-ran-battle-test.ts  # Integration script
 ```
 
 ## Key Features
@@ -251,7 +251,7 @@ test-cfv3/
 
 ## Next Steps
 
-1. **Run the battle tests**: `bun run scripts/run-ran-agent-battle-tests.ts`
+1. **Run the battle tests**: `bun run scripts/battle-test/run-ran-battle-test.ts`
 2. **Review the report**: Check `ran-agent-battle-report.json`
 3. **Analyze performance**: Look for agents needing more training
 4. **Extend to NR features**: Add 5G agents following same pattern
