@@ -6,6 +6,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](../LICENSE)
+[![Path Aliases](https://img.shields.io/badge/Path-Aliases-@/*_@domains/*_etc.-blue.svg)](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
 
 ## Introduction
 
@@ -101,7 +102,10 @@ V3 represents a complete architectural overhaul:
 ```
 v3/
 ├── @claude-flow/                    # Modular packages
-│   ├── security/                    # Security module
+│   ├── security/                    # Security module (@security/* alias)
+│   ├── memory/                      # Memory module (@memory/* alias)
+│   ├── swarm/                       # Swarm coordination (@swarm/* alias)
+│   └── ...                         # Other modules
 │   │   └── src/
 │   │       ├── index.ts             # Password hashing, validators
 │   │       └── ...
@@ -247,6 +251,13 @@ const coordinator = new UnifiedSwarmCoordinator({
 await coordinator.initialize();
 await coordinator.spawnAgent({ type: 'queen-coordinator' });
 ```
+
+**Note**: Path aliases configured in `tsconfig.json`:
+- `@/*` → `src/*`
+- `@domains/*` → `src/domains/*`
+- `@security/*` → `src/security/*`
+- `@wasm/*` → `src/wasm/*`
+- `@agentdb/*` → `src/@agentdb/*`
 
 ### @claude-flow/integration
 Deep integration with agentic-flow@alpha per ADR-001.

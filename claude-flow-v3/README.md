@@ -8,6 +8,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-SDK%20Integrated-green?style=for-the-badge&logo=anthropic)](https://github.com/ruvnet/claude-flow)
 [![Agentics Foundation](https://img.shields.io/badge/Agentics-Foundation-crimson?style=for-the-badge&logo=openai)](https://discord.com/invite/dfxmpwkG2D)
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=opensourceinitiative)](https://opensource.org/licenses/MIT)
+[![Path Aliases](https://img.shields.io/badge/Path-Aliases-@/*_@domains/*_etc.-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping)
 
 **Production-ready multi-agent AI orchestration for Claude Code**
 

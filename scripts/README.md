@@ -14,6 +14,39 @@ scripts/
 └── security/                  # Security validation
 ```
 
+## Development Notes
+
+### Script Path Structure
+All scripts use the current project structure with TypeScript path aliases configured in `tsconfig.json`:
+
+- `@/*` → `src/*`
+- `@core/*` → `src/core/*`
+- `@domains/*` → `src/domains/*`
+- `@layers/*` → `src/layers/*`
+- `@infrastructure/*` → `src/infrastructure/*`
+- `@security/*` → `src/security/*`
+- `@wasm/*` → `src/wasm/*`
+- `@agentdb/*` → `src/@agentdb/*`
+
+### Running Scripts
+
+**TypeScript Scripts** (using Bun runtime):
+```bash
+bun run scripts/<path>/<script>.ts
+```
+
+**Python Scripts** (standard library only):
+```bash
+python scripts/<path>/<script>.py
+```
+
+### Package.json Scripts
+The main `package.json` includes convenience scripts:
+- `npm run scripts:battle` - Run battle tests
+- `npm run scripts:index` - Index RAN features
+- `npm run scripts:optimize` - Run optimization demos
+- `npm run scripts:security` - Validate security hardening
+
 ## Quick Start
 
 ### Interactive Battle Demo

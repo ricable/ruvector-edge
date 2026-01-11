@@ -101,7 +101,7 @@ def extract_feature_identity(content: str) -> Optional[str]:
 
 
 def run_memory_store(key: str, value: str) -> bool:
-    """Store data in AgentDB memory"""
+    """Store data in AgentDB memory using -v flag for value"""
     try:
         cmd = [
             "npx", "@claude-flow/cli@latest", "memory", "store",
@@ -114,7 +114,7 @@ def run_memory_store(key: str, value: str) -> bool:
             stats["files_stored"] += 1
             return True
         else:
-            stats["errors"].append(f"Failed to store {key}: {result.stderr}")
+            stats["errors"].append(f"Failed to store {key}: {result.stderr[:200]}")
             return False
     except subprocess.TimeoutExpired:
         stats["errors"].append(f"Timeout storing {key}")

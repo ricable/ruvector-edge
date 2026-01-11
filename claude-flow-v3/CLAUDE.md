@@ -122,6 +122,7 @@ This project is configured with Claude Flow V3:
 - **Memory Backend**: hybrid (SQLite + AgentDB)
 - **HNSW Indexing**: Enabled (150x-12,500x faster)
 - **Neural Learning**: Enabled (SONA)
+- **Path Aliases**: @/*, @domains/*, @security/*, @wasm/*, @agentdb/*
 
 ## 🚀 V3 CLI Commands (26 Commands, 140+ Subcommands)
 

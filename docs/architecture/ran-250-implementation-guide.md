@@ -195,7 +195,7 @@ interface RegistryStatistics {
 ```typescript
 // src/memory/ran-memory-schema.ts
 
-import { agentDB } from '@agentdb/core';
+import { agentDB } from '@agentdb/core';  // Path alias: @agentdb/* → src/@agentdb/*
 
 export interface RANMemoryNamespaces {
   'ran-agents': AgentProfile;
@@ -654,7 +654,7 @@ export class CoordinationAgentsFactory {
 
 import { FeatureAgent } from '../../knowledge/aggregates/feature-agent';
 import { TestQuestion } from '../entities/test-question';
-import { agentDB } from '@agentdb/core';
+import { agentDB } from '@agentdb/core';  // Path alias: @agentdb/* → src/@agentdb/*
 
 export class QuestionTemplateEngine {
   // Generate all 250 questions for an agent
@@ -975,14 +975,14 @@ interface TroubleshootingScenario {
 ### Step 4.1: Battle Test Execution
 
 **File to Create:**
-- `/scripts/run-ran-battle-test.ts`
+- `/scripts/battle-test/run-ran-battle-test.ts`
 
 ```typescript
-// scripts/run-ran-battle-test.ts
+// scripts/battle-test/run-ran-battle-test.ts
 
-import { AgentRegistry } from '../src/domains/knowledge/aggregates/agent-registry';
-import { QuestionTemplateEngine } from '../src/domains/ran-battle-test/services/question-template-engine';
-import { BattleTestRunner } from '../src/domains/ran-battle-test/aggregates/battle-test-runner';
+import { AgentRegistry } from '@domains/knowledge/aggregates/agent-registry';
+import { QuestionTemplateEngine } from '@domains/ran-battle-test/services/question-template-engine';
+import { BattleTestRunner } from '@domains/ran-battle-test/aggregates/battle-test-runner';
 
 async function main() {
   console.log('=================================');
@@ -1058,9 +1058,9 @@ main().catch(console.error);
 ```typescript
 // scripts/deploy-250-agents.ts
 
-import { AgentRegistry } from '../src/domains/knowledge/aggregates/agent-registry';
-import { RANMemoryInitializer } from '../src/memory/ran-memory-schema';
-import { DeploymentOrchestrator } from '../src/deployment/deployment-orchestrator';
+import { AgentRegistry } from '@domains/knowledge/aggregates/agent-registry';
+import { RANMemoryInitializer } from '@memory/ran-memory-schema';
+import { DeploymentOrchestrator } from '@deployment/deployment-orchestrator';
 
 async function main() {
   console.log('=================================');

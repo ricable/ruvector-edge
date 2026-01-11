@@ -594,7 +594,7 @@ describe('250-Question Battle Test', () => {
 
 ```bash
 # Run 250-question battle test
-bun run scripts/run-ran-battle-test.ts
+bun run scripts/battle-test/run-ran-battle-test.ts
 
 # Run with coverage
 bun test tests/knowledge/50-ran-agents-battle-test.spec.ts
@@ -752,4 +752,4 @@ interface SystemMetrics {
 - docs/ddd/bounded-contexts.md
 - docs/ddd/context-map.md
 - docs/ddd/context-knowledge.md
-- docs/elex-development.md
+- docs/development/elex-development.md

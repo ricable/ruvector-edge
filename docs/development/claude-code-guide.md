@@ -1,6 +1,6 @@
 # Claude Code Configuration - Claude Flow V3
 
-Project-specific development guide: [docs/elex-development.md](docs/elex-development.md)
+Project-specific development guide: [docs/development/elex-development.md](docs/development/elex-development.md)
 
 ## Automatic Swarm Orchestration
 

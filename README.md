@@ -184,6 +184,7 @@ src/wasm/                           # Phase 8 WASM SDK Implementation ✅
 | Coordination | Raft, Gossip |
 | Security | Ed25519, AES-256-GCM |
 | Integration | claude-flow v3 |
+| TypeScript Path Aliases | @/*, @core/*, @domains/*, @layers/*, @security/*, @wasm/* |
 
 ---
 

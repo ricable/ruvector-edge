@@ -239,7 +239,7 @@ GOAL-012 has been successfully implemented with comprehensive security hardening
 ### Initialize Security for an Agent
 
 ```typescript
-import { createRANSecurityHardening } from './src/security/ran-security-hardening';
+import { createRANSecurityHardening } from './security/ran-security-hardening';
 
 // Create security manager
 const security = createRANSecurityHardening('agent-faj-121-3094');
